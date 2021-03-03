@@ -17,9 +17,9 @@ module.exports = {
         if(bankBalance === null) bankBalance = 0;
 
         const balEmbed = new MessageEmbed()
-        .setTitle(`:bank: ${user.username}\'s Balance`)
+        .setTitle(`${user.username}\'s Balance`)
         .setColor("BLUE")
-        .addField('Cash', `You Currently have \$${bal} in Cash`)
+        .addField('🏦 Bank',`\n\$${bankBalance}\n\n💵 Wallet\n\$${bal}`)
         .addField('Bank Balance', `You Currently have \$${bankBalance} in your Bank Account`)
 
         message.channel.send(balEmbed)

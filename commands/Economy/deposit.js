@@ -4,7 +4,7 @@ const ms = require('parse-ms');
 
 module.exports = {
     name: 'deposit',
-    description: "Deposit Money into IGBank and keep it Safe",
+    description: "Deposit Money into Account and keep it Safe",
     usage: "?deposit <amount>",
     aliases: ['dep'],
     run: async (client, message, args) => {
@@ -52,7 +52,7 @@ module.exports = {
         let bankBal = db.fetch(`bank_${message.guild.id}_${message.author.id}`)
 
         let depositSuccess = new MessageEmbed()
-            .setDescription(`Successfully Deposited \$${args[0]} to Your IGBank Account! \n Your New Bank Balance is \$${bankBal}`)
+            .setDescription(`Successfully Deposited \$${args[0]} to Your Account! \n Your New Bank Balance is \$${bankBal}`)
             .setColor("BLUE")
 
         message.channel.send(depositSuccess)

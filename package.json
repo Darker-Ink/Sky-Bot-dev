@@ -1,7 +1,7 @@
 {
   "name": "dark-bot",
   "version": "1.4.5",
-  "description": "This is a testbot",
+  "description": "This is a DarkBot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/IGRohan/IGbot.git"
   },
-  "author": "IGRohan",
+  "author": "DarkerInk",
   "license": "ISC",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
@@ -23,6 +23,7 @@
     "discord.js": "^12.4.1",
     "distube": "^2.7.0",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "ffmpeg-static": "^4.2.7",
     "figlet": "^1.5.0",
     "mathjs": "^8.0.1",

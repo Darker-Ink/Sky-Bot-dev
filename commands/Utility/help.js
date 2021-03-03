@@ -19,13 +19,11 @@ module.exports = {
                 .addField(':ninja: Moderation/Admin', "`kick`, `mute`, `unmute`, `ban`, `unban`,`forceban`, `clear`, `addrole`, `warn` ,\
 `warnings`, `backup`, `ctopic`, `lockchannel`, `unlockchannel`, `setwelcome`, `disablewelcome`, `slowmode`, `addcommand`, \
 `deletecommand`,  ")
-                .addField(`Fun`, "`ascii`, `meme`, `advice`,`wouldyourather`, `compliment`, `8ball`")
-                .addField('Images', "`triggered`, `changemymind`, `kiss`, `slap`, `shit`, `facepalm`" )
+                .addField(`Fun`, "`8ball`, `advice`,`ascii`, `changemymind`, `meme`, `triggered`, `welcome`, `wouldyourather`")
                 .addField(':tools: Utility', "`help`, `config`, `weather`, `serverinfo`, `userinfo`, `channelinfo`, `botstats`, `ping`,\
  `invites`, `morse`,`avatar`, `bmi`, `translate`, `calculator`")
                 .addField(':money_with_wings: Economy', "`balance`, `daily`, `work`, `leaderboard`, `pay`, `deposit`, `withdraw`, `rob`,\
 ")
-                .addField(':man_detective: Owner', "`No Commands Yet`")
                 .addField(':headphones: Music', "`join`, `leave`, `play`, `stop`, `skip`, `volume`, `queue`, `pause`, `resume`, `loop`,\
 `autoplay`, `filter` ")
                 .setColor('BLUE')

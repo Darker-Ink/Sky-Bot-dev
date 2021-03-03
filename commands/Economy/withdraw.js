@@ -5,9 +5,11 @@ module.exports = {
     name: 'withdraw',
     description: "Withdraw Money from Your IGBank Account!",
     usage: "?withdraw <amount>",
+    aliases: ['with'],
     run: async (client, message, args) => {
         let member = message.author;
         let bankBalance = db.fetch(`bank_${message.guild.id}_${member.id}`)
+
 
         if (!args[0]) {
             const withdrawError = new MessageEmbed()
@@ -25,14 +27,14 @@ module.exports = {
         }
         if(args[0] > bankBalance) {
             const withdrawError3 = new MessageEmbed()
-                .setDescription("You Do Not Have That Much Money in Your IGBank Account")
+                .setDescription("You Do Not Have That Much Money in Your Account")
                 .setColor("BLUE")
 
             return message.channel.send(withdrawError3)
         }
-        if(args[0] > 250) {
+        if(args[0] > 1000000) {
             const withdrawError4 = new MessageEmbed()
-                .setDescription("You Can Only Withdraw \$250 at once.")
+                .setDescription("You Can Only Withdraw \$1\,000\,000 at once.")
                 .setColor("BLUE")
 
             return message.channel.send(withdrawError4)
