@@ -22,7 +22,7 @@ module.exports = {
 
             return message.channel.send(workEmbed)
         } else {
-            let amount = Math.floor(Math.random() * 25) + 1
+            let amount = Math.floor(Math.random() * 200) + 1
             db.add(`money_${message.guild.id}_${user.id}`, amount)
             db.set(`worked_${message.guild.id}_${user.id}`, Date.now())
 

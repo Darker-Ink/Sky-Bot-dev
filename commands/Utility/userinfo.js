@@ -1,6 +1,13 @@
-const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
+const { MessageEmbed } = require("discord.js")
+const moment = require("moment")
+const { getMember } = require("../../functions.js");
 
+module.exports = {
+    name: "whois",
+    description: "Get stats of given person or yourself",
+    usage: "whois <MENTION>",
+    aliases: ["whois", "user"],
+run: async function (client, message, args) {
 
 const flags = {
     DISCORD_EMPLOYEE: 'Discord Employee',
@@ -15,46 +22,91 @@ const flags = {
     TEAM_USER: 'Team User',
     SYSTEM: 'System',
     VERIFIED_BOT: 'Verified Bot',
-    VERIFIED_DEVELOPER: 'Verified Bot Developer'
+    VERIFIED_DEVELOPER: 'Verified Bot Developer',
 };
 
-module.exports = {
-    name: 'userinfo',
-    description: 'This Command Will Give You Detailed Info For The Mentioned User!',
-    run: async(client, message, args) => {
+    let user;
 
-        const member = message.mentions.members.last() || message.guild.members.cache.get(target) || message.member;
-        const roles = member.roles.cache
-            .sort((a, b) => b.position - a.position)
-            .map(role => role.toString())
-            .slice(0, -1);
-        const userFlags = member.user.flags.toArray();
-        const embed = new MessageEmbed()
-            .setDescription(`**User Information for ${member.user.username}**`)
-            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
-            .setColor(member.displayHexColor || 'BLUE')
-            .addField('User', [
-                `**❯ Username:** ${member.user.username}`,
-                `**❯ Discriminator:** ${member.user.discriminator}`,
-                `**❯ ID:** ${member.id}`,
-                `**❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
-                `**❯ Avatar:** [Link to avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
-                `**❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
-                `**❯ Status:** ${member.user.presence.status}`,
-                `**❯ Game:** ${member.user.presence.game || 'Not playing a game.'}`,
-                `\u200b`
-            ])
-            .addField('Member', [
-                `**❯ Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
-                `**❯ Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
-                `**❯ Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
-                `**❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
-                `\u200b`
-            ]);
-        return message.channel.send(embed);
+    if (!args[0]) {
+      user = message.member;
+    } else {
+
+
+
+      user = message.mentions.members.first() || await message.guild.members.fetch(args[0]).catch(err => { return message.channel.send(":x: Unable to find this Person") })
     }
 
-}
+    if (!user) {
+      return message.channel.send(":x: Unable to find this person!")
+    }
 
 
+    //OPTIONS FOR STATUS
 
+    let stat = {
+      online: "https://emoji.gg/assets/emoji/9166_online.png",
+      idle: "https://emoji.gg/assets/emoji/3929_idle.png",
+      dnd: "https://emoji.gg/assets/emoji/2531_dnd.png",
+      offline: "https://emoji.gg/assets/emoji/7445_status_offline.png"
+    }
+
+    //NOW BADGES
+    let badges = await user.user.flags
+    badges = await badges ? badges.toArray() : ["None"]
+
+    let newbadges = [];
+    badges.forEach(m => {
+      newbadges.push(m.replace("_", " "))
+    })
+
+    let embed = new MessageEmbed()
+      .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+
+    //ACTIVITY
+    let array = []
+    if (user.user.presence.activities.length) {
+
+      let data = user.user.presence.activities;
+
+      for (let i = 0; i < data.length; i++) {
+        let name = data[i].name || "None"
+        let xname = data[i].details || "None"
+        let zname = data[i].state || "None"
+        let type = data[i].type
+
+        array.push(`**${type}** : \`${name} : ${xname} : ${zname}\``)
+
+        if (data[i].name === "Spotify") {
+          embed.setThumbnail(`https://i.scdn.co/image/${data[i].assets.largeImage.replace("spotify:", "")}`)
+        }
+
+        embed.setDescription(array.join("\n"))
+
+      }
+    }
+
+      //EMBED COLOR BASED ON member
+      embed.setColor(user.displayHexColor === "#000000" ? "#ffffff" : user.displayHexColor)
+
+      //OTHER STUFF 
+      embed.setAuthor(user.user.tag, user.user.displayAvatarURL({ dynamic: true }))
+
+const member = getMember(message, args.join(" "));
+const userFlags = member.user.flags.toArray();
+
+    const roles = member.roles.cache
+            .filter(r => r.id !== message.guild.id)
+            .map(r => r).join(", ") || 'none';
+
+      //CHECK IF USER HAVE NICKNAME
+      if (user.nickname !== null) embed.addField("Nickname", user.nickname)
+      embed.addField("Joined At", moment(user.joinedAt).format("LLLL"))
+        .addField("Account Created At", moment(user.user.createdAt).format("LLLL"))
+        .addField("Common Information", `ID: \`${user.user.id}\`\nDiscriminator: ${user.user.discriminator}\nBot: ${user.user.bot}\nDeleted User: ${user.deleted}`)
+        .addField('Flags',`**❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`)
+        .setFooter(user.user.presence.status, stat[user.user.presence.status])
+        .addField('**Roles:**', ` ${roles}`, true)
+
+      message.channel.send(embed);
+    }
+  }

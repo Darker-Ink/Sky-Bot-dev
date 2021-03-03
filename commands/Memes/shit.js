@@ -8,14 +8,15 @@ module.exports = {
     usage: "?shit <mention>",
     run: async(client, message, args) => {
         const member = message.mentions.users.first()
-        const mentionedMemberAvatar = member.displayAvatarURL({dynamic: false, format: "png"})
 
         if(!member) {
             const shitError = new MessageEmbed()
-            .setDescription(`You'll Need to mention a member, or do you wanna use the command on yourself? xD`)
+            .setDescription(`You Need to mention Someone XD Just Mention That Dumb Bot ||like mee6 😳||`)
             .setColor("RED")
-            return message.channel.send(shitError)
+            message.channel.send(shitError)
         }
+
+        const mentionedMemberAvatar = member.displayAvatarURL({dynamic: false, format: "png"})
 
         let image = await Canvacord.shit(mentionedMemberAvatar)
 
