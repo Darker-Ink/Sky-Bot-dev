@@ -3,6 +3,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
     name: 'kick',
     description: "Kicks The Mentioned Member",
+    category: "Admin",
     run: async(client, message, args) => {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 

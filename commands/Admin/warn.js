@@ -8,6 +8,7 @@ module.exports = {
   description: "Warn Someone",
   usage: "?warn <@mention> [reason]",
   aliases: [],
+  category: "Admin",
   run: async (client, message, args) => {
     const mentionedUser =
       message.mentions.members.first() || message.guild.members.cache.get(args[0])

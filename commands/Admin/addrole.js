@@ -5,6 +5,7 @@ module.exports = {
     description: "Adds the mentioned Role to the mentioned User. While using Role name to add, keep in mind it is case sensitive",
     usage: "?addrole <@member> <@role>/Role name",
     aliases: [],
+    category: "Admin",
     run: async(client, message, args) => {
         if(!message.member.hasPermission('ADMINISTRATOR')) {
             const noPerms = new MessageEmbed()

@@ -5,6 +5,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: "unmute",
     description: "Use This To Unmute A Muted Person!",
+    category: "Admin",
     run: async (client, message, args) => {
 
         if (!message.member.hasPermission("MANAGE_ROLES")) {

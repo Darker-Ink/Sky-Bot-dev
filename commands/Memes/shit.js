@@ -6,6 +6,7 @@ module.exports = {
     name: 'shit',
     description: "\"Eww. I stepped on shit.\" You get it now?",
     usage: "?shit <mention>",
+    category: "Fun",
     run: async(client, message, args) => {
         const member = message.mentions.users.first()
 

@@ -9,7 +9,7 @@ module.exports = {
     ownerOnly: true,
     description: 'Reload the commands',
     usage: "reload <command>",
-    category: "Owner",
+    category: "Fun",
     run: async (client, message, args) => {
       try {
       if (!config.owners.includes(message.author.id)) {

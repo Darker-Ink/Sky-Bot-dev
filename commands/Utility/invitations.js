@@ -1,10 +1,11 @@
 const { MessageEmbed } = require("discord.js")
 
 module.exports = {
-    name: 'invitations',
+    name: 'invites',
     description: "Gives You the list of top 5 people with most invites to your server!",
     usage: "?invites",
-    aliases: ['inv'],
+    aliases: ['invs'],
+    category: "Utility",
     run: async(client, message, args) => {
         message.guild.fetchInvites().then((invites) => {
             const inviteCounter = {}

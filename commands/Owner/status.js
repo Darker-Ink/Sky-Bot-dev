@@ -7,6 +7,7 @@ module.exports = {
     ownerOnly: true,
     description: 'Reload the commands',
     usage: "reload <command>",
+    category: "Owner",
     run: async (client, message, args) => {
       if (!config.owner.includes(message.author.id)) {
             return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)

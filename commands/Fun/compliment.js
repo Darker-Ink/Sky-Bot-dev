@@ -6,6 +6,7 @@ module.exports = {
     description: "Gives you a compliment",
     usage: "?compliment",
     aliases: [],
+    category: "Fun",
     run: async(client, message, args) => {
 
         const { compliment } = await fetch("https://complimentr.com/api").then((res) => res.json())

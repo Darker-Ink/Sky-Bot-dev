@@ -5,6 +5,7 @@ module.exports = {
     name: 'kiss',
     description: "Kiss other member. virtually.",
     usage: "?kiss <mentionSomeone>",
+    category: "Fun",
     run: async(client, message, args) => {
         const member = message.mentions.users.first()
         if(!member) return message.channel.send('No members mentioned. Please mention the person you wanna kiss ;)')

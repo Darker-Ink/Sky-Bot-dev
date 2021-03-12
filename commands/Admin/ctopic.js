@@ -5,6 +5,7 @@ module.exports = {
     description: "Change the Channel Topic by Just a command \n Using the command without a channel mentioned will change the topic of the channel you're executing the command in",
     usage: "?ctopic <#Channel>",
     aliases: ['channeltopic'],
+    category: "Admin",
     run: async(client, message, args) => {
         let channel = message.mentions.channels.first()
         let topic;

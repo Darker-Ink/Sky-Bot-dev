@@ -5,6 +5,7 @@ const userReg = RegExp(/<@!?(\d+)>/)
 module.exports = {
     name: 'unban',
     description: "Unbans a previously banned member",
+    category: "Admin",
     run: async(client, message, args) => {
         const userID = userReg.test(args[0]) ? userReg.exec(args[0])[1] : [0]
         const mentionedUser = await message.client.users.fetch(userID).catch(() => null)

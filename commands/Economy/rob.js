@@ -6,6 +6,7 @@ module.exports = {
     name: 'rob',
     description: "Rob someone if they have Cash!",
     usage: "?rob <mention>",
+    category: "Economy",
     run: async(client, message, args) => {
         let timeout = 7200000;
         let user = message.mentions.users.first()

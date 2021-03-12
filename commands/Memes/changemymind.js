@@ -5,6 +5,7 @@ module.exports = {
     name: 'changemymind',
     description: "Sends a Customized Change My Mind meme",
     usage: "?changemymind <text>",
+    category: "Fun",
     run: async(client, message, args) => {
         let text = args.join(" ")
 

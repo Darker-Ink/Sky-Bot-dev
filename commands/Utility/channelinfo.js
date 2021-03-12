@@ -6,6 +6,7 @@ module.exports = {
     description: "Get info about the mentioned channel or current channel!",
     usage: "?channelinfo <#channel>",
     aliases: [],
+    category: "Utility",
     run: async(client, message, args) => {
         let channel = message.mentions.channels.first();
 

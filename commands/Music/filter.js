@@ -6,6 +6,7 @@ module.exports = {
     description: "Set Music Filter! \n Filter Option: `3d, bassboost, echo, karaoke, nightcore, vaporwave`",
     usage: "?filter <filterOption>",
     aliases: ['setfilter'],
+    category: "Music",
     run: async (client, message, args) => {
         if (!message.member.voice.channel) {
             const filterError = new MessageEmbed()

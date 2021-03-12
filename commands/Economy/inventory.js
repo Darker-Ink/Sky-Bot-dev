@@ -6,6 +6,7 @@ module.exports = {
     description: "View Your Inventory",
     aliases: ['inven', 'int'],
     usage: "?inventory",
+    category: "Economy",
     run: async(client, message, args) => {
 
         let items = db.fetch(`items_${message.guild.id}_${message.author.id}`)

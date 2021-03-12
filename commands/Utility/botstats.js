@@ -11,6 +11,7 @@ module.exports = {
     description: "Gives You In-Depth Stats for SnowBot",
     usage: "?botstats",
     aliases: ['botinfo', 'botstat'],
+    category: "Utility",
     run: async(client, message, args) => {
         function formatBytes(bytes) {
             if (bytes === 0) return '0 Bytes';
@@ -49,7 +50,9 @@ module.exports = {
 				`\u3000 __Total:__ ${formatBytes(process.memoryUsage().heapTotal)}`,
 				`\u3000 __Used:__ ${formatBytes(process.memoryUsage().heapUsed)}`
 			])
+            .setColor('RANDOM')
             .setTimestamp();
+            
             
             message.channel.send(embed)
     }

@@ -8,6 +8,7 @@ module.exports = {
     name: 'work',
     description: "Work and Get Money. That's how the World Works.",
     usage: "?work",
+    category: "Economy",
     run: async(client, message, args) => {
 
         let user = message.author;

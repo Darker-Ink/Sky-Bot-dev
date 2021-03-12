@@ -5,6 +5,7 @@ module.exports = {
     name: 'pay',
     description: "Pay someone else in cash!",
     usage: "?pay [amount] <mention>",
+    category: "Economy",
     run: async(client, message, args) => {
 
         let user = message.mentions.users.first()

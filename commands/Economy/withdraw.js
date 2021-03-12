@@ -6,6 +6,7 @@ module.exports = {
     description: "Withdraw Money from Your IGBank Account!",
     usage: "?withdraw <amount>",
     aliases: ['with'],
+    category: "Economy",
     run: async (client, message, args) => {
         let member = message.author;
         let bankBalance = db.fetch(`bank_${message.guild.id}_${member.id}`)

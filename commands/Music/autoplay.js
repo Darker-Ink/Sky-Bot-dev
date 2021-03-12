@@ -5,6 +5,7 @@ module.exports = {
     description: "Toggles Autoplay to ON/OFF",
     usage: "?autoplay",
     aliases: ['autop'],
+    category: "Music",
     run: async(client, message, args) => {
         if (!message.member.voice.channel) {
             const autoplayError = new MessageEmbed()

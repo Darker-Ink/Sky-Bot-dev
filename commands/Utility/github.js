@@ -8,6 +8,7 @@ module.exports = {
     description: "To get info of someones github",
     usage: "[git <name>",
     aliases: ["git"],
+    category: "Utility",
     run: async (client, message, args) => {
 
        try {

@@ -5,6 +5,7 @@ module.exports = {
     description: "Plays Songs <3",
     usage: "?play <Song Name / URL>",
     aliases: ["p"],
+    category: "Music",
     run: async (client, message, args) => {
       if (!message.member.voice.channel) {
         const playError = new MessageEmbed()

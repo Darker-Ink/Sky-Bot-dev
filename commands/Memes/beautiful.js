@@ -6,6 +6,7 @@ module.exports = {
     description: 'Sends a \'Oh that, that is beautiful\' meme.',
     usage: 'beautiful <@mention>',
     aliases: [],
+    category: "Fun",
     run: async(client, message, args) => {
         const member = message.mentions.users.first() || message.author;
         const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })

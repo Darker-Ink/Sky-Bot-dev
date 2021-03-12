@@ -7,6 +7,7 @@ module.exports = {
   description: "Unwarn someone who was warned",
   usage: "?remove-warn [warn ID] <@mention>",
   aliases: ["rm"],
+  category: "Admin",
   run: async (client, message, args) => {
     const mentionedUser = message.mentions.users.first();
 

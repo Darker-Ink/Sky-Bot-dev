@@ -5,6 +5,7 @@ module.exports = {
     description: "Gives you the server queue list!",
     usage: "?queue",
     aliases: [],
+    category: "Music",
     run: async(client, message, args) => {
         let queue = client.distube.getQueue(message);
         if (!queue) {

@@ -5,6 +5,7 @@ module.exports = {
     description: "omg welcome!!",
     usage: "welcome <@mention>",
     aliases: ["wel"],
+    category: "Fun",
   run: async (client, message, args) => {
     if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
       return message.channel.send("I can't welcome them do to not being able to add a welcomed role");

@@ -6,6 +6,7 @@ module.exports = {
     description: "Shows the current bot servers and users.",
     usage: "[]",
     aliases: ["servers", "BotOwnerInfo"],
+    category: "Owner",
   run: async function (client, message, args) {
     if (!config.owners.includes(message.author.id)) {
             return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)

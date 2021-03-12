@@ -5,6 +5,7 @@ module.exports = {
     description: "Converts your message into morse code!",
     usage: "?morse <message>",
     aliases: ['morsecode'],
+    category: "Utility",
     run: async(client, message, args) => {
         args = args.join(" ").toLowerCase();
         const dot = "•";

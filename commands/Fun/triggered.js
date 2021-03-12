@@ -5,6 +5,7 @@ const {  MessageAttachment } = require('discord.js');
 module.exports = {
     name: 'triggered',
     description: "Trigger Yourself",
+    category: "Fun",
     run: async(client, message, args) => {
       const member = message.mentions.users.first()
       const mentionedMemberAvatar = member.displayAvatarURL({dynamic: false, format: "png"})

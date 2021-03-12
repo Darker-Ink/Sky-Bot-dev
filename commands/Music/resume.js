@@ -5,6 +5,7 @@ module.exports = {
     description: "Resume Music",
     usage: '?resume',
     aliases: [],
+    category: "Music",
     run: async(client, message, args) => {
         if (!message.member.voice.channel) {
             const resumeError = new MessageEmbed()

@@ -5,6 +5,7 @@ module.exports = {
     description: "Changes Volume of the currently playing Music!",
     usage: "?volume <number from 1 to 100>",
     aliases: ['vol'],
+    category: "Music",
     run: async(client, message, args) => {
         if (!message.member.voice.channel) {
             const volumeError = new MessageEmbed()

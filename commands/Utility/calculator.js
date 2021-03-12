@@ -6,6 +6,7 @@ module.exports = {
     description: "Calculator that can solve complex calculations!",
     usage: "?calculator <calculation> [?calculator 25 * 25]",
     aliases: ['calc'],
+    category: "Utility",
     run: async(client, message, args) => {
 
         if(!args[0]) {

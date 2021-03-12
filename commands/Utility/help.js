@@ -1,63 +1,58 @@
-const { MessageEmbed, MessageAttachment } = require("discord.js")
-const db = require('quick.db')
-
-
+const Discord = require('discord.js');
+const configs = require('../../config/config.json');
 module.exports = {
     name: 'help',
-    description: "Gives You a List of Commands that you can Use!",
-    aliases: ['h'],
-    run: async(client, message, args) => {
-        const name = args[0]
-        const command = client.commands.get(name) || client.commands.find(c => c.aliases && c.aliases.includes(name))
-        let database = db.get(`guildConfigurations_${message.guild.id}.commands`)
+    guildOnly: false,
+    usage: "help <cmd>",
+    description: 'Get Help',
+    category: "Utility",
+    run: async (client, message, args) => {
+    if (args[0]) {
+      const command = await client.commands.get(args[0]);
 
+      if (!command) {
+        return message.channel.send("Unknown Command: " + args[0]);
+      }
 
-        if (!command) {
-            const embed = new MessageEmbed()
-                .setAuthor('SnowMusic\'s Commands', message.author.displayAvatarURL({dynamic: true}))
-                //.setDescription(`${client.commands.map(c => c.name).join("\n  ")}`)
-                .addField('Moderation', "`kick`, `mute`, `unmute`, `ban`, `unban`,`forceban`, `clear`, `addrole`, `warn` ,\
-`warnings`, `backup`, `ctopic`, `lockchannel`, `unlockchannel`, `setwelcome`, `disablewelcome`, `slowmode`, `addcommand`, \
-`deletecommand`,  ")
-                .addField(`Fun`, "`8ball`, `advice`,`ascii`, `changemymind`, `meme`, `triggered`, `welcome`, `wouldyourather`")
-                .addField('Utility', "`help`, `config`, `weather`, `serverinfo`, `userinfo`, `channelinfo`, `botstats`, `ping`,\
- `invites`, `morse`,`avatar`, `bmi`, `translate`, `calculator`")
-                .addField('Economy', "`balance`, `daily`, `work`, `leaderboard`, `pay`, `deposit`, `withdraw`, `rob`,\
-")
-                .addField('Music', "`join`, `leave`, `play`, `stop`, `skip`, `volume`, `queue`, `pause`, `resume`, `loop`,\
-`autoplay`, `filter` ")
-                .setColor('BLUE')
-                .setFooter(`Use ?help <command> to get more info about it!`)
-            
+      const embed = new Discord.MessageEmbed()
+        .setAuthor(command.name, client.user.displayAvatarURL())
+        .addField("Description", command.description || "Not Provided :(")
+        .addField("Usage", "`" + command.usage + "`" || "Not Provied")
+        .addField("Info", "Tad Bit of Info [channel] Means the channel you are in <message> means You need a message")
+        .setThumbnail(client.user.displayAvatarURL())
+        .setColor("RANDOM")
+        .setFooter(client.user.username, client.user.displayAvatarURL());
 
-            if(database) {
-                let array = []
-                database.forEach(m => {
-                    array.push('`' + m.name + '`')
-                })
-                if(array.length > 0) {
-                    embed.addField(`Custom Commands`, array.join(', '))
-                }      
-            }
-            return message.channel.send(embed)
+      return message.channel.send(embed);
+    } else {
+      const commands = await client.commands;
 
+      let emx = new Discord.MessageEmbed()
+        .setDescription(`Snow Bot | Version: ${configs.version}`)
+        .setColor("RANDOM")
+        .setFooter(client.user.username, client.user.displayAvatarURL())
+        
+
+      let com = {};
+      for (let comm of commands.array()) {
+        let category = comm.category || "No Category";
+        let name = comm.name;
+
+        if (!com[category]) {
+          com[category] =  [];
         }
+        com[category].push(name);
+      }
 
-        var data = []
+      for(const [key, value] of Object.entries(com)) {
+        let category = key;
 
-        data.push(`**Name:** ${command.name}`)
+        let desc = "`" + value.join("`, `") + "`";
 
-        //if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(", ")}`)
-        if (command.description) data.push(`**Description:** ${command.description}`)
-        if (command.cooldown) data.push(`**Cooldown:** ${command.cooldown} Second(s)`)
-        if (command.usage) data.push(`**Usage:** ${command.usage}`)
+        emx.addField(`${category.toUpperCase()} [${value.length}]`, desc);
+      }
 
-       const dataEmbed = new MessageEmbed()
-       .setTitle(`Command Info - ${command.name}`)
-       .setDescription(data)
-       .setColor("BLUE")
-
-       return message.channel.send(dataEmbed)
-
+      return message.channel.send(emx);
     }
-}
+  }
+};

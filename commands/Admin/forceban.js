@@ -5,6 +5,7 @@ module.exports = {
     description: "Force Ban someone who is not in the server using their user ID",
     usage: "?forceban <userID> <reason>",
     aliases: ['forcedban'],
+    category: "Admin",
     run: async (client, message, args) => {
 
         if (!message.member.hasPermission('BAN_MEMBERS')) {

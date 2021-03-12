@@ -6,6 +6,7 @@ module.exports = {
     description: "Deletes a custom command.",
     usage: "?deletecommand <Command Name>",
     aliases: ['delcmd'],
+    category: "Admin",
     run: async(client, message, args) => {
 
         if(!message.member.hasPermission('ADMINISTRATOR')) {
