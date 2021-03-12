@@ -4,7 +4,7 @@ const fs = require('fs')
 const config = require('../../config/config.json');
 
 module.exports = {
-    name: 'reloadutil',
+    name: 'reloadowner',
     guildOnly: false,
     ownerOnly: true,
     description: 'Reload the commands',
@@ -12,14 +12,14 @@ module.exports = {
     category: "Owner",
     run: async (client, message, args) => {
       try {
-      if (!config.owners.includes(message.author.id)) {
+        if (!config.owners.includes(message.author.id)) {
             return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)
         }
     if(!args || args.size < 1) return message.reply("Must provide a command name to reload.");
   const commandName = args[0];
   // OMG
   if(!client.commands.has(commandName)) {
-    return message.reply("That command does not exist In **UTILITY**");
+    return message.reply("That command does not exist In **OWNER**");
   }
 
   // IT WORKS

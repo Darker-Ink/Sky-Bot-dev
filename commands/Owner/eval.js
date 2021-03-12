@@ -11,8 +11,9 @@ module.exports = {
   const args = message.content.split(' ');
   const command = args.shift().toLowerCase();
 
-    if (message.author.id == ownerid || message.author.id === '677216269271040041') {
-  let evaled;
+    if (!config.owners.includes(message.author.id)) {
+            return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)
+        }
     try {
       evaled = await eval(args.join(' '));
       message.channel.send(inspect(evaled));
@@ -23,5 +24,4 @@ catch (error) {
       console.log(error);
       message.reply(`There was an error during evaluation, \n\n**${error}**`);
     }
-  }
 }};

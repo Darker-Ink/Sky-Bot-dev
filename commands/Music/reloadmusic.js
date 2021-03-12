@@ -4,7 +4,7 @@ const fs = require('fs')
 const config = require('../../config/config.json');
 
 module.exports = {
-    name: 'reloadutil',
+    name: 'reloadmusic',
     guildOnly: false,
     ownerOnly: true,
     description: 'Reload the commands',
@@ -19,7 +19,7 @@ module.exports = {
   const commandName = args[0];
   // OMG
   if(!client.commands.has(commandName)) {
-    return message.reply("That command does not exist In **UTILITY**");
+    return message.reply("That command does not exist In **MUSIC**");
   }
 
   // IT WORKS
