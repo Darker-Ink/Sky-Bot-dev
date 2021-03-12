@@ -8,10 +8,12 @@ module.exports = {
     aliases: ['addcmd'],
     run: async(client, message, args) => {
 
-        if(!message.member.hasPermission('ADMINISTRATOR')) {
-            if(!message.author.id === message.guild.ownerID) {
-                return message.channel.send(`You do not have permissions to add custom commands!`)
-            }
+         if(!message.member.hasPermission('ADMINISTRATOR')) {
+            const banerror = new MessageEmbed()
+            .setDescription("You Don\'t Have Permissions To Add Commands")
+            .setColor('#34ebe5')
+
+            return message.channel.send(banerror)
         }
         if(!args[0]) return message.channel.send(`You Need to provide a Command Name! \n\
 \`addcommand <Command Name> <Command Response>\``)

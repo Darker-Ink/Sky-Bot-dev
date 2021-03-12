@@ -1,6 +1,7 @@
-const Discord = require("discord.js");
-const ownerid = "791741154999140374";
+const { MessageEmbed } = require('discord.js');
 const { inspect } = require('util');
+const config = require('../../config/config.json');
+const fs = require('fs')
 
 module.exports = {
     name: "eval",

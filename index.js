@@ -50,7 +50,7 @@ for (const file of commandFiles) {
   }
 
   client.commands.set(command.name, command);
-  console.log(`✅ Success! Loaded Command ${command.name} `);
+  console.log( `✅  Success! Loaded Command ${command.name} `);
 }
 //Ready Event
 client.on('ready', () => {
@@ -165,7 +165,7 @@ client.on("message", async message => {
       .setColor("GREEN")
      .setDescription(`${mentioned.user.tag} is \nMESSAGE: ${status}`)
 
-      message.channel.send(embed1).then(i => i.delete({timeout: 555550}));
+      message.channel.send(embed1).then(i => i.delete({timeout: 900000}));
 
     }
 

@@ -9,9 +9,11 @@ module.exports = {
     run: async(client, message, args) => {
 
         if(!message.member.hasPermission('ADMINISTRATOR')) {
-            if(!message.author.id === message.guild.ownerID) {
-                return message.channel.send(`You do not have permissions to delete this command.`)
-            }
+            const banerror = new MessageEmbed()
+            .setDescription("You Don\'t Have Permissions To Add Commands")
+            .setColor('#34ebe5')
+
+            return message.channel.send(banerror)
         }
 
         if(!args[0]) return message.channel.send(`You Need to give a command to delete!\n\n\`deletecommand <Command Name>\``)
