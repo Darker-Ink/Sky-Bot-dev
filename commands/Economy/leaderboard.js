@@ -2,10 +2,11 @@ const { MessageEmbed } = require("discord.js");
 const db = require('quick.db');;
 
 module.exports = {
-    name: 'leaderboard',
+    name: 'leaderboard-broken',
     description: "Check Who's leading the charts in terms of IGBank Balance!",
     usage: "?leaderboard",
     aliases: ['level', 'levels'],
+    category: "Economy",
     run: async(client, message, args) => {
         let money = db.all().filter(lb => lb.ID.startsWith(`bank_${message.guild.id}`)).sort((a, b) => b.data- a.data)
         let bankBalance = money.slice(0, 10)

@@ -6,6 +6,7 @@ module.exports = {
     description: "Gives an Advice",
     usage: "?advice",
     aliases: [],
+    category: "Fun",
     run: async(client, message, args) => {
         const data = await fetch("https://api.adviceslip.com/advice").then((res) => res.json())
 

@@ -5,6 +5,7 @@ module.exports = {
     name: 'slap',
     description: "Slap Someone, What else did you expect?",
     usage: '?slap <mention>',
+    category: "Fun",
     run: async(client, message, args) => {
         const member =  message.mentions.users.first()
         const mentionedMemberAvatar = member.displayAvatarURL({dynamic: false, format: "png"})

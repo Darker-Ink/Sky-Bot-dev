@@ -6,6 +6,7 @@ module.exports = {
     description: "Add a Custom Command to your server!",
     usage: "?addcommand <Command Name> <Command Response>",
     aliases: ['addcmd'],
+    category: "Admin",
     run: async(client, message, args) => {
 
          if(!message.member.hasPermission('ADMINISTRATOR')) {

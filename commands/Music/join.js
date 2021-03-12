@@ -3,6 +3,7 @@ module.exports = {
     description: "Joins The Voice Channel",
     usage: "?join",
     aliases: ['summon'],
+    category: "Music",
     run: async(client, message, args) => {
 
         const voiceChannel = message.member.voice.channel

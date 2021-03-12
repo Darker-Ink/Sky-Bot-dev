@@ -5,6 +5,7 @@ module.exports = {
     name: 'weather',
     description: "Gives You The Weather For a specific Place",
     usage: "?weather [location]", 
+    category: "Utility",
     run: async(client, message, args) => {
         const ErrorEmbed  = new MessageEmbed()
         .setDescription("You Need To Specify A Location")

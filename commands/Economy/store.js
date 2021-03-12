@@ -6,6 +6,7 @@ module.exports = {
     description: "Basic Equipment Store",
     aliases: ["shop"],
     usage: "?store",
+    category: "Economy",
     run: async(client, message, args) => {
 
         const embed = new MessageEmbed()

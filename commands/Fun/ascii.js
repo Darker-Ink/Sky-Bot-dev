@@ -5,6 +5,7 @@ module.exports = {
     name: 'ascii',
     description: "Converts Given Text Into Ascii",
     usage: "?ascii <text>",
+    category: "Fun",
     run: async(client, message, args) => {
         if(!args[0]) return message.channel.send("`Please Provide A Text That You Wanna Convert`")
 

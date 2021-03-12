@@ -6,6 +6,7 @@ module.exports = {
     description: "Returns a Yes/No/Maybe and those kind of Answers. Ask Away!",
     usage: "?8ball <question>",
     aliases: [],
+    category: "Fun",
     run: async(client, message, args) => {
         const question = args.join(" ")
 

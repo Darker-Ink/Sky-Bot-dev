@@ -5,6 +5,7 @@ module.exports = {
     description: "Pause Music",
     usage: "?pause",
     aliases: [],
+    category: "Music",
     run: async(client, message, args) => {
         if (!message.member.voice.channel) {
             const pauseError = new MessageEmbed()

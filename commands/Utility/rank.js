@@ -3,10 +3,11 @@ const canvacord = require('canvacord');
 const { MessageAttachment } = require('discord.js');
 
 module.exports = {
-    name: 'rank',
+    name: 'Rank',
     description: 'Check your or someone else\'s rank',
     usage: 'rank <@mention>',
     aliases: ['ranking'],
+    category: "Utility",
     run: async(client, message, args) => {
         const member = message.mentions.users.first() || message.author;
         var level = db.get(`guild_${message.guild.id}_level_${member.id}`) || 0

@@ -4,7 +4,8 @@ module.exports = {
     name: 'unlockchannel',
     description: "Unlocks Channel that were locked!",
     usage: '?unlockchannel <#channel>',
-    aliases: ['unlockc'],
+    aliases: ['unlock'],
+    category: "Admin",
     run: async(client, message, args) => {
         
         if(!message.member.hasPermission('MANAGE_CHANNELS')) {

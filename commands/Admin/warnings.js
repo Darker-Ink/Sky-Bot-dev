@@ -7,6 +7,7 @@ module.exports = {
   description: "Check how many warnings a member have had",
   usage: "?warnings <@member>",
   aliases: ["warnlist", "listwarnings", "warns"],
+  category: "Admin",
   run: async (client, message, args) => {
     const mentionedUser = message.mentions.users.first() || message.member;
 

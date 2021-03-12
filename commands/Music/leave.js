@@ -2,6 +2,7 @@ module.exports = {
     name: 'leave',
     description: "Leaves The Voice Channel",
     aliases: ['dc', 'disconnect'],
+    category: "Music",
     run: async(client, message, args) => {
 
         const voiceChannel = message.member.voice.channel

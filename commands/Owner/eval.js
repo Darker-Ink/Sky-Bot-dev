@@ -8,6 +8,7 @@ module.exports = {
     description: "To List the servers",
     usage: "",
     aliases: ["eval"],
+    category: "Owner",
   run: async (client, message) => {
   const args = message.content.split(' ');
   const command = args.shift().toLowerCase();

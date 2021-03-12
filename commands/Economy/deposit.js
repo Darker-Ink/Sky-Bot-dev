@@ -7,6 +7,7 @@ module.exports = {
     description: "Deposit Money into Account and keep it Safe",
     usage: "?deposit <amount>",
     aliases: ['dep'],
+    category: "Economy",
     run: async (client, message, args) => {
         
         let member = message.author;

@@ -5,6 +5,7 @@ module.exports = {
     description: "Skips Music in a Queue",
     usage: "?skip",
     aliases: [],
+    category: "Music",
     run: async(client, message, args)=> {
         if (!message.member.voice.channel) {
             const skipError = new MessageEmbed()

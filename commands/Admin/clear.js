@@ -3,6 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: 'clear',
     description: "Clears The Mentioned Number of Messages",
+    category: "Admin",
     run: async(client, message, args) => {
         if (!message.member.permissions.has("MANAGE_MESSAGES"))
             return message.channel.send(`You Do Not Have Permissions To Use This Command, ${message.author.username}`);

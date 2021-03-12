@@ -6,6 +6,7 @@ module.exports = {
     description: "Buy Items from the Shop!",
     aliases: [],
     usage: "?buy [item]",
+    category: "Economy",
     run: async(client, message, args) => {
         let purchase = args.join(" ")
         let cash = await db.fetch(`money_${message.guild.id}_${message.author.id}`)

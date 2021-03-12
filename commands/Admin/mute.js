@@ -3,6 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: "mute",
     description: "Mutes The Mentioned User!",
+    category: "Admin",
     run: async (client, message, args) => {
 
 

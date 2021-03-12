@@ -6,6 +6,7 @@ module.exports = {
     description: "Shows Your Virtual Balance in IG Bank",
     usage: "?balance <mention>\(for someone else's balance\) OR ?balance\(for your own balance\)",
     aliases: ['bal'],
+    category: "Economy",
     run: async(client, message, args) => {
 
         let user  = message.mentions.users.first() || message.author

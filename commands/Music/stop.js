@@ -5,6 +5,7 @@ module.exports = {
     description: "Stops the Music & clears the queue",
     usage: "?stop",
     aliases: [],
+    category: "Music",
     run: async(client, message, args) => {
         if (!message.member.voice.channel) {
             const stopError = new MessageEmbed()

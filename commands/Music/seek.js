@@ -5,6 +5,7 @@ module.exports = {
     description: "Set the playing time to another position",
     usage: "?seek <amount in seconds>",
     aliases: [],
+    category: "Music",
     run: async(client, message, args) => {
         if (!message.member.voice.channel) {
             const seekError = new MessageEmbed()

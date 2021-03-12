@@ -5,6 +5,7 @@ module.exports = {
     description: "Loops the Music/ Puts it on repeat!",
     usage: "?loop",
     aliases: ['loops'],
+    category: "Music",
     run: async(client, message, args) => {
         if (!message.member.voice.channel) {
             const loopError = new MessageEmbed()

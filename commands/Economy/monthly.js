@@ -6,6 +6,7 @@ module.exports = {
     name: 'monthly',
     description: "Gives You Your monthly Cash Bonus",
     usage: "?monthly",
+    category: "Economy",
     run: async(client, message, args) => {
         let timeout = 2.628e+9;
         let amount = 10000;

@@ -6,6 +6,7 @@ module.exports = {
     description: "Gives the Invite Link for this Bot to add it to your server!",
     usage: "?SnowMusic",
     aliases: ['sm'],
+    category: "Utility",
     run: async(client, message, args) => {
         const embed = new MessageEmbed()
         .setDescription('You Can Invite me to Your server using the \'Click Me\' Button \n\n [Click Me](https://discord.com/oauth2/authorize?client_id=801908661470494751&permissions=8&scope=bot)')

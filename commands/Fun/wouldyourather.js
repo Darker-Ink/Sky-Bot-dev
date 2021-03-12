@@ -5,6 +5,7 @@ module.exports = {
     description: "Sends a Would You Rather question",
     usage: "?wouldyourather",
     aliases: ['wyr'],
+    category: "Fun",
     run: async(client, message, args) => {
 
         const replies = require('../../data/wouldyourather.json')

@@ -5,6 +5,7 @@ const {  MessageAttachment } = require('discord.js');
 module.exports = {
     name: 'triggered',
     description: "Trigger Yourself",
+    category: "Fun",
     run: async(client, message, args) => {
         let avatar = message.author.displayAvatarURL({dynamic: false, format: "png"})
 

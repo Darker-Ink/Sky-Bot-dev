@@ -6,6 +6,7 @@ module.exports = {
     description: "Go Afk And let people know why",
     usage: "?botstats",
     aliases: ['botinfo', 'botstat'],
+    category: "Utility",
     run: async(client, message, args) => {
     
         const member = message.author.username
