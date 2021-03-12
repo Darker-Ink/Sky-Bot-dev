@@ -16,15 +16,15 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setAuthor('SnowMusic\'s Commands', message.author.displayAvatarURL({dynamic: true}))
                 //.setDescription(`${client.commands.map(c => c.name).join("\n  ")}`)
-                .addField(':ninja: Moderation/Admin', "`kick`, `mute`, `unmute`, `ban`, `unban`,`forceban`, `clear`, `addrole`, `warn` ,\
+                .addField('Moderation', "`kick`, `mute`, `unmute`, `ban`, `unban`,`forceban`, `clear`, `addrole`, `warn` ,\
 `warnings`, `backup`, `ctopic`, `lockchannel`, `unlockchannel`, `setwelcome`, `disablewelcome`, `slowmode`, `addcommand`, \
 `deletecommand`,  ")
                 .addField(`Fun`, "`8ball`, `advice`,`ascii`, `changemymind`, `meme`, `triggered`, `welcome`, `wouldyourather`")
-                .addField(':tools: Utility', "`help`, `config`, `weather`, `serverinfo`, `userinfo`, `channelinfo`, `botstats`, `ping`,\
+                .addField('Utility', "`help`, `config`, `weather`, `serverinfo`, `userinfo`, `channelinfo`, `botstats`, `ping`,\
  `invites`, `morse`,`avatar`, `bmi`, `translate`, `calculator`")
-                .addField(':money_with_wings: Economy', "`balance`, `daily`, `work`, `leaderboard`, `pay`, `deposit`, `withdraw`, `rob`,\
+                .addField('Economy', "`balance`, `daily`, `work`, `leaderboard`, `pay`, `deposit`, `withdraw`, `rob`,\
 ")
-                .addField(':headphones: Music', "`join`, `leave`, `play`, `stop`, `skip`, `volume`, `queue`, `pause`, `resume`, `loop`,\
+                .addField('Music', "`join`, `leave`, `play`, `stop`, `skip`, `volume`, `queue`, `pause`, `resume`, `loop`,\
 `autoplay`, `filter` ")
                 .setColor('BLUE')
                 .setFooter(`Use ?help <command> to get more info about it!`)

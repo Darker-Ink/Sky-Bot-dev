@@ -6,6 +6,9 @@ module.exports = {
     usage: "[]",
     aliases: ["servers", "BotOwnerInfo"],
   run: async function (client, message, args) {
+    if (!config.owners.includes(message.author.id)) {
+            return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)
+        }
     let embed = new MessageEmbed()
     .setAuthor("Bot Status")
     .setColor("RANDOM")

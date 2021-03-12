@@ -7,7 +7,9 @@ module.exports = {
     usage: "",
     aliases: ["ls", "sl"],
   run: async (bot, message, args) => {
-    if (message.author.id == ownerid || message.author.id === '677216269271040041') {
+    if (!config.owners.includes(message.author.id)) {
+            return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)
+        }
       if (!message.guild.me.hasPermission("ADMINISTRATOR"))
         return message.channel
           .send("I Dont Have Permissions")
@@ -121,9 +123,5 @@ module.exports = {
 
         // Remove the reaction when the user react to the message
         await reaction.users.remove(message.author.id);
-      });
-    } else {
-      return;
-    }
-  }
-};
+      })
+}}

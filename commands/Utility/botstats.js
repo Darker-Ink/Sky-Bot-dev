@@ -8,7 +8,7 @@ const version = require('../../package.json')
 
 module.exports = {
     name: 'botstats',
-    description: "Gives You In-Depth Stats for IGBot",
+    description: "Gives You In-Depth Stats for SnowBot",
     usage: "?botstats",
     aliases: ['botinfo', 'botstat'],
     run: async(client, message, args) => {

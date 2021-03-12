@@ -67,7 +67,6 @@ client.on('ready', () => {
 
 //Message Event
 client.on('message', async message => {
-  const statss = require('./status.json')
   const xp = require('./events&functions/xp')
   if (!message.guild) return;
   const prefix = process.env.prefix;
@@ -95,10 +94,9 @@ client.on('message', async message => {
   }
 
   //Setting Bot's Status
-  const stats = statss[Math.floor(Math.random() * statss.length)];
   client.user.setActivity({
     type: 'WATCHING',
-    name: `danik abused this bot and is not a dev now`
+    name: `I am bored `
   })
 })
 
