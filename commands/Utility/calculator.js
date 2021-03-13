@@ -8,6 +8,9 @@ module.exports = {
     aliases: ['calc'],
     category: "Utility",
     run: async(client, message, args) => {
+      const db = require('quick.db')
+    let user = db.get(`blacklist_${message.author.id}`);
+    if(user == true) return;
 
         if(!args[0]) {
             const calculatorError = new MessageEmbed()

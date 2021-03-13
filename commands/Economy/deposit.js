@@ -9,6 +9,8 @@ module.exports = {
     aliases: ['dep'],
     category: "Economy",
     run: async (client, message, args) => {
+      let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
         
         let member = message.author;
 

@@ -9,6 +9,10 @@ module.exports = {
     aliases: ['ranking'],
     category: "Utility",
     run: async(client, message, args) => {
+      const db = require('quick.db')
+let user = db.get(`blacklist_${message.author.id}`);
+  if(user == true) return;
+
         const member = message.mentions.users.first() || message.author;
         var level = db.get(`guild_${message.guild.id}_level_${member.id}`) || 0
         let xp = db.get(`guild_${message.guild.id}_xp_${member.id}`) || 0

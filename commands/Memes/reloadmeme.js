@@ -11,6 +11,9 @@ module.exports = {
     usage: "reload <command>",
     category: "Fun",
     run: async (client, message, args) => {
+      const db = require('quick.db')
+    let user = db.get(`blacklist_${message.author.id}`);
+    if(user == true) return;
       try {
       if (!config.owners.includes(message.author.id)) {
             return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)

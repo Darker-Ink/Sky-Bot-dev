@@ -7,6 +7,9 @@ module.exports = {
     aliases: ["wel"],
     category: "Fun",
   run: async (client, message, args) => {
+    const db = require('quick.db')
+    let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
     if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
       return message.channel.send("I can't welcome them do to not being able to add a welcomed role");
     } 

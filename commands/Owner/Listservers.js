@@ -9,6 +9,7 @@ module.exports = {
     aliases: ["ls", "sl"],
     category: "Owner",
   run: async (bot, message, args) => {
+    try {
     if (!config.owners.includes(message.author.id)) {
             return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)
         }
@@ -126,4 +127,9 @@ module.exports = {
         // Remove the reaction when the user react to the message
         await reaction.users.remove(message.author.id);
       })
-}}
+}catch (err) {
+      console.log('fuck a error');
+      message.reply(`There was an error during evaluation, \n\n**${err}**`);
+      client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+    }
+  }}

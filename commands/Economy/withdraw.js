@@ -8,6 +8,8 @@ module.exports = {
     aliases: ['with'],
     category: "Economy",
     run: async (client, message, args) => {
+      let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
         let member = message.author;
         let bankBalance = db.fetch(`bank_${message.guild.id}_${member.id}`)
 

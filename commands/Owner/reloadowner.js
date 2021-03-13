@@ -7,7 +7,7 @@ module.exports = {
     name: 'reloadowner',
     guildOnly: false,
     ownerOnly: true,
-    description: 'Reload the commands',
+    description: 'Reloads the commands',
     usage: "reload <command>",
     category: "Owner",
     run: async (client, message, args) => {
@@ -17,7 +17,6 @@ module.exports = {
         }
     if(!args || args.size < 1) return message.reply("Must provide a command name to reload.");
   const commandName = args[0];
-  // OMG
   if(!client.commands.has(commandName)) {
     return message.reply("That command does not exist In **OWNER**");
   }
@@ -30,9 +29,10 @@ module.exports = {
   client.commands.set(commandName, props);
   message.reply(`The command ${commandName} has been reloaded`);
     }
-    catch (error) {
-      message.reply(`There was an error when reloading the commands, \n\n**${error}**`);
-}
-    }
+    catch (err) {
+      console.log('fuck a error');
+      message.reply(`There was an error during evaluation, \n\n**${err}**`);
+      client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+    }}
 }
 //I AM HAPPY 

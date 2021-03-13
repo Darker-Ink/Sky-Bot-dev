@@ -10,6 +10,8 @@ module.exports = {
     usage: "?work",
     category: "Economy",
     run: async(client, message, args) => {
+      let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
 
         let user = message.author;
         let author = await db.fetch(`worked_${message.guild.id}_${user.id}`)

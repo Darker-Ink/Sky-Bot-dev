@@ -7,6 +7,9 @@ module.exports = {
     description: "Bans a mentioned member",
     category: "Admin",
     run: async(client, message, args) => {
+      const db = require('quick.db')
+    let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
         const userID = userReg.test(args[0]) ? userReg.exec(args[0])[1] : [0]
         const mentionedUser = await message.client.users.fetch(userID).catch(() => null)
 

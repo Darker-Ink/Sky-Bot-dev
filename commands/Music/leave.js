@@ -4,6 +4,9 @@ module.exports = {
     aliases: ['dc', 'disconnect'],
     category: "Music",
     run: async(client, message, args) => {
+      const db = require('quick.db')
+    let user = db.get(`blacklist_${message.author.id}`);
+    if(user == true) return;
 
         const voiceChannel = message.member.voice.channel
 

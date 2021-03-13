@@ -8,6 +8,8 @@ module.exports = {
     usage: "?store",
     category: "Economy",
     run: async(client, message, args) => {
+      let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
 
         const embed = new MessageEmbed()
         .setTitle('Store')

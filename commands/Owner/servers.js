@@ -2,12 +2,13 @@ const { MessageEmbed } = require("discord.js");
 const config = require('../../config/config.json');
 
 module.exports = {
-    name: "status",
+    name: "servers",
     description: "Shows the current bot servers and users.",
     usage: "[]",
     aliases: ["servers", "BotOwnerInfo"],
     category: "Owner",
   run: async function (client, message, args) {
+    try {
     if (!config.owners.includes(message.author.id)) {
             return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)
         }
@@ -25,5 +26,9 @@ module.exports = {
     .setTimestamp();
 
         return message.channel.send(embed)
-   }
-}
+   }catch (err) {
+      console.log('fuck a error');
+      message.reply(`There was an error during evaluation, \n\n**${err}**`);
+      client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+    }
+}}

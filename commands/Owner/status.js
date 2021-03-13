@@ -9,7 +9,8 @@ module.exports = {
     usage: "reload <command>",
     category: "Owner",
     run: async (client, message, args) => {
-      if (!config.owner.includes(message.author.id)) {
+      try {
+      if (!config.owners.includes(message.author.id)) {
             return message.channel.send(`lmao are you the Owner? No So why are you trying to use this command...? <:thonking:814600683458265090>`)
         }
 const status = args[0];
@@ -23,5 +24,9 @@ const status = args[0];
     } else {
       return message.channel.send(`"${statusType}" is not a valid status type.`);
     }
-  }
-}
+  }catch (err) {
+      console.log('fuck a error');
+      message.reply(`There was an error during evaluation, \n\n**${err}**`);
+      client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+    }
+}}

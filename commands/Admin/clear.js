@@ -5,6 +5,9 @@ module.exports = {
     description: "Clears The Mentioned Number of Messages",
     category: "Admin",
     run: async(client, message, args) => {
+      const db = require('quick.db')
+    let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
         if (!message.member.permissions.has("MANAGE_MESSAGES"))
             return message.channel.send(`You Do Not Have Permissions To Use This Command, ${message.author.username}`);
 

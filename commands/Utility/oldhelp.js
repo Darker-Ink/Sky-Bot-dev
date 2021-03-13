@@ -4,7 +4,7 @@ const db = require('quick.db')
 
 module.exports = {
     name: 'CantUseThis',
-    description: "Gives You a List of Commands that you can Use!",
+    description: "Gives You a List of Commands that you cant Use!",
     aliases: [],
     category: "Utility",
     run: async(client, message, args) => {
@@ -48,7 +48,7 @@ module.exports = {
 
         data.push(`**Name:** ${command.name}`)
 
-        //if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(", ")}`)
+        if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(", ")}`)
         if (command.description) data.push(`**Description:** ${command.description}`)
         if (command.cooldown) data.push(`**Cooldown:** ${command.cooldown} Second(s)`)
         if (command.usage) data.push(`**Usage:** ${command.usage}`)
