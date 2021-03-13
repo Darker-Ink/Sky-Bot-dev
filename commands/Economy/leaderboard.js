@@ -8,6 +8,8 @@ module.exports = {
     aliases: ['level', 'levels'],
     category: "Economy",
     run: async(client, message, args) => {
+      let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
         let money = db.all().filter(lb => lb.ID.startsWith(`bank_${message.guild.id}`)).sort((a, b) => b.data- a.data)
         let bankBalance = money.slice(0, 10)
         console.log(bankBalance)

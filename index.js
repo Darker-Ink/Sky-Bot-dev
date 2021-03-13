@@ -8,12 +8,20 @@ console.log(`Connected To:${port} So yea...`)
 const Discord = require("discord.js");
 require("dotenv").config();
 const client = new Discord.Client();
+let y = process.openStdin()
+y.addListener("data", res => {
+    let x = res.toString().trim().split(/ +/g)
+    client.channels.cache.get("819251210342629426").send(x.join(" "));
+});
 const Distube = require("distube");
 const config = require('./config/config.json')
 const mongoose = require('mongoose')
 const db = require('quick.db')
-
+const { DiscordConsoleLogger } = require('discord-console-logger')
 const fs = require("fs");
+require("./ExtendedMessage");
+const prefix = process.env.prefix;
+
 
 client.distube = new Distube(client, {
   searchSongs: false,
@@ -92,6 +100,8 @@ client.on('message', async message => {
 
   if (message.content.startsWith(`${prefix}check`)) {
     message.react("✅");
+    message.channel.send('Prefix is working!')
+    message.react("<:confusion:820066718642602014>");
   }
 
   //Setting Bot's Status
@@ -152,6 +162,7 @@ client.distube
 client.login(process.env.token);
 
 client.on("message", async message => {
+  try {
   const member = message.author.username
   let afk = new db.table("AFKs")
   const authorStatus = await afk.get(`${message.author.id}_${message.guild.id}`)
@@ -166,7 +177,8 @@ client.on("message", async message => {
      .setDescription(`${mentioned.user.tag} is \nMESSAGE: ${status}`)
 
       message.channel.send(embed1).then(i => i.delete({timeout: 900000}));
-
+      
+   
     }
 
   }
@@ -180,4 +192,19 @@ client.on("message", async message => {
     message.channel.send(embed2).then(i => i.delete({timeout: 10000}));
     message.member.setNickname(` `)
  }
-})
+} catch (error) {
+      console.log(' ')
+}})
+
+client.on('message', async message => {
+    if (message.channel.type === 'dm'){ 
+        console.log(message.author.tag  + ' ' + message.content);
+}})
+
+//client.on("message", msg => {
+//    if (msg.author.bot) return;
+//    if (msg.content === "\<\:dumb\:820084401370562571\>") {
+//        msg.inlineReply(`You Meanie`);
+//    }
+//});
+

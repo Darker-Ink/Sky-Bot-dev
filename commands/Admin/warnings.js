@@ -9,6 +9,9 @@ module.exports = {
   aliases: ["warnlist", "listwarnings", "warns"],
   category: "Admin",
   run: async (client, message, args) => {
+    const db = require('quick.db')
+    let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
     const mentionedUser = message.mentions.users.first() || message.member;
 
     const warnDoc = await warnSchema

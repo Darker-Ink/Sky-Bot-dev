@@ -8,6 +8,8 @@ module.exports = {
     usage: "?weekly",
     category: "Economy",
     run: async(client, message, args) => {
+      let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
         let timeout = 6.048e+8;
         let amount = 5000;
         let user = message.author

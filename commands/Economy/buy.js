@@ -8,6 +8,8 @@ module.exports = {
     usage: "?buy [item]",
     category: "Economy",
     run: async(client, message, args) => {
+      let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
         let purchase = args.join(" ")
         let cash = await db.fetch(`money_${message.guild.id}_${message.author.id}`)
 

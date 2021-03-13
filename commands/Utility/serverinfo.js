@@ -38,6 +38,9 @@ module.exports = {
     usage: "",
     category: "Utility",
     run: async (client, message, args) => {
+      const db = require('quick.db')
+    let user = db.get(`blacklist_${message.author.id}`);
+    if(user == true) return;
     // const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
 		const members = message.guild.members.cache;
 		const channels = message.guild.channels.cache;

@@ -7,6 +7,9 @@ module.exports = {
     aliases: ['loops'],
     category: "Music",
     run: async(client, message, args) => {
+      const db = require('quick.db')
+    let user = db.get(`blacklist_${message.author.id}`);
+    if(user == true) return;
         if (!message.member.voice.channel) {
             const loopError = new MessageEmbed()
               .setDescription("You Need to be in a Voice Channel to loop Music!")

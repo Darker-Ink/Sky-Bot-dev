@@ -19,6 +19,7 @@
     "canvacord": "^5.0.7",
     "discord-backup": "^2.2.5",
     "discord-canvas": "^1.4.1",
+    "discord-console-logger": "^1.0.8",
     "discord-simple-paginationembed": "0.0.1",
     "discord.js": "^12.4.1",
     "distube": "^2.7.0",

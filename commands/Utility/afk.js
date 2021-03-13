@@ -8,6 +8,10 @@ module.exports = {
     aliases: ['botinfo', 'botstat'],
     category: "Utility",
     run: async(client, message, args) => {
+let user = db.get(`blacklist_${message.author.id}`);
+  if(user == true) return;
+
+      try {
     
         const member = message.author.username
            const no1 = new Discord.MessageEmbed()
@@ -39,5 +43,7 @@ module.exports = {
 
     message.member.setNickname(`\[AFK\] ${member}`)
    }
+    }catch (err) {
+      console.log('fuck a error');
     }
-}
+}}

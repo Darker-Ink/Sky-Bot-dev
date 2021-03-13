@@ -7,6 +7,9 @@ module.exports = {
     usage: "?weather [location]", 
     category: "Utility",
     run: async(client, message, args) => {
+      const db = require('quick.db')
+    let user = db.get(`blacklist_${message.author.id}`);
+    if(user == true) return;
         const ErrorEmbed  = new MessageEmbed()
         .setDescription("You Need To Specify A Location")
         .setColor("#f54242")

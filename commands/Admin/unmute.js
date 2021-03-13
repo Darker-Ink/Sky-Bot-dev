@@ -7,6 +7,9 @@ module.exports = {
     description: "Use This To Unmute A Muted Person!",
     category: "Admin",
     run: async (client, message, args) => {
+      const db = require('quick.db')
+    let user1 = db.get(`blacklist_${message.author.id}`);
+    if(user1 == true) return;
 
         if (!message.member.hasPermission("MANAGE_ROLES")) {
             return message.channel.send("Sorry, You Don\'t Have Permissions To Unmute Anyone!");
