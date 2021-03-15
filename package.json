@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IGRohan/IGbot.git"
+    "url": ""
   },
   "author": "DarkerInk",
   "license": "ISC",
@@ -43,7 +43,7 @@
     "weather-js": "^2.0.0"
   },
   "bugs": {
-    "url": "https://github.com/IGRohan/IGbot/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/IGRohan/IGbot#readme"
+  "homepage": ""
 }
