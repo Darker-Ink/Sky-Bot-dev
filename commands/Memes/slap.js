@@ -1,0 +1,24 @@
+const Canvacord = require("canvacord/src/Canvacord")
+const { MessageAttachment } = require("discord.js")
+
+module.exports = {
+    name: 'slap',
+    description: "Slap Someone, What else did you expect?",
+    usage: '?slap <mention>',
+    category: "Fun",
+    run: async(client, message, args) => {
+      const db = require('quick.db')
+    let user = db.get(`blacklist_${message.author.id}`);
+    if(user == true) return;
+
+        const member =  message.mentions.users.first()
+        const mentionedMemberAvatar = member.displayAvatarURL({dynamic: false, format: "png"})
+        const messageAuthorAvatar = message.author.displayAvatarURL({dynamic: false, format: "png"})
+
+        let image = await Canvacord.slap(messageAuthorAvatar, mentionedMemberAvatar)
+
+        let slap = new MessageAttachment(image, "slap.png")
+
+        message.channel.send(slap)
+    }
+}
