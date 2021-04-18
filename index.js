@@ -88,7 +88,7 @@ const status = (queue) =>
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 
 client.distube
-    .on("playSong", (message, queue, song) => {
+	.on("playSong", (message, queue, song) => {
         const playSongEmbed = new Discord.MessageEmbed()
             .setTitle('Started Playing')
             .setDescription(`[${song.name}](${song.url})`)
@@ -99,6 +99,7 @@ client.distube
             .setColor("BLUE")
         message.channel.send(playSongEmbed)
     })
+            //▶️⏸️⏹️🔁🔉🔊
     .on("addSong", (message, queue, song) =>
         message.channel.send(
             `${client.emotes.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
@@ -124,7 +125,7 @@ client.distube
     )
 	.on("initQueue", queue => {
     queue.autoplay = false;
-    queue.volume = 100;
+    queue.volume = 50;
 })
 	.on("searchResult", (message, result) => {
         let i = 0
