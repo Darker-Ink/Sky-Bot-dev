@@ -1,5 +1,7 @@
 const canvacord = require('canvacord/src/Canvacord');
-const { MessageAttachment } = require('discord.js');
+const {
+    MessageAttachment
+} = require('discord.js');
 
 module.exports = {
     name: 'beautiful',
@@ -7,12 +9,12 @@ module.exports = {
     usage: 'beautiful <@mention>',
     aliases: ['beaut'],
     category: "Fun",
-    run: async(client, message, args) => {
-      const db = require('quick.db')
-    let user = db.get(`blacklist_${message.author.id}`);
-    if(user == true) return;
+    run: async (client, message, args) => {
         const member = message.mentions.users.first() || message.author;
-        const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })
+        const memberAvatar = member.displayAvatarURL({
+            dynamic: false,
+            format: 'png'
+        })
 
         const image = await canvacord.beautiful(memberAvatar)
         const beautiful = new MessageAttachment(image, 'beautiful.png')

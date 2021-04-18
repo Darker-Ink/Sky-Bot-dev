@@ -1,0 +1,7 @@
+Simple, take the bat files one folder out so where index.js is ONE folder out 
+
+---- PM2 STEPS ----
+If you use pm2 do pm2link.bat first then do install.bat then pm2start.bat
+
+---- NORMAL STEPS ----
+If you don't want to use pm2 do install.bat then start.bat

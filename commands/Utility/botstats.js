@@ -1,7 +1,12 @@
-const { MessageEmbed, version: djsversion } = require('discord.js')
+const {
+    MessageEmbed,
+    version: djsversion
+} = require('discord.js')
 const ms = require('ms')
 const os = require('os')
-const { utc } = require('moment')
+const {
+    utc
+} = require('moment')
 const moment = require('moment')
 const version = require('../../config/config.json')
 
@@ -12,25 +17,25 @@ module.exports = {
     usage: "?botstats",
     aliases: ['botinfo', 'botstat', 'bs'],
     category: "Utility",
-    run: async(client, message, args) => {
-      const db = require('quick.db')
-    let user = db.get(`blacklist_${message.author.id}`);
-    if(user == true) return;
-      try {
-        function formatBytes(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(1024));
-            return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
-        }
-		const uptime = moment
-		.duration(client.uptime)
-		.format(" D [days], H [hrs], m [mins], s [secs]");
-        const core = os.cpus()[0];
-        const embed = new MessageEmbed()
-			.setThumbnail(client.user.displayAvatarURL())
-			.setColor(message.guild.me.displayHexColor || 'BLUE')
-			.addField('General', [
+    run: async (client, message, args) => {
+        const db = require('quick.db')
+        let user = db.get(`blacklist_${message.author.id}`);
+        if (user == true) return;
+        try {
+            function formatBytes(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(1024));
+                return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
+            }
+            const uptime = moment
+                .duration(client.uptime)
+                .format(" D [days], H [hrs], m [mins], s [secs]");
+            const core = os.cpus()[0];
+            const embed = new MessageEmbed()
+                .setThumbnail(client.user.displayAvatarURL())
+                .setColor(message.guild.me.displayHexColor || 'BLUE')
+                .addField('General', [
 				`**❯ Client:** ${client.user.tag} (${client.user.id})`,
 				`**❯ Commands:** ${client.commands.size}`,
 				`**❯ Servers:** ${client.guilds.cache.size.toLocaleString()} `,
@@ -43,7 +48,7 @@ module.exports = {
 				`**❯ Uptime:** ${uptime}`,
 				'\u200b'
 			])
-			.addField('System', [
+                .addField('System', [
 				`**❯ Platform:** ${process.platform}`,
 				`**❯ Uptime:** ${ms(os.uptime() * 1000, { long: true })}`,
 				`**❯ CPU:**`,
@@ -54,20 +59,15 @@ module.exports = {
 				`\u3000 __Total:__ ${formatBytes(process.memoryUsage().heapTotal)}`,
 				`\u3000 __Used:__ ${formatBytes(process.memoryUsage().heapUsed)}`
 			])
-            .setColor('RANDOM')
-            .setTimestamp();
-            
-            
+                .setColor('RANDOM')
+                .setTimestamp();
+
+
             message.channel.send(embed)
-    }catch (err) {
-      console.log('fuck a error');
-      message.reply(`There was a error Darkerink Already Got the error and Got ping He will check it out soon but anyways here is the error, \n\n**${err}**`);
-      client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+        } catch (err) {
+            console.log('fuck a error');
+            message.reply(`There was a error Darkerink Already Got the error and Got ping He will check it out soon but anyways here is the error, \n\n**${err}**`);
+            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+        }
     }
-
-    
 }
-
-
-}
-

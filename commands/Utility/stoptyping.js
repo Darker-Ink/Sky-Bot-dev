@@ -1,5 +1,5 @@
 const db = require('quick.db')
-const Discord  = require('discord.js')
+const Discord = require('discord.js')
 
 module.exports = {
     name: 'stoptyping',
@@ -7,8 +7,7 @@ module.exports = {
     usage: "?stoptyping",
     aliases: ['styp'],
     category: "Utility",
-    run: async(client, message, args) => {
-let user = db.get(`blacklist_${message.author.id}`);
-  if(user == true) return;
+    run: async (client, message, args) => {
         message.channel.stopTyping();
-    }}
+    }
+}

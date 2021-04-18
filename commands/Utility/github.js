@@ -1,5 +1,10 @@
-const { Discord, discord } = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const {
+    Discord,
+    discord
+} = require("discord.js");
+const {
+    MessageEmbed
+} = require("discord.js");
 const moment = require("moment");
 const fetch = require("node-fetch")
 
@@ -10,36 +15,45 @@ module.exports = {
     aliases: ["git"],
     category: "Utility",
     run: async (client, message, args) => {
-      const db = require('quick.db')
-    let user = db.get(`blacklist_${message.author.id}`);
-    if(user == true) return;
 
-       try {
+        try {
 
-  if (!args[0]) return message.channel.send(`Please Give Me A Username!`)
-    
-  fetch(`https://api.github.com/users/${args.join('-')}`)
-    .then(res => res.json()).then(body => {
-      if(body.message) return message.channel.send(`User Not Found | Please Give Me A Valid Username!`);
-    let { login, avatar_url, name, id, html_url, public_repos, followers, following, location, created_at, bio } = body;
+            if (!args[0]) return message.channel.send(`Please Give Me A Username!`)
 
-            const embed = new MessageEmbed()
-            .setAuthor(`${login} Information!`, avatar_url)
-            .setColor(`RANDOM`)
-            .setThumbnail(`${avatar_url}`)
-            .addField(`Username`, `${login}`)
-            .addField(`ID`, `${id}`)
-            .addField(`Bio`, `${bio || "No Bio"}`)
-            .addField(`Public Repositories`, `${public_repos || "None"}`, true)
-            .addField(`Followers`, `${followers}`, true)
-            .addField(`Following`, `${following}`, true)
-            .addField(`Location`, `${location || "No Location"}`)
-            .addField(`Account Created`, moment.utc(created_at).format("dddd, MMMM, Do YYYY"))
-            .setFooter(`Tysm For Using Me! ${message.author.username}`)
+            fetch(`https://api.github.com/users/${args.join('-')}`)
+                .then(res => res.json()).then(body => {
+                    if (body.message) return message.channel.send(`User Not Found | Please Give Me A Valid Username!`);
+                    let {
+                        login,
+                        avatar_url,
+                        name,
+                        id,
+                        html_url,
+                        public_repos,
+                        followers,
+                        following,
+                        location,
+                        created_at,
+                        bio
+                    } = body;
 
-            message.channel.send(embed)
+                    const embed = new MessageEmbed()
+                        .setAuthor(`${login} Information!`, avatar_url)
+                        .setColor(`RANDOM`)
+                        .setThumbnail(`${avatar_url}`)
+                        .addField(`Username`, `${login}`)
+                        .addField(`ID`, `${id}`)
+                        .addField(`Bio`, `${bio || "No Bio"}`)
+                        .addField(`Public Repositories`, `${public_repos || "None"}`, true)
+                        .addField(`Followers`, `${followers}`, true)
+                        .addField(`Following`, `${following}`, true)
+                        .addField(`Location`, `${location || "No Location"}`)
+                        .addField(`Account Created`, moment.utc(created_at).format("dddd, MMMM, Do YYYY"))
+                        .setFooter(`Tysm For Using Me! ${message.author.username}`)
 
-    })
+                    message.channel.send(embed)
+
+                })
 
         } catch (error) {
             console.log(`[Commands] [github] Getting Error In github Command :\n`, error);
