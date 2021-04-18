@@ -107,14 +107,14 @@ module.exports = {
             try {
                 if (!command) command = client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
 
-                //  if (!command) return;
+                  if (!command) return;
 
                 if (command.ownerOnly && !config.owners.includes(message.author.id)) {
-                    return message.reply('You are Not a Owner, If you think this is a Mistake Please Contact Support');
+                    return message.reply('You are Not a Owner, If this is a mistake and the command shouldn\'t say this contact support');
                 }
 
                 if (command.disabled && !config.owners.includes(message.author.id)) {
-                    return message.reply('This Command Is disabled Due to a Bug Or It is still in development Please Check back later!');
+                    return message.reply('This Command Is disabled Due to It being in develpment Please Check back later!');
                 }
                 if (command.disabledbug && !config.owners.includes(message.author.id)) {
                     return message.reply('This Command Is disabled Due to a Bug Please Check back later!');
