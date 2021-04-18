@@ -285,13 +285,15 @@ client.on("message", async message => {
 
     if (message.channel.name == "chatbot") {
 
-        //    if(message.channel.type == "dm") {
         if (message.author.bot) return;
         if (message.content.includes(`Who Made you`)) {
             return message.inlineReply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
         };
         if (message.content.includes(`who made you`)) {
             return message.inlineReply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
+        };
+        if (message.content.includes(`how many servers are you in`)) {
+            return message.inlineReply(`I am in ${client.guilds.cache.size} servers`)
         };
         message.channel.startTyping();
         if (message.author.bot) return;
@@ -304,7 +306,7 @@ client.on("message", async message => {
             uid: message.author.id,
             bot: {
                 name: "Blue Sky",
-                birthdate: "12/14/1969",
+                birthdate: "12/31/1969",
                 prefix: "?",
                 gender: "Female",
                 description: "I'm a Multipurpose Bot That loves to help you!"
