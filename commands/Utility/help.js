@@ -1,71 +1,146 @@
-const Discord = require('discord.js');
-const configs = require('../../config/config.json');
-const db = require('quick.db')
-const ms = require("parse-ms");
+const {
+    MessageEmbed
+} = require("discord.js");
+const {
+    readdirSync
+} = require("fs");
+const mongoose = require('mongoose');
+const Guild = require('../../schema.js')
+
 module.exports = {
-    name: 'help',
-    guildOnly: false,
-    usage: "help <cmd>",
-    description: 'Get Help',
-    category: "Utility",
-    cooldown: 8,
+    name: "help",
+    aliases: [''],
+    description: "Shows all available bot commands.",
+    disabled: false,
     run: async (client, message, args) => {
-      let user1 = db.get(`blacklist_${message.author.id}`);
-  if(user1 == true) return;
-      try {
-    if (args[0]) {
-      const command = await client.commands.get(args[0]);
 
-      if (!command) {
-        return message.channel.send("Unknown Command: " + args[0]);
-      }
-      const embed = new Discord.MessageEmbed()
-        .setAuthor(command.name, client.user.displayAvatarURL())
-        .addField("Description", command.description || "Not Provided :(")
-        .addField("Usage", "`" + command.usage + "`" || "Not Provied")
-		.addField("aliases", "`" + command.aliases + "`" || "Not Provied")
-      //	.addField("aliases", "`" + command.aliases + "`" || "Not Provied")
-        .addField("Info", "Tad Bit of Info [channel] Means the channel you are in <message> means You need a message")
-        .setThumbnail(client.user.displayAvatarURL())
-        .setColor("RANDOM")
-        .setFooter(client.user.username, client.user.displayAvatarURL());
+        const settings = await Guild.findOne({
+            guildID: message.guild.id
+        }, (err, guild) => {
+            if (err) console.error(err)
+            if (!guild) {
+                const newGuild = new Guild({
+                    _id: mongoose.Types.ObjectId(),
+                    guildID: message.guild.id,
+                    guildName: message.guild.name,
+                    prefix: process.env.PREFIX
+                })
 
-      return message.channel.send(embed);
-    } else {
-      const commands = await client.commands;
-      let emx = new Discord.MessageEmbed()
-        .setDescription(`${client.user.username} | Version: ${configs.version} | Command Amount: ${client.commands.size}`)
-        .setColor("RANDOM")
-        .setFooter(client.user.username, client.user.displayAvatarURL())
-        
+                newGuild.save()
+                    .then(result => console.log(result))
+                    .catch(err => console.error(err));
 
-      let com = {};
-      for (let comm of commands.array()) {
-        let category = comm.category || "No Category";
-        let name = comm.name;
+                return message.channel.send('This server was not in our database! We have added it, please retype this command.').then(m => m.delete({
+                    timeout: 10000
+                }));
+            }
+        });
 
-        if (!com[category]) {
-          com[category] =  [];
+        const roleColor =
+            message.guild.me.displayHexColor === "#000000" ?
+            "#ffffff" :
+            message.guild.me.displayHexColor;
+
+        if (!args[0]) {
+            let categories = [];
+
+            readdirSync("./commands/").forEach((dir) => {
+                if (dir === 'Owner') return;
+                const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
+                    file.endsWith(".js")
+                );
+
+                const cmds = commands.filter((command) => {
+                    let file = require(`../../commands/${dir}/${command}`);
+                    return !file.hidden;
+                }).map((command) => {
+                    let file = require(`../../commands/${dir}/${command}`);
+
+                    if (!file.name) return "No command name.";
+
+                    let name = file.name.replace(".js", "");
+
+                    return `\`${name}\``;
+                });
+
+                let data = new Object();
+
+                data = {
+                    name: dir.toUpperCase(),
+                    value: cmds.length === 0 ? "In progress." : cmds.join(" "),
+                };
+
+                categories.push(data);
+            });
+
+            const embed = new MessageEmbed()
+                .setTitle(`${client.user.username} | Version: ${client.config.version} | Command Amount: ${client.commands.size}`)
+                .addFields(categories)
+                .setDescription(
+                    `Latest Update News: Cleaned All the code up and It made the bot run 36% Faster :D`
+                )
+                .setFooter(
+                    `Requested by ${message.author.tag}`,
+                    message.author.displayAvatarURL({
+                        dynamic: true
+                    })
+                )
+                .setTimestamp()
+                .setColor(roleColor);
+            return message.channel.send(embed);
+        } else {
+            const command =
+                client.commands.get(args[0].toLowerCase()) ||
+                client.commands.find(
+                    (c) => c.aliases && c.aliases.includes(args[0].toLowerCase())
+                );
+
+            if (!command) {
+                const embed = new MessageEmbed()
+                    .setTitle(`Invalid command! Use \`${settings.prefix}help\` for all of my commands!`)
+                    .setColor("FF0000");
+                return message.channel.send(embed);
+            }
+
+            const embed = new MessageEmbed()
+                .setTitle("Command Details:")
+                .addField(
+                    "COMMAND:",
+                    command.name ? `\`${command.name}\`` : "No name for this command."
+                )
+                .addField(
+                    "ALIASES:",
+                    command.aliases ?
+                    `\`${command.aliases.join("` `")}\`` :
+                    "No aliases for this command."
+                )
+                .addField(
+                    "USAGE:",
+                    command.usage ?
+                    `\`${settings.prefix}${command.name} ${command.usage}\`` :
+                    `\`${settings.prefix}${command.name}\``
+                )
+                .addField(
+                    "DESCRIPTION:",
+                    command.description ?
+                    command.description :
+                    "No description for this command."
+                )
+                .addField(
+                    "PERMS NEEDED:",
+                    command.perms ?
+                    command.perms :
+                    "No Perms needed."
+                )
+                .setFooter(
+                    `Requested by ${message.author.tag}`,
+                    message.author.displayAvatarURL({
+                        dynamic: true
+                    })
+                )
+                .setTimestamp()
+                .setColor(roleColor);
+            return message.channel.send(embed);
         }
-        com[category].push(name);
-          
-      }
-
-      for(const [key, value] of Object.entries(com)) {
-        let category = key;
-
-        let desc = "`" + value.join("`, `") + "`";
-
-        emx.addField(`${category.toUpperCase()} [${value.length}]`, desc);
-
-      }
-	  console.log(emx)
-      return message.channel.send(emx);
-        
-    }
-  }catch (err) {
-      console.log('fuck a error');
-      message.reply(`There was a error Darkerink Already Got the error and Got pinged, He will check it out soon but anyways here is the error, ||idk why you would need it though|| \n\n**${err}**`);
-      client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
-    }
-}};
+    },
+};

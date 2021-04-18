@@ -1,4 +1,6 @@
-const { MessageEmbed } = require('discord.js');
+const {
+    MessageEmbed
+} = require('discord.js');
 const answers = require('../../data/8ball.json')
 
 module.exports = {
@@ -7,29 +9,25 @@ module.exports = {
     usage: "?8ball <question>",
     aliases: [],
     category: "Fun",
-    run: async(client, message, args) => {
-      const db = require('quick.db')
-    let user1 = db.get(`blacklist_${message.author.id}`);
-    if(user1 == true) return;
-
+    run: async (client, message, args) => {
         const question = args.join(" ")
 
-        if(!question) {
+        if (!question) {
             const eightBallError = new MessageEmbed()
-            .setDescription('Please Provide a Question')
-            .setColor('RED')
+                .setDescription('Please Provide a Question')
+                .setColor('RED')
             return message.channel.send(eightBallError)
         }
         const answer = answers[Math.floor(Math.random() * answers.length)];
 
         const embed = new MessageEmbed()
-        .setTitle("8Ball")
-        .setColor("BLUE")
-        .addField(`Question:`, question)
-        .addField(`Answer:`, answer);
-        
+            .setTitle("8Ball")
+            .setColor("BLUE")
+            .addField(`Question:`, question)
+            .addField(`Answer:`, answer);
+
 
         message.channel.send(embed);
-        
+
     }
 }

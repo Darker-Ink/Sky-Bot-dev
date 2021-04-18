@@ -1,4 +1,6 @@
-const { Message } = require('discord.js');
+const {
+    Message
+} = require('discord.js');
 const figlet = require('figlet');
 
 module.exports = {
@@ -6,25 +8,21 @@ module.exports = {
     description: "Converts Given Text Into Ascii",
     usage: "?ascii <text>",
     category: "Fun",
-    run: async(client, message, args) => {
-      const db = require('quick.db')
-    let user = db.get(`blacklist_${message.author.id}`);
-    if(user == true) return;
+    run: async (client, message, args) => {
 
-        if(!args[0]) return message.channel.send("`Please Provide A Text That You Wanna Convert`")
+        if (!args[0]) return message.channel.send("`Please Provide A Text That You Wanna Convert`")
 
         msg = args.join(" "),
 
 
-        figlet.text(msg, function (err, data) {
-            if(err) {
-                console.log(err)
-            }
+            figlet.text(msg, function(err, data) {
+                if (err) {
+                    console.log(err)
+                }
 
-            if(data.length > 2000) return message.channel.send("`Please Provide Text Below 2000 Characters`")
+                if (data.length > 2000) return message.channel.send("`Please Provide Text Below 2000 Characters`")
 
-            message.channel.send('```' + data + '```')
-        })
+                message.channel.send('```' + data + '```')
+            })
     }
 }
-

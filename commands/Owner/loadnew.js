@@ -1,55 +1,56 @@
 const Discord = require('discord.js');
-const { inspect } = require('util');
+const {
+    inspect
+} = require('util');
 const fs = require('fs')
 const config = require('../../config/config.json');
 
 module.exports = {
     name: 'loadnew',
-    guildOnly: false,
     ownerOnly: true,
     description: 'Reloads the commandFiles',
     aliases: ['ln'],
     usage: "reload <command>",
     category: "Owner",
     run: async (client, message, args) => {
-      try {
-            
-    client.commands = undefined
-   console.log(client.commands)
+        try {
 
-    client.commands = new Discord.Collection();
+            client.commands = undefined
+            console.log(client.commands)
 
-        function getDirectories() {
-  return fs.readdirSync("./commands").filter(function subFolders(file) {
-    return fs.statSync("./commands/" + file).isDirectory();
-  });
-}
-const commandFiles = fs
-  .readdirSync("./commands/")
-  .filter((file) => file.endsWith(".js"));
-for (const folder of getDirectories()) {
-  const folderFiles = fs
-    .readdirSync("./commands/" + folder)
-    .filter((file) => file.endsWith(".js"));
-  for (const file of folderFiles) {
-    commandFiles.push([folder, file]);
-  }
-}
-for (const file of commandFiles) {
-  let command;
-  if (Array.isArray(file)) {
-    command = require(`../../commands/${file[0]}/${file[1]}`);
-  } else {
-    command = require(`./commands/${file}`);
-  }
+            client.commands = new Discord.Collection();
 
-  client.commands.set(command.name, command);
-  
-}
-    
-      message.channel.send('New commands Have been added')
+            function getDirectories() {
+                return fs.readdirSync("./commands").filter(function subFolders(file) {
+                    return fs.statSync("./commands/" + file).isDirectory();
+                });
+            }
+            const commandFiles = fs
+                .readdirSync("./commands/")
+                .filter((file) => file.endsWith(".js"));
+            for (const folder of getDirectories()) {
+                const folderFiles = fs
+                    .readdirSync("./commands/" + folder)
+                    .filter((file) => file.endsWith(".js"));
+                for (const file of folderFiles) {
+                    commandFiles.push([folder, file]);
+                }
+            }
+            for (const file of commandFiles) {
+                let command;
+                if (Array.isArray(file)) {
+                    command = require(`../../commands/${file[0]}/${file[1]}`);
+                } else {
+                    command = require(`./commands/${file}`);
+                }
+
+                client.commands.set(command.name, command);
+
+            }
+
+            message.channel.send('New commands Have been added')
+        } catch (error) {
+            message.reply(`There was an error when loading the new commands, \n\n**${error}**`);
+        }
     }
-    catch (error) {
-      message.reply(`There was an error when loading the new commands, \n\n**${error}**`);
-    }}
 }

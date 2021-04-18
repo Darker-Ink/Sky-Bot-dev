@@ -19,12 +19,13 @@ module.exports = {
             `He wasn\'t seen again`,
             `Bot restarts are common`
         ]
-    
+
         setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
             client.user.setActivity(status, {
                 type: 'PLAYING',
                 //url: 'https://twitch.tv/monstercat'
             });
-        }, 20000)
-    }}
+        }, 60000)
+    }
+}

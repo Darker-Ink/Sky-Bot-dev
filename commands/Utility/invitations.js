@@ -1,4 +1,6 @@
-const { MessageEmbed } = require("discord.js")
+const {
+    MessageEmbed
+} = require("discord.js")
 
 module.exports = {
     name: 'invites',
@@ -6,38 +8,41 @@ module.exports = {
     usage: "?invites",
     aliases: ['invs'],
     category: "Utility",
-    run: async(client, message, args) => {
-      const db = require('quick.db')
-    let user = db.get(`blacklist_${message.author.id}`);
-    if(user == true) return;
+    run: async (client, message, args) => {
         message.guild.fetchInvites().then((invites) => {
             const inviteCounter = {}
 
 
             invites.forEach((invite => {
-                const { uses, inviter } = invite
-                const { username, discriminator } = inviter
+                const {
+                    uses,
+                    inviter
+                } = invite
+                const {
+                    username,
+                    discriminator
+                } = inviter
 
                 const name = `${inviter}`
 
                 inviteCounter[name] = (inviteCounter[name] || 0) + uses
-             }))
+            }))
 
-             let replyText = new MessageEmbed()
-             .setDescription('Invites: \n')
-             .setColor("BLUE")
+            let replyText = new MessageEmbed()
+                .setDescription('Invites: \n')
+                .setColor("BLUE")
 
-             const sortedInvites = Object.keys(inviteCounter).sort((a, b) => inviteCounter[b] - inviteCounter[a])
+            const sortedInvites = Object.keys(inviteCounter).sort((a, b) => inviteCounter[b] - inviteCounter[a])
 
-             if (sortedInvites.length > 5) sortedInvites.length = 5
-             else if(sortedInvites.length > 5) sortedInvites.length = sortedInvites.length
+            if (sortedInvites.length > 5) sortedInvites.length = 5
+            else if (sortedInvites.length > 5) sortedInvites.length = sortedInvites.length
 
 
-             for(const invite of sortedInvites) {
-                 const count = inviteCounter[invite]
-                 replyText.description += `\n${invite} has invited ${count} member(s)!`
-             }
-             message.channel.send(replyText)
+            for (const invite of sortedInvites) {
+                const count = inviteCounter[invite]
+                replyText.description += `\n${invite} has invited ${count} member(s)!`
+            }
+            message.channel.send(replyText)
 
 
         })
