@@ -15,9 +15,10 @@ const timeoutObj = setTimeout(() => {
         console.log(result)
     })
 }, 10000);
-//console.log(result, { code: "asciidoc", split: "\n"})
-/**function intervalFunc() {
+/*console.log(result, { code: "asciidoc", split: "\n"})
+function intervalFunc() {
   console.log('Cant stop me now!');
 }
 
-setInterval(intervalFunc, 1500); */
+setInterval(intervalFunc, 1500); 
+*/
