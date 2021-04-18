@@ -1,10 +1,36 @@
+const Guild = require('../../database/guild');
+const { MessageEmbed } = require('discord.js');
+
+const ReactionRole = require("../../packages/reactionrole/index.js")
+const react = new ReactionRole()
 module.exports = {
     name: "rrtypes",
-    description: "Not Finished Yet",
+    description: "Will Display all reaction role Types",
     disabled: true,
     usage: "",
     aliases: [],
     category: "Owner",
-    run: async (client, message) => {
-        message.channel.send('this command is not finished yet')
-    }}
+    run: async (client, message, args) => {
+        let client = message.client
+
+        const guildDB = await Guild.findOne({
+         guildId: message.guild.id
+       });
+     
+ 
+       
+     
+       let fail = '❌'
+       let success = '✅'
+ 
+ 
+   const embedType = new MessageEmbed()
+   .setAuthor(message.author.tag, message.author.displayAvatarURL())
+   .setDescription(`\`Type 1\` - React adds the role, unreacting removes the role\n\`Type 2\` - Reacting will give the role but unreaction won't remove the role\n\`Type 3\` - Reacting will remove the user's role and unreacting won't give it back\n\`Type 4\` - When reacting it will remove the role, unreacting will add the role\n\`Type 5\` - Same concept as number 3 but removes the user's reaction\n\`Type 6\` - React to recieve the role and react again to remove the role`)
+    .setColor(client.color.red)
+ 
+ message.channel.send(embedType)
+ 
+ 
+     }
+ };

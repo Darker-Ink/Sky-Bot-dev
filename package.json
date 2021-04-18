@@ -4,10 +4,9 @@
   "description": "This is a DarkBot",
   "main": "index.js",
   "repository": {
-    "apiUrl": "https://api.github.com/repos/DarkTheif/Odd-Bot"
+    "apiUrl": "https://github.com/DarkSky-Inc/Sky-Bot/"
   },
   "scripts": {
-    "prod:start": "pm2-runtime index.js",
     "test": "node test.js"
   },
   "author": "DarkerInk",
@@ -56,7 +55,7 @@
     "weky": "^1.4.1"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/DarkSky-Inc/Sky-Bot/issues"
   },
   "homepage": ""
 }
