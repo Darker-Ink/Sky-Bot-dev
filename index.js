@@ -23,7 +23,7 @@ client.emotes = config.emoji
 client.cooldowns = new Discord.Collection();
 client.data = require("./models/mongo/MongoDB.js");
 client.tools = require("./tools/Tools.js");
-
+client.color = require('./colors.js');
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
