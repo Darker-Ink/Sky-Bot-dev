@@ -23,7 +23,7 @@ module.exports = {
     async run(messageReaction, user) {
 
         //ignore bot's reactions
-        if (message.author.id === client.user.id) return;
+        if (user === client.user.id) return;
         
         const {
             message,
