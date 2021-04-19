@@ -23,7 +23,7 @@ module.exports = {
     async run(messageReaction, user) {
 
         //ignore bot's reactions
-        if (this.client.user === user) return;
+        if (client.user === user) return;
 
         const {
             message,
@@ -62,7 +62,7 @@ module.exports = {
                 // return (avoid rate limit + SPAM)
                 if (botCooldown.has(message.guild.id)) return;
 
-                let guild = this.client.guilds.cache.get(db.guildid);
+                let guild = client.guilds.cache.get(db.guildid);
                 let guildName = guild.name;
 
                 let slowDownEmbed = new MessageEmbed()
