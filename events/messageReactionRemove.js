@@ -3,7 +3,7 @@ const {
     User,
     MessageEmbed
 } = require("discord.js");
-const Db = require("../../packages/reactionrole/models/schema.js");
+const Db = require("../packages/reactionrole/models/schema.js");
 const reactionCooldown = new Set();
 const GuildDB = require('../models/reaction');
 const botCooldown = new Set();
