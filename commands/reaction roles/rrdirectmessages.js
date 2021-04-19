@@ -12,7 +12,6 @@ module.exports = {
     category: "Owner",
     run: async (client, message, args) => {
 
-        let client = message.client
 
         const guildDB = await Guild.findOne({
          guildId: message.guild.id
