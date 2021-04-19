@@ -19,8 +19,8 @@ module.exports = {
 
 
         //ignore bot's reactions
-        if (message.author.id === client.user.id) return;
-        
+        if (user === client.user.id) return;
+
         const {
             message,
             emoji
