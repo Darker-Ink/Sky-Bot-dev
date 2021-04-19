@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const colors = require('colors')
+const event_handler = require('./event');
 const client = new Discord.Client();
 
 function getDirectories() {
@@ -28,6 +29,7 @@ for (const file of commandFiles) {
     }
     console.log(colors.green(`✅  Success! Command: ${command.name} Is Working!`));
 }
+event_handler.performEvents(client);
 
 console.log('All The Commands Work and the bot is ready to go!')
 
