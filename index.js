@@ -24,6 +24,7 @@ client.cooldowns = new Discord.Collection();
 client.data = require("./models/mongo/MongoDB.js");
 client.tools = require("./tools/Tools.js");
 client.color = require('./colors.js');
+client.react = new Map()
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
