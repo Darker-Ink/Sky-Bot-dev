@@ -1,4 +1,4 @@
-const Guild = require('../../models/guild');
+const Guild = require('../../models/reaction');
 const { MessageEmbed } = require('discord.js');
 
 const ReactionRole = require("../../packages/reactionrole/index.js")
