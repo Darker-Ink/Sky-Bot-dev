@@ -21,4 +21,4 @@ const reactionConfigSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('reaction', reactionConfigSchema);
+module.exports = mongoose.model('reactionconfig', reactionConfigSchema);
