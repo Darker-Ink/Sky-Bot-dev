@@ -13,9 +13,9 @@ const prefix = process.env.prefix;
 const colors = require('colors');
 const blacklist = require('./models/blacklist')
 client.distube = new Distube(client, {
-    searchSongs: false,
+    searchSongs: true,
     leaveOnFinish: false,
-    leaveOnStop: false,
+    leaveOnStop: true,
 });
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -129,8 +129,15 @@ client.distube
     queue.volume = 50;
 })
 	.on("searchResult", (message, result) => {
-        let i = 0
-        message.channel.send(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`)
+            let i = 0
+    const searchembed = new Discord.MessageEmbed()
+            .setTitle('Choose an option from below')
+            .setDescription(`${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}`)
+    		.setColor("YELLOW")
+    		.setFooter('*Enter anything else or wait 60 seconds to cancel*')
+    message.channel.send(searchembed).then(m => m.delete({
+                        timeout: 61000
+                    }));
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
 
@@ -264,7 +271,7 @@ client.on("guildCreate", guild => {
     }
 })
 
-
+/*
 const {
     inspect
 } = require("util")
@@ -278,7 +285,7 @@ process.on('warning', (warn) => {
     client.channels.cache.get('827716948087013406').send(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn.stack}\n\`\`\``)
 })
 
-
+*/
 fetch = require("node-fetch");
 
 

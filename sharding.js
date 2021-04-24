@@ -1,19 +1,10 @@
-// Include discord.js ShardingManger
 const { ShardingManager } = require('discord.js');
 
-// Create your ShardingManger instance
 const manager = new ShardingManager('./index.js', {
-    // for ShardingManager options see:
-    // https://discord.js.org/#/docs/main/v11/class/ShardingManager
-
-    // 'auto' handles shard count automatically
     totalShards: 'auto', 
-
-    // your bot token
-    token: ''
+    token: "NjgyMDkwMDA2MTUxNTYxMjMz.XlX70g.EkrpipP8k1cWugAPqXkI_wtyor8"
 });
 
-// Spawn your shards
 manager.spawn();
 
 // The shardCreate event is emitted when a shard is created.
