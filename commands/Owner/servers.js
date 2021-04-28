@@ -10,6 +10,7 @@ module.exports = {
     usage: '',
     aliases: ["servers", "BotOwnerInfo"],
     category: "Owner",
+    hidden: true,
     run: async function(client, message, args) {
         try {
             let embed = new MessageEmbed()

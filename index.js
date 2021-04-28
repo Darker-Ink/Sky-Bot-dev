@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 require("dotenv").config();
+fetch = require("node-fetch");
 const client = new Discord.Client();
 const Distube = require("distube");
 const config = require('./config/config.json');
@@ -12,6 +13,9 @@ require("./ExtendedMessage");
 const prefix = process.env.prefix;
 const colors = require('colors');
 const blacklist = require('./models/blacklist')
+const mongoCurrency = require('discord-mongo-currency');
+const logger = require("discordjs-logger");
+
 client.distube = new Distube(client, {
     searchSongs: true,
     leaveOnFinish: false,
@@ -25,6 +29,8 @@ client.data = require("./models/mongo/MongoDB.js");
 client.tools = require("./tools/Tools.js");
 client.color = require('./colors.js');
 client.react = new Map()
+
+
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
@@ -51,9 +57,16 @@ for (const file of commandFiles) {
     }
 
     client.commands.set(command.name, command);
-    console.log(colors.green(`✅  Success! Loaded Command ${command.name} `));
+    const responses = [
+        `✅  Success! Loaded Command ${command.name} `,
+        `✅  Loaded ${command.name} `,
+        `✅  ${command.name} Has Loaded`,
+      ];
+            const dresponses = responses[Math.floor(Math.random() * responses.length)];
+    console.log(colors.green(dresponses));
 }
-//Ready Event
+
+//Event Handler
 event_handler.performEvents(client);
 
 client.on('messageDelete', message => {
@@ -61,6 +74,7 @@ client.on('messageDelete', message => {
 
     obj[message.guild.id] = JSON.parse(JSON.stringify(message))
     fs.writeFileSync('./snipe.json', JSON.stringify(obj))
+    console.log(message.guild.id)
 })
 
 client.on('ready', () => {
@@ -74,10 +88,6 @@ client.on('ready', () => {
 })
 
 client.login(process.env.token);
-client.on("error", () => {
-    client.login(process.env.token)
-});
-
 
 const status = (queue) =>
     `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"
@@ -141,19 +151,6 @@ client.distube
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
 
-client.on('message', async message => {
-    if (message.channel.type === 'dm') {
-        console.log(message.author.tag + ' ' + message.content);
-    }
-})
-
-client.on('message', async message => {
-    var now = new Date();
-    if (message.channel.id == "827629437502881883") {
-        console.log(message.author.tag + ' ' + message.content);
-    }
-})
-
 const {
     GiveawaysManager
 } = require('discord-giveaways');
@@ -215,6 +212,14 @@ client.on("guildCreate", guild => {
 });
 
 client.on("guildDelete", guild => {
+    Guild.findOneAndDelete({
+        guildID: guild.id
+    }, (err, res) => {
+        if (err) console.error(err)
+    });
+})
+
+client.on("guildDelete", guild => {
     const Logs = '827719260209152010'
     client.channels.cache.get(Logs).send(
         new Discord.MessageEmbed()
@@ -226,15 +231,8 @@ client.on("guildDelete", guild => {
         .setFooter(`Blue Sky is Currently in ${client.guilds.cache.size} guilds!`)
         .setTimestamp()
         .setColor('RED')
-    )
-    Guild.findOneAndDelete({
-        guildID: guild.id
-    }, (err, res) => {
-        if (err) console.error(err)
-    });
-})
-
-
+    )})
+/*
 client.on('message', async message => {
     try {
         if (config.ownertest.includes(message.guild.id)) {
@@ -270,7 +268,7 @@ client.on("guildCreate", guild => {
         });
     }
 })
-
+*/
 /*
 const {
     inspect
@@ -286,9 +284,6 @@ process.on('warning', (warn) => {
 })
 
 */
-fetch = require("node-fetch");
-
-
 
 client.on("message", async message => {
 
@@ -336,18 +331,11 @@ client.on("message", async message => {
         message.channel.stopTyping();
     }
 })
-
-let y = process.openStdin()
-y.addListener("data", res => {
-    let x = res.toString().trim().split(/ +/g)
-    client.channels.cache.get("827629437502881883").send(x.join(" "));
-    //client.users.cache.get("206481777987026944").send(x.join(" "));
-});
-
+/*
 client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
-//client.on("debug", (e) => console.info(e));
-
+client.on("debug", (e) => console.info(e));
+*/
 client.on("guildCreate", async (guild) => {
     let owner = client.users.cache.get(guild.ownerID)
     const EmbedJoin = new Discord.MessageEmbed()
@@ -363,3 +351,38 @@ client.on("guildCreate", async (guild) => {
     console.log(`Joined New Guild: ${guild.name}`);
     client.channels.cache.get(`827719260209152010`).send(EmbedJoin)
 });
+
+
+
+client.on("messageUpdate", async (oldMessage, message) => {
+        try {
+            if(message.author.bot) return
+            let guild = oldMessage.guild
+            let guildData = await client.data.getMsgDB(guild.id);
+            if (!guildData.addons.log.enabled) return;
+
+            let logChannel = await client.tools.resolveChannel(guildData.addons.log.channel, guild);
+            if (!logChannel) return;
+            const log = new Discord.MessageEmbed()
+        .setAuthor(`${oldMessage.author.tag}`, oldMessage.author.displayAvatarURL({ dynamic: true }))
+        .setTitle(`Message Edited in #${oldMessage.channel.name}`)
+        .addFields({
+            name: 'Before',
+            value: `${oldMessage.content}`,
+            inline: true
+        }, {
+            name: 'After',
+            value: `${message.content}`,
+            inline: true
+        }, )
+        .addField(`Message Link`, `[click here](${oldMessage.url})`)
+        .setFooter(`ID: ${oldMessage.author.id}`)
+        .setTimestamp()
+        .setColor("RANDOM")
+            logChannel.send(log)
+
+        } catch (e) {
+            console.log(e);
+        }
+
+    });

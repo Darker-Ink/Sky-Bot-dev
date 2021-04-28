@@ -13,6 +13,7 @@ module.exports = {
     description: 'dms a user',
     usage: "dm <message>",
     category: "Owner",
+	hidden: true,
     run: async (client, message, args) => {
         try {
             let id = await client.users.fetch(args[0]);

@@ -3,6 +3,7 @@ const config = require("../../config/config.json");
 const usersDB = require("../User.js");
 const guildsDB = require("../Guild.js");
 const logsDB = require("../Log.js");
+const msglog = require("../msglog.js")
 
 //Create/find users Database
 module.exports.getUserDB = async function(userID){
@@ -32,6 +33,19 @@ module.exports.getGuildDB = async function (guildID){
     })
     await guildDB.save().catch(err => console.log(err));
     return guildDB;
+  }
+};
+module.exports.getMsgDB = async function (guildID){
+let msglogs = await msglog.findOne( { id: guildID } );
+
+  if(msglogs){
+    return msglogs;
+  } else {
+    msglogs = new msglog({
+      id: guildID
+    })
+    await msglogs.save().catch(err => console.log(err));
+    return msglogs;
   }
 };
 

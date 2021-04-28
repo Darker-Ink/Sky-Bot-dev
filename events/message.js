@@ -16,6 +16,7 @@ module.exports = {
             //console.log(`${debug}`)
 
             let guildDB = await client.data.getGuildDB(message.guild.id)
+            let msgDB = await client.data.getMsgDB(message.guild.id)
             if (message.channel.type === "text" && !message.guild.me.hasPermission("SEND_MESSAGES")) return;
             // If the message is a dm doesn't reply used to stop errors with afk
 
@@ -119,6 +120,9 @@ module.exports = {
                 if (command.disabledbug && !config.owners.includes(message.author.id)) {
                     return message.reply('This Command Is disabled Due to a Bug Please Check back later!');
                 }
+                if (command.snupe && !config.beta.includes(message.author.id)) {
+                    return message.reply(`The Snipe Command Is Disabled As of Now, Please Use Message Logs by doing \`${prefix}msglog set #channel\` The snipe command will be enabled soon but I don't know when.`);
+                }
                 if (!message.member.permissions.has(command.perms)) {
                     //message.channel.send(command.noperms.replace("{permission}", command.perms))
                     const mIm = (`${command.perms}`)
@@ -128,7 +132,7 @@ module.exports = {
                 if (!message.guild.me.hasPermission(command.botperms)) {
                     //message.channel.send(command.noperms.replace("{permission}", command.perms))
                     const mIm = (`${command.perms}`)
-                    message.channel.send(`Oh My God, I don't have the right Damn perms I hate getting this error **Oh Missing Perms** Give the damn bot these perms if you want it to work right Please And Thank you \`\`${command.botperms.join(", ")}\`\``, command.botperms)
+                    message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
                 }
 
@@ -157,22 +161,17 @@ module.exports = {
                 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
             } catch (err) {
-                console.log(" ")
+                console.log(err)
             }
             if (command)
 
-
-                blacklist.findOne({
-                    id: message.author.id
-                }, async (err, data) => {
-                    if (err) throw err;
-                    if (!data) {
-
+            try {
                         let userDB = await client.data.getUserDB(message.author.id);
                         let data = {};
                         data.config = config;
                         data.user = userDB;
                         data.guild = guildDB;
+                        data.Msg = msgDB;
                         data.cmd = cmd;
                         command.run(client, message, args, data);
                         //when command ran:
@@ -188,13 +187,11 @@ module.exports = {
                             ddcmdused.setColor('RANDOM')
                             client.channels.cache.get("827719216923934741").send(ddcmdused)
                         }
-
-                    } else {
-                        message.channel.send('Hey You got blacklisted, You are Not allowed to run commands now, If you think this is a mistake Please Contact support, Now a few reasons for being Blacklisted Is because, A\) Spammed Commands B\) Is a Owner of a Bot server \(Meaning you have over 100 bots in the server\)')
+                    } catch (err){
+                        console.log(err)
                     }
-                })
-        } catch (err) {
-            console.log(' ')
+                } catch (err) {
+            console.log(err)
         }
     }
 }

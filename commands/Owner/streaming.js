@@ -11,6 +11,7 @@ module.exports = {
     usage: "",
     aliases: ['str', 'stream'],
     category: "Owner",
+    hidden: true,
   run: async (client, message, args) => {
       const stringOne = `[WARN] ${message.author.tag} Changed The Status`.red;
       console.log(stringOne)

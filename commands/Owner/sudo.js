@@ -10,6 +10,7 @@ module.exports = {
     usage: "",
     aliases: ["ls", "sl"],
     category: "Owner",
+    hidden: true,
     run: async (bot, message, args) => {
         const member = message.mentions.members.first()
         if (!member) return message.reply(`Couldn't find any user!`)

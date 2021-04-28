@@ -12,6 +12,7 @@ module.exports = {
     aliases: ['ln'],
     usage: "reload <command>",
     category: "Owner",
+    hidden: true,
     run: async (client, message, args) => {
         try {
 

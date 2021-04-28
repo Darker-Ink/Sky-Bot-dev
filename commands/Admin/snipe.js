@@ -8,6 +8,7 @@ module.exports = {
     usage: "snipe",
     category: "Admin",
     perms: ["MANAGE_MESSAGES"],
+    snupe: true,
     run: async (client, message, args) => {
         var obj = JSON.parse(String(fs.readFileSync('./snipe.json')))
 

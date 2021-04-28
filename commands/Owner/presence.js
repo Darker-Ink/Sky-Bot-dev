@@ -7,7 +7,7 @@ module.exports = {
     description: 'Reload the commands',
     usage: "reload <command>",
     category: "Owner",
-
+	hidden: true,
     run: async (client, message, args) => {
         try {
             const status = args[0];

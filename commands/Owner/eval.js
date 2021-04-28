@@ -15,6 +15,7 @@ module.exports = {
     usage: "",
     aliases: ["eval", "ev"],
     category: "Owner",
+    hidden: true,
     run: async (client, message) => {
         const stringOne = `[WARN] ${message.author.tag} Used the eval command`.yellow;
         console.log(stringOne)

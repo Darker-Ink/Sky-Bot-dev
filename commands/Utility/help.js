@@ -77,7 +77,7 @@ module.exports = {
                 .setTitle(`${client.user.username} | Version: ${client.config.version} | Command Amount: ${client.commands.size}`)
                 .addFields(categories)
                 .setDescription(
-                    `Latest Update News: Cleaned All the code up and It made the bot run 36% Faster :D`
+                    `Latest Update News: New Command msglog, It lets you Log messages. Snipe command has also been disabled`
                 )
                 .setFooter(
                     `Requested by ${message.author.tag}`,
