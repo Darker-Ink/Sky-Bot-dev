@@ -2,7 +2,7 @@ const { ShardingManager } = require('discord.js');
 
 const manager = new ShardingManager('./index.js', {
     totalShards: 'auto', 
-    token: "NjgyMDkwMDA2MTUxNTYxMjMz.XlX70g.EkrpipP8k1cWugAPqXkI_wtyor8"
+    token: ""
 });
 
 manager.spawn();

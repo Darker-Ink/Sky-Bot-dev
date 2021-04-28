@@ -10,6 +10,7 @@ module.exports = {
     category: "Owner",
     ownerOnly: true,
     disabled: true,
+    hidden: true,
     run: async (client, message, args) => {
         try {
             if (message.content.includes('801908661470494751')) return message.channel.send('You Can\'t Blacklist Devs');

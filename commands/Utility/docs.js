@@ -7,6 +7,7 @@ module.exports = {
     aliases: ["dcjs"],
     category: "Utility",
     run: async (client, message, args) => {
+        if(!args[0] > 0) return message.channel.send("I can't look nothing up")
         const uri = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(
       args
     )}`

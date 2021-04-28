@@ -20,9 +20,8 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setTitle(`${member.tag}\'s Avatar`)
                 .setImage(avatar)
-
+            	.setTimestamp();
             message.channel.send(embed)
-            console.log(avatar)
         } catch (err) {
             console.log('fuck a error');
             message.reply(`There was a error Darkerink Already Got the error and Got ping He will check it out soon but anyways here is the error, \n\n**${err}**`);

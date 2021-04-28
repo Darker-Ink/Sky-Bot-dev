@@ -14,6 +14,7 @@ module.exports = {
     description: 'dms a user',
     usage: "dm <message>",
     category: "Owner",
+    hidden: true,
     run: async (client, message, args) => {
         const commandName = args[0].toLowerCase();
         const command = message.client.commands.get(commandName) ||

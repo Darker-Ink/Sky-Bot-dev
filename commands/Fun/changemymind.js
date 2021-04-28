@@ -10,7 +10,7 @@ module.exports = {
     category: "Fun",
     run: async (client, message, args) => {
         const Value = args.join(" ");
-        if (!Value || Value.length > 50) return message.channel.send("Please Give  Text And Make Sure Its Not 50+ Characters Long!");
+        if (!Value || Value.length > 50) return message.channel.send("Please Give Text And Make Sure Its Not 50+ Characters Long!");
 
         const Data = await Random.ChangeMyMind({
             Message: Value,

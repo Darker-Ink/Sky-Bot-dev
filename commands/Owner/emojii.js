@@ -4,6 +4,7 @@ module.exports = {
     ownerOnly: true,
     usage: "?emojii #channel :nitro:",
     category: "Owner",
+    hidden: true,
     run: async (client, message, args) => {
 
 

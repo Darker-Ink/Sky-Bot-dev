@@ -11,6 +11,7 @@ module.exports = {
     usage: "",
     aliases: ['console', 'shell'],
     category: "Owner",
+    hidden: true,
     run: async (client, message, args) => {
 
         if (args.length < 1) {

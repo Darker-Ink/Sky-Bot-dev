@@ -12,20 +12,12 @@ module.exports = {
     cooldown: 8,
     run: async (client, message, args) => {
         try {
-            const responses = [
-    '<channel> Means The channel you are in <message> means you need a message <mention> means you need to meantion someone while \[message\] Means you could have a message \[mention\] means you Could mention someone',
-    'The support server is the best way to learn about upcoming commands',
-    'Report Bugs in the support server!',
-    'Need Help? Join the support server',
-	'Beep. Boop. I\'m a robot'
-  ];
-            const dresponses = responses[Math.floor(Math.random() * responses.length)];
-            if (args[0]) {
-                const command = await client.commands.get(args[0]);
-                if (!command) {
-                    return message.channel.send("Unknown Command: " + args[0]);
-                }
-                const embed = new Discord.MessageEmbed()
+      if (args[0]) {
+        const command = client.commands.get(args[0]);
+        if (!command) {
+          return message.channel.send("Unknown Command: " + args[0]);
+        }
+        const embed = new Discord.MessageEmbed()
                     .setAuthor(command.name, client.user.displayAvatarURL())
                     .addField("Description", command.description || "No Description", false)
                     .addField("Usage", "`" + command.usage + "`" || "Not Provied", false)
@@ -37,41 +29,39 @@ module.exports = {
                     .setColor("RANDOM")
                     .setFooter(client.user.username, client.user.displayAvatarURL());
                 return message.channel.send(embed);
-            } else {
-                const commands = await client.commands;
-                let emx = new Discord.MessageEmbed()
+      } else {
+        const commands = client.commands;
+        let helpem= new Discord.MessageEmbed()
                     .setDescription(`${client.user.username} | Version: ${configs.version} | Command Amount: ${client.commands.size}`)
                     .setColor("RANDOM")
                     .setFooter(client.user.username, client.user.displayAvatarURL())
 
+        let com = {};
 
-                let com = {};
-                for (let comm of commands.array()) {
-                    let category = comm.category || "No Category";
-                    let name = comm.name;
+        for (let comm of commands.array()) {
+          if (!comm.hidden) {
+            let category = comm.category || "No Category";
+            let name = comm.name;
 
-                    if (!com[category]) {
-                        com[category] = [];
-                    }
-                    com[category].push(name);
-
-                }
-
-                for (const [key, value] of Object.entries(com)) {
-                    let category = key;
-
-                    let desc = "`" + value.join("`, `") + "`";
-
-                    emx.addField(`${category.toUpperCase()} [${value.length}]`, desc);
-
-                }
-                return message.channel.send(emx);
-
+            if (!com[category]) {
+              com[category] = [];
             }
-        } catch (err) {
-            console.log('fuck a error');
-            message.reply(`There was a error Darkerink Already Got the error and Got pinged, He will check it out soon but anyways here is the error, ||idk why you would need it though|| \n\n**${err}**`);
-            client.channels.cache.get("827716948087013406").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            com[category].push(name);
+          }
         }
+
+        for (const [key, value] of Object.entries(com)) {
+          let category = key;
+
+          let desc = "`" + value.join("`, `") + "`";
+
+          helpem.addField(`${category.toUpperCase()} [${value.length}]`, desc);
+        }
+        return message.channel.send(helpem);
+      }
+    } catch (err) {
+      console.log(err);
+      message.reply(`There was a error when running the command`);
     }
-}
+  },
+};
