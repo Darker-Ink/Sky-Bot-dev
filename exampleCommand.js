@@ -14,5 +14,5 @@ module.exports = {
     botperms: [], // The perms the bot needs
     run: async (client, message, args, data) => {
     // Stuff I.E command
-  };
+  },
 };
