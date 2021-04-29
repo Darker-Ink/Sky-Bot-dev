@@ -1,12 +1,8 @@
 module.exports = {
-    name: "emojii",
-    description: "To say a emoji without nitro",
-    ownerOnly: true,
-    usage: "?emojii #channel :nitro:",
-    category: "Owner",
-    hidden: true,
+    name: "emojiid",
+    description: "To get a emoji ID without Nitro",
+    usage: "?emojiid #channel :nitro:",
     run: async (client, message, args) => {
-
 
         let emojis = message.guild.emojis.cache.filter(emoji => emoji.animated);
         const ids = (emojis.map(e => '<' + 'a' + ':' + e.name + ':' + e.id + '>'));
@@ -14,7 +10,7 @@ module.exports = {
             e.name + ':'));
 
 
-
+		if (!args[0] > 0) return message.channel.send("<a:DarkPet:833162248527937536> What Emoji do you want me to send?")
         let keys = names;
         let values = ids;
         let result = Object.assign.apply({}, keys.map((v, i) => ({
@@ -22,8 +18,7 @@ module.exports = {
         })));
 
 
-
-        let sayMessage = args.slice(1).join(" ");
+		let sayMessage = args[0];
         let str = sayMessage;
         let arr = result;
         let new_str = str;
@@ -39,12 +34,7 @@ module.exports = {
         }
 
 
-
-        let channel = message.mentions.channels.first();
-        if (!channel) return message.reply('Please provide a channel');
-        if (!sayMessage) return message.reply('Please provide a message');
-
-        channel.send(`${new_str}`)
+        message.channel.send(`\\${new_str}`)
 
     }
 };

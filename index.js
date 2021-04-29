@@ -366,19 +366,11 @@ client.on("messageUpdate", async (oldMessage, message) => {
             const log = new Discord.MessageEmbed()
         .setAuthor(`${oldMessage.author.tag}`, oldMessage.author.displayAvatarURL({ dynamic: true }))
         .setTitle(`Message Edited in #${oldMessage.channel.name}`)
-        .addFields({
-            name: 'Before',
-            value: `${oldMessage.content}`,
-            inline: true
-        }, {
-            name: 'After',
-            value: `${message.content}`,
-            inline: true
-        }, )
+        .setDescription(`**Before:** ${oldMessage.content}\n**After:** ${message.content}`)
         .addField(`Message Link`, `[click here](${oldMessage.url})`)
         .setFooter(`ID: ${oldMessage.author.id}`)
         .setTimestamp()
-        .setColor("RANDOM")
+        .setColor("YELLOW")
             logChannel.send(log)
 
         } catch (e) {
@@ -386,3 +378,83 @@ client.on("messageUpdate", async (oldMessage, message) => {
         }
 
     });
+
+const { Menu } = require('discord.js-menu')
+client.on('message', message => {
+    const { MessageEmbed } = require('discord.js')
+    if (message.content === "?darkhelp") {
+        /*
+         * The menu class takes 4 parameters. 
+         * 1) A channel to send the menu to
+         * 2) A user ID to give control over the navigation, 
+         * 3) An array of Page objects, each being a unique page of the menu
+         * 4) How long, in milliseconds, you want the menu to wait for new reactions
+         */
+        let helpMenu = new Menu(message.channel, message.author.id, [
+            {
+                /*
+                 * A page object consists of three items:
+                 * 1) A name. This is used as a unique destination name for reactions.
+                 * 2) Some content. This is a rich embed. 
+                 * You can use {object: formatting} or .functionFormatting() for embeds. Whichever you prefer.
+                 * 3) A set of reactions, linked to either a page destination or a function.* (See example pages)
+                 * 
+                 * Reactions can be emojis or custom emote IDs, and reaction destinations can be either the names
+                 * of pages, () => { functions }, or special destination names. See below for a list of these.
+                 */
+
+                /* You can call pages whatever you like. The first in the array is always loaded first. */
+                name: 'main',
+                content: new MessageEmbed({
+                    title: 'Help Menu',
+                    description: 'This is some helpful info!',
+                    fields: [
+                        {
+                            name: "Command: Ban",
+                            value: "This command bans people.",
+                            inline: true
+                        }
+                    ]
+                }),
+                reactions: {
+                    '😳': 'extra',
+                    '😀': async () => {
+                        // You can run whatever you like in functions.
+                        let res = await message.channel.send("Hey-")
+                        setTimeout(() => {
+                            return res.edit("listen!")
+                        }, 1000)
+                    }
+                }
+            },
+            {
+                name: 'extra',
+                content: new MessageEmbed({
+                    title: 'Extra menu',
+                    description: 'This is another page.'
+                }),
+                reactions: {
+                    /* You can use custom emotes by using their ID instead of an emoji. */
+                    '837401618286248018': 'main',
+                    '837401983132368896': 'delete',
+                }
+            }
+        ], 300000)
+
+        /* Run Menu.start() when you're ready to send the menu in chat.
+         * Once sent, the menu will automatically handle everything else.
+         */ 
+        helpMenu.start()
+
+        /* The menu also has a singular event you can use for, well, whatever you like.
+         * The "pageChange" event fires just before a new page is sent. You can use
+         * this to edit pages on the fly, or run some other logic.
+         * It's your menu, man, do whatever.
+         * 
+         * The "destination" is the Page object it's about to change to.
+         */
+        helpMenu.on('pageChange', destination => {
+            destination.content.title = "Hey, " + message.author.username
+        })
+    }
+})

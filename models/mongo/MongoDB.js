@@ -35,9 +35,9 @@ module.exports.getGuildDB = async function (guildID){
     return guildDB;
   }
 };
-module.exports.getMsgDB = async function (guildID){
+module.exports.getMsgDB = async function (guildID, guildNamee){
 let msglogs = await msglog.findOne( { id: guildID } );
-
+    
   if(msglogs){
     return msglogs;
   } else {

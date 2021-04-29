@@ -9,7 +9,8 @@ module.exports = mongoose.model("Msg", new mongoose.Schema({
   addons: { type: Object, default: { 
     log: {
       enabled: false, 
-      channel:  null
+      channel:  null,
+      webhook:  null
     }
   }}
 

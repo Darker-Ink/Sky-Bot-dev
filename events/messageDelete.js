@@ -18,7 +18,7 @@ const logd = new Discord.MessageEmbed()
 		.setDescription(`> ${message.content}`) 
 		.setFooter(`ID: ${message.author.id}`)
 		.setTimestamp()
-		.setColor("RANDOM")
+		.setColor("RED")
             welcomeChannel.send(logd)
 
         } catch (e) {
