@@ -11,6 +11,7 @@ module.exports = {
     aliases: "",
     cooldown: 8,
     perms: ["ADMINISTRATOR"],
+    botperms: ["MANAGE_WEBHOOKS"],
         run: async (client, message, args, data) => {
             try {
     
@@ -40,7 +41,7 @@ module.exports = {
                     data.Msg.addons.log.enabled = true; // Enable settings
                     data.Msg.addons.log.channel = welcomeChannel.id; // Set as channel ID
                     data.Msg.markModified("addons.log");
-                    await data.Msg.save();
+                    await data.Msg.save().then(result => client.channels.cache.get("827719237116231702").send(`Someone Enabled Their Message Logs. \n\n \`\`\`json\n${result}\`\`\``))
     
                     embed.setTitle("Successfully updated")
                         .setDescription(`Message Logs will be sent to ${welcomeChannel}`)
@@ -58,7 +59,7 @@ module.exports = {
                     data.Msg.addons.log.enabled = false;
                     data.Msg.addons.log.channel = "";
                     data.Msg.markModified("addons.log");
-                    await data.Msg.save();
+                    await data.Msg.save().then(result => client.channels.cache.get("827719237116231702").send(`Someone Disabled Their Message Logs. \n\n \`\`\`json\n${result}\`\`\``))
     
                     embed.setTitle("Successfully updated")
                         .setDescription("Message Logs have now been disabled.")
