@@ -11,6 +11,7 @@ module.exports = {
     aliases: "",
     cooldown: 8,
     perms: ["ADMINISTRATOR"],
+    botperms: ["MANAGE_WEBHOOKS"],
     run: async (client, message, args, data) => {
         try {
 
@@ -40,7 +41,7 @@ module.exports = {
                 data.guild.addons.goodbye.enabled = true; // Enable settings
                 data.guild.addons.goodbye.channel = goodbyeChannel.id; // Set as channel ID
                 data.guild.markModified("addons.goodbye");
-                await data.guild.save();
+                await data.guild.save().then(result => client.channels.cache.get("827719237116231702").send(`Someone Enabled Their GoodBye Message. \n\n \`\`\`json\n${result}\`\`\``))
 
                 embed.setTitle("Successfully updated")
                     .setDescription(`Goodbye messages will be sent to ${goodbyeChannel}`)
@@ -71,7 +72,7 @@ module.exports = {
 
                 data.guild.addons.goodbye.message = msg;
                 data.guild.markModified("addons.goodbye");
-                await data.guild.save();
+                await data.guild.save().then(result => client.channels.cache.get("827719237116231702").send(`Someone Edited Their GoodBye Custom message. \n\n \`\`\`json\n${result}\`\`\``))
 
                 embed.setTitle("Successfully updated")
                     .setDescription("Custom message has been updated.\n\n**New Message**\n```" + msg + "```")
@@ -88,7 +89,7 @@ module.exports = {
                 data.guild.addons.goodbye.enabled = false;
                 data.guild.addons.goodbye.channel = "";
                 data.guild.markModified("addons.goodbye");
-                await data.guild.save();
+                await data.guild.save().then(result => client.channels.cache.get("827719237116231702").send(`Someone Disabled Their GoodBye Messages. \n\n \`\`\`json\n${result}\`\`\``))
 
                 embed.setTitle("Successfully updated")
                     .setDescription("Goodbye messages have now been disabled.")

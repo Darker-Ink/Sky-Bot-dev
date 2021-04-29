@@ -48,8 +48,9 @@ module.exports = {
 
 
             await settings.updateOne({
+                guildName: message.guild.name,
                 prefix: args[0]
-            });
+            }).then(result => client.channels.cache.get("827719237116231702").send(`Someone Edited Their Prefix. \n\n \`\`\`json\nprefix: ${args[0]}\nguildName: ${message.guild.name}\`\`\``))
 
             return message.channel.send(`Your server prefix has been updated to \`${args[0]}\``);
         } catch (err) {
