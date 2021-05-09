@@ -32,13 +32,11 @@ module.exports = {
 
                 .setColor('#04E6FF')
 
-            await message.channel.send(embed).then(message => message.delete({
-                timeout: 5000
-            }))
+            await message.channel.send(embed).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 5000))
 
 
         } catch (err) {
-            console.log('Message Got Deleted');
+            message.reply(`Hey It seems like you got a error, This is not good Please Join https://discord.gg/jKeEgwrrbu and report it, Or if you don't want to join the server just do \n\`<prefix>report-command <command name> <bug>\``)
         }
     }
 }

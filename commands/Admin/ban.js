@@ -24,7 +24,7 @@ module.exports = {
 
                 return message.channel.send(banerr)
             }
-            if (message.guild.member(`${person.id}`)) {
+            if (message.guild.members.cache.get(`${person.id}`)) {
                 if (person) {
                     const mentionedPosition = person.roles.highest.position
                     const memberPosition = message.member.roles.highest.position
@@ -67,7 +67,7 @@ module.exports = {
                 if (message.guild.members.cache.has(person.id)) {
                     let reason = `Banned by ${message.author.tag}`
                     if (args[1]) reason = args.splice(1).join(" ")
-                    if (person.roles.highest.position >= message.member.roles.highest.position && message.author.id !== message.guild.ownerID) return message.channel.send('You are not high enough in the role hierachy to ban this person.')
+                    if (person.roles.highest.position >= message.members.roles.highest.position && message.author.id !== message.guild.ownerID) return message.channel.send('You are not high enough in the role hierachy to ban this person.')
                     message.guild.members.ban(person, {
                         reason: reason
                     })
@@ -85,7 +85,7 @@ module.exports = {
             }
         } catch (err) {
             console.log('fuck a error');
-            message.reply(`error`);
+			message.reply(`Hey It seems like you got a error, This is not good Please Join https://discord.gg/jKeEgwrrbu and report it, Or if you don't want to join the server just do \n\`<prefix>report-command <command name> <bug>\``)
             client.channels.cache.get("827716948087013406").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
         }
     }

@@ -45,6 +45,7 @@ module.exports = {
             }
             voiceChannel.join().then(connection => {
                 connection.voice.setSelfDeaf(true)
+                connection.voice.setSuppressed(false);
             })
             client.distube.play(message, songName)
         } catch (err) {

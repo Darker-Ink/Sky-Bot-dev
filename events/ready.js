@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
+
+
 module.exports = {
     type: 'ready',
     async run(client) {
-
         console.log(`ready.js has been loaded`);
 
         let statuses = [

@@ -17,7 +17,7 @@ module.exports = {
 
             let guildDB = await client.data.getGuildDB(message.guild.id)
             let msgDB = await client.data.getMsgDB(message.guild.id)
-            if (message.channel.type === "text" && !message.guild.me.hasPermission("SEND_MESSAGES")) return;
+            if (message.channel.type === "text" && !message.guild.me.permissions.has("SEND_MESSAGES")) return;
             // If the message is a dm doesn't reply used to stop errors with afk
 
             if (message.channel.type == "dm") return;
@@ -129,13 +129,16 @@ module.exports = {
                     message.channel.send(`You do Not have the right perms to use this command You need \`\`${command.perms.join(", ")}\`\` To use this command!`, command.perms)
                     return;
                 }
-                if (!message.guild.me.hasPermission(command.botperms)) {
+                if (!message.guild.me.permissions.has(command.botperms)) {
                     //message.channel.send(command.noperms.replace("{permission}", command.perms))
                     const mIm = (`${command.perms}`)
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
                 }
-
+				//if(config.owners.includes(message.author.id)) {{
+                  //  return;
+                //}
+			//} else {
                 const {
                     cooldowns
                 } = client;
@@ -159,7 +162,7 @@ module.exports = {
 
                 timestamps.set(message.author.id, now);
                 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
+           // }
             } catch (err) {
                 console.log(err)
             }
@@ -174,6 +177,7 @@ module.exports = {
                         data.Msg = msgDB;
                         data.cmd = cmd;
                         command.run(client, message, args, data);
+                
                         //when command ran:
                         const darklog = (`${settings.prefix}${command.name}`)
                         if (message.content.startsWith(darklog)) {
