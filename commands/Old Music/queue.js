@@ -8,7 +8,9 @@ module.exports = {
     usage: "?queue",
     aliases: ["q"],
     category: "Music",
+    disabledbug: true,
     run: async (client, message, args) => {
+        try {
         let queue = client.distube.getQueue(message);
         if (!queue) {
             const queueError = new MessageEmbed()
@@ -16,6 +18,9 @@ module.exports = {
                 .setColor("RED")
             return message.channel.send(queueError)
         }
+            if(!queue.length > 90) {
+                return message.channel.send("This queue is to powerful I can't read it... Is it over 20 songs?")
+            }
         let q = queue.songs.map((song, i) => {
             return `${i === 0 ? "Playing:" : `${i}.`} ${song.name} - \`${song.formattedDuration}\``
         }).join("\n");
@@ -25,5 +30,8 @@ module.exports = {
             .setColor("BLUE")
 
         message.channel.send(embed)
-    }
+   } catch (err) {
+            console.log(err);
+            message.reply(`${err.stack}`);
+        }}
 }

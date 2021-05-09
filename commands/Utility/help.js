@@ -52,6 +52,10 @@ module.exports = {
 
                 const cmds = commands.filter((command) => {
                     let file = require(`../../commands/${dir}/${command}`);
+                    //return  !file.nsfwOnly && message.channel.nsfw
+                    if(!message.channel.nsfw) {
+                    return !file.nsfwOnly;
+                }
                     return !file.hidden;
                 }).map((command) => {
                     let file = require(`../../commands/${dir}/${command}`);
@@ -67,7 +71,7 @@ module.exports = {
 
                 data = {
                     name: dir.toUpperCase(),
-                    value: cmds.length === 0 ? "In progress." : cmds.join(" "),
+                    value: cmds.length === 0 ? "To See NSFW commands Use Help In a NSFW channel." : cmds.join(" "),
                 };
 
                 categories.push(data);

@@ -1,25 +1,29 @@
 const Discord = require("discord.js");
 require("dotenv").config();
 fetch = require("node-fetch");
-const client = new Discord.Client();
+const client = new Discord.Client({
+     allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
+   // intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_VOICE_STATES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "GUILD_PRESENCES", "GUILD_MEMBERS", "GUILD_BANS"]
+    intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING"]
+})
 const Distube = require("distube");
+const SpotifyPlugin = require("@distube/spotify")
 const config = require('./config/config.json');
 client.config = config;
 const event_handler = require('./event');
 const Guild = require('./schema.js')
 const mongoose = require('mongoose');
 const fs = require("fs");
-require("./ExtendedMessage");
 const prefix = process.env.prefix;
 const colors = require('colors');
-const blacklist = require('./models/blacklist')
 const mongoCurrency = require('discord-mongo-currency');
-const logger = require("discordjs-logger");
-
 client.distube = new Distube(client, {
-    searchSongs: true,
+    searchSongs: 15,
+    emitNewSongOnly: true,
+    plugins: [new SpotifyPlugin()],
     leaveOnFinish: false,
     leaveOnStop: true,
+    leaveOnEmpty: true,
 });
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -29,8 +33,15 @@ client.data = require("./models/mongo/MongoDB.js");
 client.tools = require("./tools/Tools.js");
 client.color = require('./colors.js');
 client.react = new Map()
-
-
+const WOKCommands = require('wokcommands')
+const guildId = '827204137829007361'
+client.on('ready', () => {
+  new WOKCommands(client, {
+    commandsDir: 'slash',
+    testServers: [guildId],
+    showWarns: false,
+  })
+})
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
@@ -70,11 +81,10 @@ for (const file of commandFiles) {
 event_handler.performEvents(client);
 
 client.on('messageDelete', message => {
-    var obj = JSON.parse(String(fs.readFileSync('./snipe.json')))
+    let obj = JSON.parse(String(fs.readFileSync('./snipe.json')))
 
     obj[message.guild.id] = JSON.parse(JSON.stringify(message))
     fs.writeFileSync('./snipe.json', JSON.stringify(obj))
-    console.log(message.guild.id)
 })
 
 client.on('ready', () => {
@@ -90,7 +100,7 @@ client.on('ready', () => {
 client.login(process.env.token);
 
 const status = (queue) =>
-    `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"
+ `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"
   }\` | Loop: \`${queue.repeatMode
     ? queue.repeatMode == 2
       ? "All Queue"
@@ -99,40 +109,39 @@ const status = (queue) =>
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 
 client.distube
-	.on("playSong", (message, queue, song) => {
+	.on("playSong", (queue, song) => {
         const playSongEmbed = new Discord.MessageEmbed()
             .setTitle('Started Playing')
             .setDescription(`[${song.name}](${song.url})`)
-            .addField('**Views:**', song.views)
+            .addField('**Views:**', parseFloat(song.views).toLocaleString('en'))
             .addField('**Duration:**', song.formattedDuration)
-            .addField('**Status**', status(queue))
+			.addField('**Status:**', status(queue))
+        	.addField('**Requested By:**', `${song.user}`)
             .setThumbnail(song.thumbnail)
+        	//.setDescription(` [${queue.name}](${queue.url})`)
             .setColor("BLUE")
-        message.channel.send(playSongEmbed)
+        queue.textChannel.send(playSongEmbed)
     })
             //▶️⏸️⏹️🔁🔉🔊
-    .on("addSong", (message, queue, song) =>
-        message.channel.send(
+    .on("addSong", (queue, song) =>
+        queue.textChannel.send(
             `${client.emotes.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
         )
     )
-    .on("playList", (message, queue, playlist, song) =>
-        message.channel.send(
-            `${client.emotes.play} | Play \`${playlist.title}\` playlist (${playlist.total_items
+	.on("searchNoResult", (message, query) =>
+        message.channel.send(`No result found for ${query}!`))
+    .on("playList", (queue, song, playlist) =>
+        queue.textChannel.send(
+            `${client.emotes.play} | Play \`${song.title}\` playlist (${song.total_items
       } songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration
       }\`\n${status(queue)}`
         )
     )
     .on("addList", (message, queue, playlist) =>
-        message.channel.send(
-            `${client.emotes.success} | Added \`${playlist.title}\` playlist (${playlist.total_items
-      } songs) to queue\n${status(queue)}`
-        )
+        message.textChannel.send(`${client.emotes.success} | Added \`${playlist.title}\` playlist (${playlist.total_items} songs) to queue\n${status(queue)}`)
     )
     .on("error", (message, err) =>
-        message.channel.send(
-            `${client.emotes.error} | An error encountered: ${err}`
-        )
+        console.log(`${client.emotes.error} | An error encountered: ${err.stack}`)
     )
 	.on("initQueue", queue => {
     queue.autoplay = false;
@@ -145,9 +154,7 @@ client.distube
             .setDescription(`${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}`)
     		.setColor("YELLOW")
     		.setFooter('*Enter anything else or wait 60 seconds to cancel*')
-    message.channel.send(searchembed).then(m => m.delete({
-                        timeout: 61000
-                    }));
+    message.channel.send(searchembed).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
 
@@ -269,7 +276,7 @@ client.on("guildCreate", guild => {
     }
 })
 */
-/*
+
 const {
     inspect
 } = require("util")
@@ -283,7 +290,6 @@ process.on('warning', (warn) => {
     client.channels.cache.get('827716948087013406').send(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn.stack}\n\`\`\``)
 })
 
-*/
 
 client.on("message", async message => {
 
@@ -291,13 +297,13 @@ client.on("message", async message => {
 
         if (message.author.bot) return;
         if (message.content.includes(`Who Made you`)) {
-            return message.inlineReply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
+            return message.reply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
         };
         if (message.content.includes(`who made you`)) {
-            return message.inlineReply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
+            return message.reply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
         };
         if (message.content.includes(`how many servers are you in`)) {
-            return message.inlineReply(`I am in ${client.guilds.cache.size} servers`)
+            return message.reply(`I am in ${client.guilds.cache.size} servers`)
         };
         message.channel.startTyping();
         if (message.author.bot) return;
@@ -327,7 +333,7 @@ client.on("message", async message => {
 
         //data
         console.log(getting)
-        message.inlineReply(`${getting.data}`)
+        message.reply(`${getting.data}`)
         message.channel.stopTyping();
     }
 })
@@ -458,3 +464,37 @@ client.on('message', message => {
         })
     }
 })
+
+client.on('message', message => {
+    if (message.content === "?ForceInviteMessage") {
+    const DarkerInk = client.users.cache.find(u => u.id === '379781622704111626').tag
+    const M4X4 = client.users.cache.find(u => u.id === '424418136515936276').tag
+    const linklel = client.users.cache.find(u => u.id === '206481777987026944').tag
+    const Discord = require('discord.js');
+    const welcomeembed = new Discord.MessageEmbed()
+
+        .setColor('#0099ff')
+        .setTitle('Bot Info')
+        .setAuthor('Thank you for Inviting me!')
+        .setDescription('I\'m Blue Sky, a Multi Purpose Discord bot made In discord.js, I used to be Known as Snow Music or Snow Bot, I changed My name due to.... Issues! There will be some Info below so you can understand how I work!')
+        .addFields({
+            name: 'Features',
+            value: 'We have changeable prefix, a variety of commands, and more. The default prefix is \`\`?\`\` But it is always changeable like I said at the beginning It can be whatever you want, We have awesome devs and a great [support server](https://discord.gg/H3UNnxZSZ6) And will help you with whatever you need help with! To get started Using the Bot do \`\`?help\`\`'
+        }, {
+            name: '\u200B',
+            value: '\u200B'
+        }, {
+            name: 'Main Dev',
+            value: `${DarkerInk}`,
+            inline: true
+        }, {
+            name: 'Dev',
+            value: `${linklel}`,
+            inline: true
+        }, )
+        .addField('Main Support Assistant', `${M4X4}`, true)
+        .setTimestamp()
+        .setFooter('Thx for inviting me', 'https://images-ext-1.discordapp.net/external/ge5a4I80_V8Kuau7AvqwWRaVnRbwlt4YlpT2HGu-F1Y/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/801908661470494751/ffd9ba48a16bab0cbe3d763b37a8a08e.webp?width=377&height=377');
+
+    message.channel.send(welcomeembed);
+}});

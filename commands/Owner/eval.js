@@ -27,9 +27,9 @@ module.exports = {
             message.channel.send(inspect(evaled));
             console.log(inspect(evaled));
         } catch (err) {
-            console.log('fuck a error');
-            message.reply(`There was an error during evaluation, \n\n**${err}**`);
-            client.channels.cache.get("820052885081423872").send(`Someone got a error\`\`\`${err.stack}\`\`\` `)
+            console.log(err);
+            message.reply(`There was an error during evaluation, \n\n**${err.stack}**`);
+            client.channels.cache.get("827716948087013406").send(`Someone got a error\`\`\`${err.stack}\`\`\` `)
         }
     }
 };
