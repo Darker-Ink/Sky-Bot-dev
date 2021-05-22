@@ -41,7 +41,7 @@ client.react = new Map()
 
 // Global stuff
 global.MessageEmbed = require('discord.js')
-global.Embed = new M
+global.Embed = new Discord.MessageEmbed()
 global.errorHook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
 
 //Command Handler
