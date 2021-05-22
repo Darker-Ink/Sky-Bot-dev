@@ -2,26 +2,26 @@
 const date = require('date-and-time');
 const now = new Date();
 const time = (colors.red(date.format(now, 'hh:mm A')))
-const Discord = require("discord.js");
+global.Discord = require("discord.js");
 const Util = require("discord.js")
 require("dotenv").config();
 fetch = require("node-fetch");
 const client = new Discord.Client({
      allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
-   // intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_VOICE_STATES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "GUILD_PRESENCES", "GUILD_MEMBERS", "GUILD_BANS"]
     intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING"]
 })
 const Distube = require("distube");
 const SpotifyPlugin = require("@distube/spotify")
-const config = require('./config/config.json');
+global.config = require('./config/config.json');
 client.config = config;
 const event_handler = require('./event');
 const Guild = require('./schema.js')
 const mongoose = require('mongoose');
 const suggestionModel = require('./models/suggestion');
 const fs = require("fs");
-const prefix = process.env.prefix;
-const mongoCurrency = require('discord-mongo-currency');
+
+//Client stuff
+
 client.distube = new Distube(client, {
     searchSongs: 1,
     emitNewSongOnly: true,
@@ -38,8 +38,12 @@ client.data = require("./models/mongo/MongoDB.js");
 client.tools = require("./tools/Tools.js");
 client.color = require('./colors.js');
 client.react = new Map()
+
+// Global stuff
+global.MessageEmbed = require('discord.js')
+global.Embed = new M
 global.errorHook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
-const WOKCommands = require('wokcommands')
+
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
@@ -587,10 +591,15 @@ client.on('interaction', async interaction => {
         const channel = client.channels.cache.get("832805317338857483")
 		const token = interaction.options[0].value;
         const model = await suggestionModel.findOne({ message: token });
+        const guild = client.guilds.cache.get("827204137829007361")
+		const member = guild.members.cache.get(interaction.user.id);
+        if (!config.owners.includes(interaction.user.id)) {
+            return interaction.reply("ERROR: You can't use this command", { ephemeral: true })
+        }
 	
 	if (!model) {
             return interaction.reply("That message ID or suggestion ID is invalid or Has been deleted, Please Try again", { ephemeral: true });
-        }
+    }
 	await interaction.reply(JSON.stringify(interaction.options), { ephemeral: true })
 	const msg = await client.channels.cache.get("832805317338857483").messages.fetch(model.message);
         const author = await client.users.cache.find((u) => u.id === model.author);
