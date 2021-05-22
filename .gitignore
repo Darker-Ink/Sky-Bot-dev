@@ -22,3 +22,5 @@ package-lock.json
 config.json
 json.sqlite
 javascript_playground.js
+giveaways.json
+sharding.js
