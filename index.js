@@ -89,7 +89,7 @@ client.on('ready', () => {
     mongoose.connect(mongo_url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    }).then(console.log(`Connected to ${client.user.username}\'s Database`));
+    }).then(console.log(colors.green((`[${time}] Connected to ${client.user.username}\'s Database`))));
 })
 
 client.login(process.env.token);
