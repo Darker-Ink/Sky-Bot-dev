@@ -1,1 +1,24 @@
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Dependency directories
+node_modules/
+package-lock.json
+.node_repl_history
+.npm
 .env
+config.json
+json.sqlite
+javascript_playground.js
