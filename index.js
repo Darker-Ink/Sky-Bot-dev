@@ -38,6 +38,7 @@ client.data = require("./models/mongo/MongoDB.js");
 client.tools = require("./tools/Tools.js");
 client.color = require('./colors.js');
 client.react = new Map()
+global.errorHook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
 const WOKCommands = require('wokcommands')
 //Command Handler
 function getDirectories() {
@@ -271,20 +272,20 @@ client.on("guildCreate", guild => {
     }
 })
 */
-/*
+
 const {
     inspect
 } = require("util")
 process.on('unhandledRejection', (reason, promise) => {
-    client.channels.cache.get('827716948087013406').send(`UnhandledRejection\nReason:\n\`\`\`\n${inspect(reason, { depth: 0 })}\n\`\`\` Promise:\n\`\`\`\n${inspect(promise, { depth: 0 })}\n\`\`\``)
+    errorHook.send(`UnhandledRejection\nReason:\n\`\`\`\n${inspect(reason, { depth: 0 })}\n\`\`\` Promise:\n\`\`\`\n${inspect(promise, { depth: 0 })}\n\`\`\``)
 })
 process.on('uncaughtException', (err, origin) => {
-    client.channels.cache.get('827716948087013406').send(`UncaughtException\nError:\n\`\`\`\n${inspect(err, { depth: 0 })}\n\`\`\`\nType: ${inspect(origin, { depth: 0 })}`)
+    errorHook.send(`UncaughtException\nError:\n\`\`\`\n${inspect(err, { depth: 0 })}\n\`\`\`\nType: ${inspect(origin, { depth: 0 })}`)
 })
 process.on('warning', (warn) => {
-    console.log(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn}\n\`\`\``)
+    errorHook.send(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn}\n\`\`\``)
 })
-*/
+
 
 client.on("message", async message => {
 
