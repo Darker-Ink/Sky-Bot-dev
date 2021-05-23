@@ -291,52 +291,6 @@ process.on('warning', (warn) => {
 })
 
 
-client.on("message", async message => {
-
-    if (message.channel.name == "chatbot") {
-
-        if (message.author.bot) return;
-        if (message.content.includes(`Who Made you`)) {
-            return message.reply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
-        };
-        if (message.content.includes(`who made you`)) {
-            return message.reply(`The Bot was Made By Darkerink But the Chat bot was made by a great person Called Nekoyasui#6804 \(check them out on github :\) \)`)
-        };
-        if (message.content.includes(`how many servers are you in`)) {
-            return message.reply(`I am in ${client.guilds.cache.size} servers`)
-        };
-        message.channel.startTyping();
-        if (message.author.bot) return;
-
-        if (!message.author || !message.content || message.author.bot || message.author.id === client.user.id) return;
-        if (!message.channel.permissionsFor(message.guild.me).has(["SEND_MESSAGES"])) return;
-
-        const chat = {
-            message: `${message.content}`,
-            uid: message.author.id,
-            bot: {
-                name: "Blue Sky",
-                birthdate: "12/31/1969",
-                prefix: "?",
-                gender: "Female",
-                description: "I'm a Multipurpose Bot That loves to help you!"
-            }
-        };
-
-        const getting = await fetch("https://api.nekoyasui.ga/post/chat", {
-            method: "POST",
-            body: JSON.stringify(chat),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json()).catch(() => {})
-
-        //data
-        console.log(getting)
-        message.reply(`${getting.data}`)
-        message.channel.stopTyping();
-    }
-})
 /*
 client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
