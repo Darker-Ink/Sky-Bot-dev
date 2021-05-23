@@ -487,7 +487,7 @@ client.on('message', async message => {
 	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
 		const data = {
 			name: 'suggest',
-			description: 'Suggest something for the Discord bot444',
+			description: 'Suggest something for the Discord bot',
 			options: [{
 				name: 'suggestion',
 				type: 'STRING',
