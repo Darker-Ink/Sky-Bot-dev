@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 
 const exec = require('child_process').exec;
-const wshShell = new ActiveXObject("WScript.Shell");
-
 module.exports = {
     type: 'ready',
     async run(client) {
