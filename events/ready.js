@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 
 const exec = require('child_process').exec;
-const wshShell = new ActiveXObject("WScript.Shell");
-
 module.exports = {
     type: 'ready',
     async run(client) {
@@ -32,8 +30,8 @@ setInterval(() => {
                 } else {
                     client.channels.cache.get('828831337619652648').send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
                     setTimeout(() => {
-                      exec('pm2 restart index.js')
-			//process.exit()
+                        exec('pm2 start ../index.js')
+			process.exit()
                     }, 1000)
                 };
             }
