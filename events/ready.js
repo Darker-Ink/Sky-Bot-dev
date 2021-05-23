@@ -30,7 +30,8 @@ setInterval(() => {
                 } else {
                     client.channels.cache.get('828831337619652648').send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
                     setTimeout(() => {
-                        process.exit();
+                        process.exit()
+			C:\Users\Administrator\Documents\GitHub\Sky-Bot\restart.bat
                     }, 1000)
                 };
             }
