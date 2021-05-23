@@ -1,1 +1,0 @@
-cd C:\Users\Administrator\Documents\GitHub\Sky-Bot
