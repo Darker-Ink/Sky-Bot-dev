@@ -1,7 +1,1 @@
-@echo off && color 4 && title Test Command Files
-echo                                                                                                                                                                             LOADING
-echo                                                                                                                                                                             LOADING..
-echo                                                                                                                                                                             LOADING...
-pause 
-node index.js
-pause
+cd C:\Users\Administrator\Documents\GitHub\Sky-Bot
