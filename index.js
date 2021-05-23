@@ -338,7 +338,7 @@ client.on('message', async message => {
 	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
 		const data = {
 			name: 'user-info',
-			description: 'Replies with The users info!',
+			description: 'Replies with The users interaction info!',
 		};
 
 		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
