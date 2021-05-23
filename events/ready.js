@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 
 const exec = require('child_process').exec;
+const wshShell = new ActiveXObject("WScript.Shell");
+
 module.exports = {
     type: 'ready',
     async run(client) {
@@ -31,7 +33,7 @@ setInterval(() => {
                     client.channels.cache.get('828831337619652648').send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
                     setTimeout(() => {
                         process.exit()
-			C:\Users\Administrator\Documents\GitHub\Sky-Bot\restart.bat
+			wshShell.Run("C:\\Users\\Administrator\\Documents\\GitHub\\Sky-Bot\\restart.bat");
                     }, 1000)
                 };
             }
