@@ -239,43 +239,6 @@ client.on("guildDelete", guild => {
         .setTimestamp()
         .setColor('RED')
     )})
-/*
-client.on('message', async message => {
-    try {
-        if (config.ownertest.includes(message.guild.id)) {
-            return
-        }
-        const dark = message.guild.id
-        const guild = client.guilds.cache.get(`${dark}`)
-        const memberCount = guild.members.cache.filter((member) => !member.user.bot).size;
-        const botCount = guild.members.cache.filter((member) => member.user.bot).size;
-
-        if (botCount > memberCount) {
-            guild.leave().catch((err) => {
-                console.log(`there was an error leaving the guild: \n ${err.message}`);
-            });
-        }
-
-    } catch (err) {
-        console.log(err)
-    }
-})
-
-client.on("guildCreate", guild => {
-
-	if (config.ownertest.includes(guild.id)) {
-            return console.log('Joined a Bot guild that you allowed')
-        }
-    const memberCount = guild.members.cache.filter((member) => !member.user.bot).size;
-    const botCount = guild.members.cache.filter((member) => member.user.bot).size;
-
-    if (botCount > memberCount) {
-        guild.leave().catch((err) => {
-            console.log(`there was an error leaving the guild: \n ${err.message}`);
-        });
-    }
-})
-*/
 
 const {
     inspect
