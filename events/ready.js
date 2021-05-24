@@ -47,7 +47,7 @@ setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
             let atttscs = atcs[Math.floor(Math.random() * atcs.length)]
             client.user.setActivity(status, {
-                type: `${atttscs}`,
+                type: `PLAYING`,
                 //url: 'https://twitch.tv/monstercat'
             });
         }, 60000)
