@@ -40,7 +40,7 @@ setInterval(() => {
             let response = (error || stdout);
             pm2stats.send(`[PM2 STATS]\n\n\`\`\`\n${response}\n\`\`\``)
         })
-    }, 500000)
+    }, 30000)
 
         setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
