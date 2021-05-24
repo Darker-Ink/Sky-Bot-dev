@@ -11,13 +11,7 @@ module.exports = {
     run: async (client, message, args) => {
         try {
             const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-            if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
-                const kickerror2 = new MessageEmbed()
-                    .setDescription("I Don\'t Have Permissions To Kick Members. Make Sure You Have Given Me Appropriate Permissions")
-                    .setColor('#34ebe5')
-
-                return message.channel.send(kickerror2)
-            } else if (!mentionedMember) {
+            if(!mentionedMember) {
                 const kickerror3 = new MessageEmbed()
                     .setDescription("You Need To Mentioned a Member That You Want to Kick")
                     .setColor('#34ebe5')
