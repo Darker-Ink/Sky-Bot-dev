@@ -106,12 +106,11 @@ module.exports = {
         
               //CHECK IF USER HAVE NICKNAME
               if (user.nickname !== null) embed.addField("Nickname", user.nickname)
-              embed.addField("Joined At", moment(user.joinedAt).format("LLLL"), true)
-                .addField("Account Created At", moment(user.user.createdAt).format("LLLL"), true)
-                .addField("Common Information", `ID: \`${user.user.id}\`\nDiscriminator: ${user.user.discriminator}\nBot: ${user.user.bot}\nDeleted User: ${user.deleted}`, true)
-                .addField('Flags',`**❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`, true)
-                .setFooter(user.user.presence.status, stat[user.user.presence.status])
-                .addField('**Roles:**', ` ${roles}`, true)
+              embed.addField('Name:', '1', true)
+              .addField('ID:', '2', true)
+              .addField('Created at:', '3', true)
+              .addField('Joined:', '4', true)
+              .addField('Badges:', '5', true)
         
               message.channel.send(embed);
             }
