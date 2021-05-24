@@ -8,7 +8,7 @@ module.exports = {
     perms: [""],
     run: async (client, message, args) => {
         try {
-            if (!message.channel.name.includes("ticket")) return message.channel.send('This is Not a Ticket Please use this command in a ticket');
+            if (!message.channel.name.includes("-ticket")) return message.channel.send('This is Not a Ticket Please use this command in a ticket');
             const embed = new Discord.MessageEmbed()
                 .setTitle('Are you sure?')
                 .setDescription('Do you really want to close #' + message.channel.name + '?\n**This will delete __all__ the channel content!**')

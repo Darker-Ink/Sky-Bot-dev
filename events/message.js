@@ -1,13 +1,7 @@
-const discord = require('discord.js');
 const Discord = require('discord.js');
 const Guild = require('../schema.js')
 const mongoose = require('mongoose');
-const db = require('quick.db');
-const fs = require("fs");
-const colors = require('colors');
-const debug = '[DEBUG] Message.js Is working!'.blue;
 const config = require('../config/config.json')
-const blacklist = require('../models/blacklist')
 
 module.exports = {
     type: 'message',
@@ -69,34 +63,27 @@ module.exports = {
                 if (!command) return;
 
                 if (command.ownerOnly && !config.owners.includes(message.author.id)) {
-                    return message.reply('You are Not a Owner, If this is a mistake and the command shouldn\'t say this contact support');
+                    return
                 }
-
-                if (command.disabled && !config.owners.includes(message.author.id)) {
+                if (command.disabled && !config.beta.includes(message.author.id)) {
                     return message.reply('This Command Is disabled Due to It being in develpment Please Check back later!');
                 }
-                if (command.disabledbug && !config.owners.includes(message.author.id)) {
+                if (command.disabledbug && !config.beta.includes(message.author.id)) {
                     return message.reply('This Command Is disabled Due to a Bug Please Check back later!');
                 }
                 if (command.snupe && !config.beta.includes(message.author.id)) {
                     return message.reply(`The Snipe Command Is Disabled As of Now, Please Use Message Logs by doing \`${prefix}msglog set #channel\` The snipe command will be enabled soon but I don't know when.`);
                 }
                 if (!message.member.permissions.has(command.perms)) {
-                    //message.channel.send(command.noperms.replace("{permission}", command.perms))
                     const mIm = (`${command.perms}`)
                     message.channel.send(`You do Not have the right perms to use this command You need \`\`${command.perms.join(", ")}\`\` To use this command!`, command.perms)
                     return;
                 }
                 if (!message.guild.me.permissions.has(command.botperms)) {
-                    //message.channel.send(command.noperms.replace("{permission}", command.perms))
                     const mIm = (`${command.perms}`)
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
                 }
-                //if(config.owners.includes(message.author.id)) {{
-                //  return;
-                //}
-                //} else {
                 if (message.channel.type == "dm") {
                     let userDB = await client.data.getUserDB(message.author.id);
                     let data = {};
@@ -130,7 +117,6 @@ module.exports = {
 
                 timestamps.set(message.author.id, now);
                 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-                // }
             } catch (err) {
                 console.log(err)
             }

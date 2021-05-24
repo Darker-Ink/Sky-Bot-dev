@@ -1,4 +1,4 @@
 @echo off
-echo "Installing the packages"
+echo Installing the packages
 npm i 
 PAUSE

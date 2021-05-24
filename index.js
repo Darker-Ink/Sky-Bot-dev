@@ -3,6 +3,7 @@ const date = require('date-and-time');
 const now = new Date();
 const time = (colors.red(date.format(now, 'hh:mm A')))
 global.Discord = require("discord.js");
+global.discord = require('discord.js');
 const Util = require("discord.js")
 require("dotenv").config();
 fetch = require("node-fetch");
@@ -74,17 +75,17 @@ for (const file of commandFiles) {
 
 //Event Handler
 event_handler.performEvents(client);
-
+/*
 client.on('messageDelete', message => {
     let obj = JSON.parse(String(fs.readFileSync('./snipe.json')))
 
     obj[message.guild.id] = JSON.parse(JSON.stringify(message))
     fs.writeFileSync('./snipe.json', JSON.stringify(obj))
 })
-
+*/
 client.on('ready', () => {
     const mongo_url = process.env.mongo_url;
-    console.log(`${client.user.username} is online!`);
+    console.log(colors.green((`[${time}] ${client.user.username} is online!`)));
 
     mongoose.connect(mongo_url, {
         useNewUrlParser: true,
@@ -170,7 +171,7 @@ client.giveawaysManager = new GiveawaysManager(client, {
         reaction: "🎉"
     }
 });
-
+/*
 client.giveawaysManager.on("giveawayReactionAdded", (giveaway, member, reaction) => {
     console.log(`${member.user.tag} entered giveaway #${giveaway.messageID} (${reaction.emoji.name})`);
 });
@@ -182,7 +183,7 @@ client.giveawaysManager.on("giveawayReactionRemoved", (giveaway, member, reactio
 client.giveawaysManager.on("giveawayEnded", (giveaway, winners) => {
     console.log(`Giveaway #${giveaway.messageID} ended! Winners: ${winners.map((member) => member.user.username).join(', ')}  ${giveaway.messageURL}`);
 });
-
+*/
 
 client.on("guildCreate", guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
@@ -226,20 +227,6 @@ client.on("guildDelete", guild => {
     });
 })
 
-client.on("guildDelete", guild => {
-    const Logs = '827719260209152010'
-    client.channels.cache.get(Logs).send(
-        new Discord.MessageEmbed()
-        .setTitle("I Was Removed From a Guild :c")
-        .addField("Guild Name", `${guild.name}`)
-        .addField("Guild Members", `${guild.members.cache.size}`)
-        .addField("Guild Id", `${guild.id}`)
-        .addField("Guild Owner", `<@${guild.ownerID}> | Id: ${guild.ownerID}`)
-        .setFooter(`Blue Sky is Currently in ${client.guilds.cache.size} guilds!`)
-        .setTimestamp()
-        .setColor('RED')
-    )})
-
 const {
     inspect
 } = require("util")
@@ -259,23 +246,6 @@ client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
 */
-client.on("guildCreate", async (guild) => {
-    let owner = client.users.cache.get(guild.ownerID)
-    const EmbedJoin = new Discord.MessageEmbed()
-        .setColor('RANDOM')
-        .setTitle(`Joined Guild: ${guild.name}!`)
-        .setThumbnail(guild.iconURL())
-        .addField(`**SERVER ID**`, `\`\`\`${guild.id}\`\`\``)
-        .addField(`**SERVER OWNER**`, `\`\`\`${owner.tag}\`\`\``)
-        .addField(`**OWNER ID**`, `\`\`\`${owner.id}\`\`\``)
-        .addField(`**CREATED ON**`, `\`\`\`${guild.createdAt}\`\`\``)
-        .addField(`**MEMBERS**`, `\`\`\`${guild.memberCount}\`\`\``)
-        .setTimestamp()
-    console.log(`Joined New Guild: ${guild.name}`);
-    client.channels.cache.get(`827719260209152010`).send(EmbedJoin)
-});
-
-
 
 client.on("messageUpdate", async (oldMessage, message) => {
         try {
@@ -305,7 +275,6 @@ client.db2 = require("quick.db");
 client.request = new (require("rss-parser"))();
 client.config3 = require("./config.js");
 client.on("ready", () => {
-    console.log("I'm ready!");
     handleUploads();
 });
 function handleUploads() {
@@ -325,7 +294,6 @@ function handleUploads() {
                     .replace(/{author}/g, parsed.author)
                     .replace(/{title}/g, Discord.Util.escapeMarkdown(parsed.title))
                     .replace(/{url}/g, parsed.link);
-                //channel.send(message);
 		webhookClient.send(message);
             }
         });
@@ -342,7 +310,6 @@ client.on('message', async message => {
 		};
 
 		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-		//console.log(command);
 	}
 });
 
@@ -365,7 +332,6 @@ const embed = new Discord.MessageEmbed()
 		await client.users.cache.get('379781622704111626').send(`${interaction.user.username}#${interaction.user.discriminator} Used ${interaction.commandName}`)
         await interaction.reply(embed);
 		const message = await interaction.fetchReply();
-		//console.log(message);
         const ink = await interaction.user;
         console.log(ink)
 	}
@@ -388,7 +354,6 @@ client.on('message', async message => {
 		};
 
 		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-		//console.log(command);
 	}
 });
 
@@ -414,7 +379,6 @@ client.on('message', async message => {
 		};
 
 		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-		//console.log(command);
 	}
 });
 const db = require('quick.db')
@@ -551,7 +515,6 @@ client.on('message', async message => {
 		};
 
 		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-		//console.log(command);
 	}
 });
 const wait = require('util').promisify(setTimeout);
@@ -591,7 +554,6 @@ client.on('message', async message => {
 		};
 
 		const command = await client.application?.commands.create(data);
-		//console.log(command);
 	}
 });
 
