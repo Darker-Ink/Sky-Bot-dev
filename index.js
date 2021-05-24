@@ -455,7 +455,7 @@ client.on('message', async message => {
 		const data = {
 			name: 'suggestion',
 			description: 'For replying to a suggestion!',
-			defaultPermission: false,
+			//defaultPermission: false,
             options: [{
 				name: 'id',
 				type: 'STRING',
@@ -551,7 +551,6 @@ client.on('message', async message => {
 		};
 
 		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-		//console.log(command);
 	}
 });
 const wait = require('util').promisify(setTimeout);
@@ -591,7 +590,6 @@ client.on('message', async message => {
 		};
 
 		const command = await client.application?.commands.create(data);
-		//console.log(command);
 	}
 });
 
