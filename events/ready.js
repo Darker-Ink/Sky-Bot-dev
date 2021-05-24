@@ -1,5 +1,9 @@
 const githubhook = new Discord.WebhookClient('832350968837308486', 'FxTirx2pPs3OHL5MjuR7rn4Rmre8HinUkMjpjdvKye_e-5A2e_uATnyr8vfoo6O67m-c');
 const exec = require('child_process').exec;
+const date = require('date-and-time');
+const now = new Date();
+const time = (date.format(now, 'YYYY/MM/DD hh:mm'))
+const pm2stats = new Discord.WebhookClient('846411328234717215', 'i9GUJQlHHY11haR-MfkJIuYf7kGeEGTE6dLh_s--InaYgleYbDucH6KWk25J9F5nOHx2');
 module.exports = {
     type: 'ready',
     async run(client) {
@@ -12,6 +16,13 @@ module.exports = {
             `He wasn\'t seen again`,
 	        `Discord\'s API`,
 	]
+
+setInterval(() => {
+    exec("npx pm2 status", (error, stdout) => {
+    let result = (stdout || error);
+    pm2stats.send("Auto Stats\n\n\`\`\`" + result + "\`\`\`\n\n" + `${time}`)
+})
+}, 300000)
 
 setInterval(() => {
         exec(`git pull`, (error, stdout) => {
