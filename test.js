@@ -5,6 +5,10 @@ const time = (colors.red(date.format(now, 'hh:mm A')))
 const Discord = require('discord.js');
 const fs = require('fs');
 const event_handler = require('./event');
+const client = new Discord.Client({
+    allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
+   intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING"]
+})
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
