@@ -361,6 +361,7 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'echo') {
         await interaction.reply(`${interaction.options[0].value}`, { ephemeral: false });
+        console.log(interaction)
 }});
 
 client.on('message', async message => {
