@@ -19,6 +19,6 @@ module.exports = {
     'Testing, testing, 1, 2, 3!'
   ];
         const dresponses = responses[Math.floor(Math.random() * responses.length)];
-			message.channel.send(`**API:**\`${new Date() - dt}ms\`\n\n**WS:**\`${client.ws.ping}ms\`\n\n**Windows Uptime:**\`${ms(os.uptime() * 1000, { long: true })}\``)
+			message.channel.send(`**API:**\`${new Date() - dt}ms\`\n\n**WS:**\`${client.ws.ping}ms\`\n\n**Ubuntu Uptime:**\`${ms(os.uptime() * 1000, { long: true })}\``)
             console.log(`"API" ${new Date() - dt}ms "WS" ${client.ws.ping}ms`)
     }}
