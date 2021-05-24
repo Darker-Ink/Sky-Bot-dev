@@ -4,7 +4,6 @@ const now = new Date();
 const time = (colors.red(date.format(now, 'hh:mm A')))
 const Discord = require('discord.js');
 const fs = require('fs');
-const colors = require('colors')
 const event_handler = require('./event');
 //Command Handler
 function getDirectories() {
