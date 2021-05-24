@@ -106,13 +106,13 @@ module.exports = {
         
               //CHECK IF USER HAVE NICKNAME
               if (user.nickname !== null) embed.addField("Nickname", user.nickname)
-              embed.addField('Name:', '1', true)
-              .addField('ID:', `${weed}`, true)
+              embed.addField('Name:', `${user.username}`, true)
+              .addField('ID:', `${user.id}`, true)
               .addField('Created at:', '3', true)
               .addField('Joined:', '4', true)
               .addField('Badges:', '5', true)
               .addField('Highest role:', `<@&${weed}>`, true)
-        
+              .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
             }
           }
