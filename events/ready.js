@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const githubhook = new Discord.WebhookClient('832350968837308486', 'FxTirx2pPs3OHL5MjuR7rn4Rmre8HinUkMjpjdvKye_e-5A2e_uATnyr8vfoo6O67m-c');
 const exec = require('child_process').exec;
 module.exports = {
