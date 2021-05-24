@@ -15,7 +15,7 @@ module.exports = {
 
         weather.find({
             search: args.join(" "),
-            degreeType: 'C'
+            degreeType: 'F'
         }, function(error, result) {
             if (error) return message.channel.send(error)
             if (!args[0]) return message.channel.send(ErrorEmbed)
