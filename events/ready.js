@@ -23,6 +23,7 @@ setInterval(() => {
             let response = (error || stdout);
             if (!error) {
                 if (response.includes("Already up to date.")) {
+                    pm2stats.send(`[Bot already up to date. No changes since last pull]\n\n\`\`\`\n${response}\n\`\`\``)
                     //console.log('Bot already up to date. No changes since last pull')
                 } else {
                     githubhook.send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
@@ -32,13 +33,6 @@ setInterval(() => {
                     }, 1000)
                 };
             }
-        })
-    }, 30000)
-
-    setInterval(() => {
-        exec(`npx pm2 status 0`, (error, stdout) => {
-            let response = (error || stdout);
-            pm2stats.send(`[PM2 STATS]\n\n\`\`\`\n${response}\n\`\`\``)
         })
     }, 30000)
 
