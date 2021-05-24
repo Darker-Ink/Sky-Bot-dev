@@ -274,7 +274,6 @@ client.db2 = require("quick.db");
 client.request = new (require("rss-parser"))();
 client.config3 = require("./config.js");
 client.on("ready", () => {
-    console.log("I'm ready!");
     handleUploads();
 });
 function handleUploads() {
