@@ -60,7 +60,7 @@ module.exports = {
         }
 
         //NOW BADGES
-        if (guild.members.cache.get(`${user.id}`)) {
+        if (message.guild.members.cache.get(`${user.id}`)) {
 
             let badges = await user.user.flags
             badges = await badges ? badges.toArray() : ["None"]
