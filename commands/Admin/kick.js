@@ -66,7 +66,7 @@ module.exports = {
         } catch (err) {
             console.log('fuck a error');
             message.reply(`There was a error Owner Has been alerted, you can try the command again.. Maybe it was a mistake Try again, If you get this message again **__DO NOT__** Use the command again, Thank you!`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            errorHook.send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
         }
     }
 }
