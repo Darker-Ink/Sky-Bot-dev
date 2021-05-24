@@ -9,7 +9,7 @@ module.exports = {
     name: 'reloadfiles',
     ownerOnly: true,
     description: 'Reloads the commandFiles',
-    aliases: ['ln'],
+    aliases: ['ln', 'loadnew'],
     usage: "reload <command>",
     category: "Owner",
     hidden: true,

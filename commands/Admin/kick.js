@@ -11,13 +11,7 @@ module.exports = {
     run: async (client, message, args) => {
         try {
             const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-            if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
-                const kickerror2 = new MessageEmbed()
-                    .setDescription("I Don\'t Have Permissions To Kick Members. Make Sure You Have Given Me Appropriate Permissions")
-                    .setColor('#34ebe5')
-
-                return message.channel.send(kickerror2)
-            } else if (!mentionedMember) {
+            if(!mentionedMember) {
                 const kickerror3 = new MessageEmbed()
                     .setDescription("You Need To Mentioned a Member That You Want to Kick")
                     .setColor('#34ebe5')
@@ -66,7 +60,7 @@ module.exports = {
         } catch (err) {
             console.log('fuck a error');
             message.reply(`There was a error Owner Has been alerted, you can try the command again.. Maybe it was a mistake Try again, If you get this message again **__DO NOT__** Use the command again, Thank you!`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            errorHook.send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
         }
     }
 }

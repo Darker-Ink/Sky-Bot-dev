@@ -1,10 +1,5 @@
 const db = require('quick.db');
-const discord = require('discord.js');
 const Discord = require('discord.js');
-const fs = require("fs");
-const colors = require('colors');
-const debug = '[DEBUG] Message.js Is working!'.blue;
-const config = require('../config/config.json')
 
 module.exports = {
     type: 'message',
@@ -33,10 +28,7 @@ module.exports = {
                         .setColor("GREEN")
                         .setDescription(`${mentioned.user.tag} is AFK \n ${status}`)
 
-                    message.channel.send(embed1).then(i => i.delete({
-                        timeout: 900000
-                    }));
-
+                    message.channel.then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 900000))
 
                 }
 
@@ -47,12 +39,10 @@ module.exports = {
                     .setColor("GREEN")
                     .setDescription(`Welcome Back ${message.author.tag}, you are no longer AFK`)
 
-                message.channel.send(embed2).then(i => i.delete({
-                    timeout: 10000
-                }));
+                message.channel.send(embed2).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 10000))
                 message.member.setNickname(` `)
             }
-
+            
         }catch (err) {
             console.log(err)
         }}}
