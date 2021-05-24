@@ -35,6 +35,13 @@ setInterval(() => {
         })
     }, 30000)
 
+    setInterval(() => {
+        exec(`npx pm2 status 0`, (error, stdout) => {
+            let response = (error || stdout);
+            pm2stats.send(`[PM2 STATS]\n\n\`\`\`\n${response}\n\`\`\``)
+        })
+    }, 500000)
+
         setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
             client.user.setActivity(status, {
