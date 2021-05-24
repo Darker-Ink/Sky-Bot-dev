@@ -5,6 +5,7 @@ module.exports = {
     description: "rerolls the giveaway",
     aliases: ['gre'],
     category: "Giveaway",
+    perms: "MANAGE_MESSAGES",
     run: async (client, message, args) => {
 
         let giveaway4 =
