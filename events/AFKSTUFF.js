@@ -1,10 +1,5 @@
 const db = require('quick.db');
-const discord = require('discord.js');
 const Discord = require('discord.js');
-const fs = require("fs");
-const colors = require('colors');
-const debug = '[DEBUG] Message.js Is working!'.blue;
-const config = require('../config/config.json')
 
 module.exports = {
     type: 'message',
