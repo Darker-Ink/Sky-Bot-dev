@@ -108,7 +108,7 @@ module.exports = {
               if (user.nickname !== null) embed.addField("Nickname", user.nickname)
               embed.addField('Name:', `${user.user.tag}`, true)
               .addField('ID:', `${user.id}`, true)
-              .addField('Created at:', `${user.createdAt}`, true)
+              .addField('Created at:', `${user.user.createdAt}`, true)
               .addField('Joined:', '4', true)
               .addField('Badges:', `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`, true)
               .addField('Highest role:', `<@&${weed}>`, true)
