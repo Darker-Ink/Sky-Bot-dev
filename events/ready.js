@@ -15,6 +15,7 @@ module.exports = {
             `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()} Users`,
             `He wasn\'t seen again`,
 	        `Discord\'s API`,
+            `The Time Is ${time}`,
 	]
 
     let atcs = [
@@ -48,7 +49,6 @@ setInterval(() => {
             let atttscs = atcs[Math.floor(Math.random() * atcs.length)]
             client.user.setActivity(status, {
                 type: `PLAYING`,
-                //url: 'https://twitch.tv/monstercat'
             });
         }, 60000)
     }
