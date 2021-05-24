@@ -38,7 +38,7 @@ module.exports = {
         } else {
 
 
-            user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || await client.users.fetch(args[0]).catch(err => {
+            user = message.mentions.members.first() || await client.users.fetch(args[0]).catch(err => {
                 return message.channel.send(":x: Unable to find this Person")
             })
         }
