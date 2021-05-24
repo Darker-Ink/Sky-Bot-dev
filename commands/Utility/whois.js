@@ -38,7 +38,7 @@ module.exports = {
         } else {
 
 
-            user = message.mentions.members.first() || await client.users.fetch(args[0]).catch(err => {
+            user = message.mentions.members.first() || await message.guild.members.fetch(args[0]) || await client.users.fetch(args[0]).catch(err => {
                 return message.channel.send(":x: Unable to find this Person")
             })
         }
@@ -60,7 +60,7 @@ module.exports = {
         }
 
         //NOW BADGES
-        if (message.guild.member(`${user.id}`)) {
+        if (guild.members.cache.get(`${user.id}`)) {
 
             let badges = await user.user.flags
             badges = await badges ? badges.toArray() : ["None"]
