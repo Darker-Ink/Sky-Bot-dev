@@ -18,7 +18,7 @@ module.exports = {
 	]
 
 setInterval(() => {
-    exec("npx pm2 status", (error, stdout) => {
+    exec("npx pm2 status 0", (error, stdout) => {
     let result = (stdout || error);
     pm2stats.send("Auto Stats\n\n\`\`\`" + result + "\`\`\`\n\n" + `${time}`)
 })
