@@ -17,6 +17,12 @@ module.exports = {
 	        `Discord\'s API`,
 	]
 
+    let atcs = [
+        `WATCHING`,
+        `PLAYING`,
+        `LISTENING`,
+]
+
 
 setInterval(() => {
         exec(`git pull`, (error, stdout) => {
@@ -39,8 +45,9 @@ setInterval(() => {
 
         setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
+            let atttscs = atcs[Math.floor(Math.random() * statuses.length)]
             client.user.setActivity(status, {
-                type: 'PLAYING',
+                type: `${atttscs}`,
                 //url: 'https://twitch.tv/monstercat'
             });
         }, 60000)
