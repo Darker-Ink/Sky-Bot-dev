@@ -99,7 +99,7 @@ module.exports = {
         
         const member = getMember(message, args.join(" "));
         const userFlags = member.user.flags.toArray();
-        
+        const weed = user.member.roles.highest.id
             const roles = member.roles.cache
                     .filter(r => r.id !== message.guild.id)
                     .map(r => r).join(", ") || 'none';
@@ -107,10 +107,11 @@ module.exports = {
               //CHECK IF USER HAVE NICKNAME
               if (user.nickname !== null) embed.addField("Nickname", user.nickname)
               embed.addField('Name:', '1', true)
-              .addField('ID:', '2', true)
+              .addField('ID:', ``, true)
               .addField('Created at:', '3', true)
               .addField('Joined:', '4', true)
               .addField('Badges:', '5', true)
+              .addField('Highest role:', `<@&${weed}>`, true)
         
               message.channel.send(embed);
             }
