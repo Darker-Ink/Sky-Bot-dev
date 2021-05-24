@@ -30,7 +30,7 @@ setInterval(() => {
                 } else {
                     client.channels.cache.get('828831337619652648').send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
                     setTimeout(() => {
-                      exec('pm2 restart 0')
+                      exec('npx pm2 restart 0')
 			//process.exit()
                     }, 1000)
                 };
