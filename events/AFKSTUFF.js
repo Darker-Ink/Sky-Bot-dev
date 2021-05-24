@@ -39,12 +39,10 @@ module.exports = {
                     .setColor("GREEN")
                     .setDescription(`Welcome Back ${message.author.tag}, you are no longer AFK`)
 
-                message.channel.send(embed2).then(i => i.delete({
-                    timeout: 10000
-                }));
+                message.channel.send(embed2).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 10000))
                 message.member.setNickname(` `)
             }
-
+            
         }catch (err) {
             console.log(err)
         }}}
