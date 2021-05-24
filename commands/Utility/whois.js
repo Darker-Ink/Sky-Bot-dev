@@ -114,6 +114,7 @@ module.exports = {
               .addField('Highest role:', `<@&${weed}>`, true)
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
+              message.channel.send('[DEBUG] This is a Debug messsage you should **Never** Get this, If you do The code Bugged and added you to a bugged DataBase')
             }
           }
                 
