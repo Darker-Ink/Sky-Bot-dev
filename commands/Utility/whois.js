@@ -18,17 +18,17 @@ module.exports = {
         const flags = {
             DISCORD_EMPLOYEE: 'Discord Employee',
             DISCORD_PARTNER: 'Discord Partner',
-            BUGHUNTER_LEVEL_1: 'Bug Hunter (Level 1)',
-            BUGHUNTER_LEVEL_2: 'Bug Hunter (Level 2)',
+            BUGHUNTER_LEVEL_1: '<:BugHunter:846460263229554778>',
+            BUGHUNTER_LEVEL_2: '<:BugHunter_2:846460290966487050>',
             HYPESQUAD_EVENTS: 'HypeSquad Events',
-            HOUSE_BRAVERY: 'House of Bravery',
-            HOUSE_BRILLIANCE: 'House of Brilliance',
-            HOUSE_BALANCE: 'House of Balance',
-            EARLY_SUPPORTER: 'Early Supporter',
+            HOUSE_BRAVERY: '<:Bravery:846447779760701520>',
+            HOUSE_BRILLIANCE: '<:Brilliance:846447781661245440>',
+            HOUSE_BALANCE: '<:Balance:846447781661245440>',
+            EARLY_SUPPORTER: '<:earlysupporter:846447770998800435>',
             TEAM_USER: 'Team User',
             SYSTEM: 'System',
             VERIFIED_BOT: 'Verified Bot',
-            VERIFIED_DEVELOPER: 'Verified Bot Developer',
+            VERIFIED_DEVELOPER: '<:Developer:846447890523881572>',
         };
         
             let user;
@@ -110,7 +110,7 @@ module.exports = {
               .addField('ID:', `${user.id}`, true)
               .addField('Created at:', '3', true)
               .addField('Joined:', '4', true)
-              .addField('Badges:', '5', true)
+              .addField('Badges:', `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`, true)
               .addField('Highest role:', `<@&${weed}>`, true)
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
