@@ -107,7 +107,7 @@ module.exports = {
               //CHECK IF USER HAVE NICKNAME
               if (user.nickname !== null) embed.addField("Nickname", user.nickname)
               embed.addField('Name:', '1', true)
-              .addField('ID:', ``, true)
+              .addField('ID:', `${weed}`, true)
               .addField('Created at:', '3', true)
               .addField('Joined:', '4', true)
               .addField('Badges:', '5', true)
