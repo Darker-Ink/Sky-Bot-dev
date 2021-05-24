@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-
+const githubhook = new Discord.WebhookClient('832350968837308486', 'FxTirx2pPs3OHL5MjuR7rn4Rmre8HinUkMjpjdvKye_e-5A2e_uATnyr8vfoo6O67m-c');
 const exec = require('child_process').exec;
 module.exports = {
     type: 'ready',
@@ -28,7 +28,7 @@ setInterval(() => {
                 if (response.includes("Already up to date.")) {
                     //console.log('Bot already up to date. No changes since last pull')
                 } else {
-                    client.channels.cache.get('828831337619652648').send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
+                    githubhook.send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
                     setTimeout(() => {
                       exec('npx pm2 restart 0')
 			//process.exit()
