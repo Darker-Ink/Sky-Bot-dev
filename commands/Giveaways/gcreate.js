@@ -6,6 +6,7 @@ module.exports = {
     aliases: ['gc'],
     category: "Giveaway",
     perms: "MANAGE_MESSAGES",
+    disabledbug: true,
     run: async (client, message, args) => {
 
         // Giveaway channel
