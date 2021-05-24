@@ -10,7 +10,7 @@ module.exports = {
             `Serving ${client.guilds.cache.size} Servers`,
             `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()} Users`,
             `He wasn\'t seen again`,
-	    `Discord\'s API`,
+	        `Discord\'s API`,
 	]
 
 setInterval(() => {
