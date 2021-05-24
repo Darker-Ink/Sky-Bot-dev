@@ -6,6 +6,7 @@ module.exports = {
     aliases: ['gre'],
     category: "Giveaway",
     perms: "MANAGE_MESSAGES",
+    disabledbug: true,
     run: async (client, message, args) => {
 
         let giveaway4 =
