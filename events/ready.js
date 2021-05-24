@@ -24,7 +24,7 @@ module.exports = {
         `LISTENING`,
 ]
 
-
+// Credit goes to DanBot hosting's discord bot!
 setInterval(() => {
         exec(`git pull`, (error, stdout) => {
             let response = (error || stdout);

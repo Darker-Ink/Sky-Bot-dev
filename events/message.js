@@ -84,10 +84,6 @@ module.exports = {
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
                 }
-                //if(config.owners.includes(message.author.id)) {{
-                //  return;
-                //}
-                //} else {
                 if (message.channel.type == "dm") {
                     let userDB = await client.data.getUserDB(message.author.id);
                     let data = {};
@@ -121,7 +117,6 @@ module.exports = {
 
                 timestamps.set(message.author.id, now);
                 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-                // }
             } catch (err) {
                 console.log(err)
             }
