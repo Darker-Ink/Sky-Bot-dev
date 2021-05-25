@@ -6,15 +6,16 @@ module.exports = {
     description: "",
     category: "Tickets",
     perms: [""],
+    //botperms: ["MANAGE_CHANNELS"],
     run: async (client, message, args) => {
         const reason = message.content.split(' ').slice(1).join(' ');
         let SupportCategory = message.guild.channels.cache.find(category => category.name === "Tickets");
-        if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !SupportCategory) {
+        if (message.guild.me.permissions.has('MANAGE_CHANNELS') && !SupportCategory) {
             SupportCategory = await message.guild.channels.create('Tickets', {
                 type: 'category',
             });
         };
-        if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !SupportCategory) {
+        if (!message.guild.me.permissions.has('MANAGE_CHANNELS') && !SupportCategory) {
             message.channel.send("I do not have permissions for this command.")
         }
         if (!message.guild.roles.cache.find(role => role.name === "ticket support")) {
