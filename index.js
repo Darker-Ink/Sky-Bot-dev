@@ -44,6 +44,7 @@ client.react = new Map()
 global.MessageEmbed = require('discord.js')
 global.Embed = new Discord.MessageEmbed()
 global.errorHook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
+global.errorhook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
 
 //Command Handler
 function getDirectories() {
@@ -361,6 +362,7 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'echo') {
         await interaction.reply(`${interaction.options[0].value}`, { ephemeral: false });
+        console.log(interaction)
 }});
 
 client.on('message', async message => {

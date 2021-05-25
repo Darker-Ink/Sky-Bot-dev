@@ -48,7 +48,7 @@ module.exports = {
         const channels = message.guild.channels.cache;
         const emojis = message.guild.emojis.cache;
         let rolemap = message.guild.roles.cache
-
+        const owner = await message.guild.fetchOwner()
 
         var roles = ''
         var rc = 0
@@ -67,7 +67,7 @@ module.exports = {
             .addField('General', [
 				`**» Name:** ${message.guild.name}`,
 				`**» ID:** ${message.guild.id}`,
-				`**» Owner:** ${message.guild.owner.user.tag} (${message.guild.ownerID})`,
+				`**» Owner:** ${owner.user.tag} (${owner.user.id})`,
 				`**» Region:** ${regions[message.guild.region]}`,
 				`**» Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : 'None'}`,
 				`**» Explicit Filter:** ${filterLevels[message.guild.explicitContentFilter]}`,
