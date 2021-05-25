@@ -7,7 +7,6 @@ module.exports = {
     type: 'message',
     run: async (client, message) => {
         try {
-            //console.log(`${debug}`)
 
             let guildDB = await client.data.getGuildDB(message.guild.id)
             let msgDB = await client.data.getMsgDB(message.guild.id)
@@ -23,7 +22,7 @@ module.exports = {
                         _id: mongoose.Types.ObjectId(),
                         guildID: message.guild.id,
                         guildName: message.guild.name,
-                        prefix: process.env.PREFIX
+                        prefix: '!'
                     })
 
                     newGuild.save()
@@ -37,8 +36,7 @@ module.exports = {
             });
 
             const prefix = settings.prefix;
-            if (!message.guild) return;
-            if (message.channel.name == "chatbot") return;
+         //   if (!message.guild) return;
             //if someone pings the bot says the prefix in the server
             if (message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>`) {
                 return message.channel.send(`You need the prefix? Well thats Fine its \`\`${settings.prefix}\`\``);
@@ -55,7 +53,7 @@ module.exports = {
 
             if (cmd.length === 0) return;
             let command = client.commands.get(cmd);
-            if (cmd.name = null) return;
+            //if (cmd.name = null) return;
 
             try {
                 if (!command) command = client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
@@ -83,16 +81,6 @@ module.exports = {
                     const mIm = (`${command.perms}`)
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
-                }
-                if (message.channel.type == "dm") {
-                    let userDB = await client.data.getUserDB(message.author.id);
-                    let data = {};
-                    data.config = config;
-                    data.user = userDB;
-                    data.guild = guildDB;
-                    data.Msg = msgDB;
-                    data.cmd = cmd;
-                    command.run(client, message, args, data);
                 }
                 const {
                     cooldowns
