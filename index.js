@@ -72,7 +72,7 @@ for (const file of commandFiles) {
     }
     client.commands.set(command.name, command);
     //console.log(colors.green(`[${time}] Command Loaded: ${command.name}`));
-    pm2stats.send(`Command Loaded ${command.name}`)
+    pm2stats.send(`Command Loaded: ${command.name}`)
 }
 
 //Event Handler
