@@ -34,7 +34,7 @@ module.exports = {
         if (!reason) {
             return message.channel.send("Please specify a ticket subject \n \`(ex: -ticket {subject})\`");
         }
-        const channelName = `ticket-${message.author.username}-${message.author.discriminator}`
+        const channelName = `${message.author.username}-ticket`
         if (message.guild.channels.cache.find(channel => channel.name === `ticket-${message.author.username.toLowerCase()}-${message.author.discriminator}`)) {
             return message.channel.send("You already have a ticket open.")
         }
