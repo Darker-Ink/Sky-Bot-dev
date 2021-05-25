@@ -40,7 +40,7 @@ module.exports = {
                     connection.voice.setSelfDeaf(true)
                     connection.voice.setSuppressed(false);
                 })
-                return client.distube.play(message, "https://www.youtube.com/watch?v=vMogJoHaMC4")
+                return client.distube.play(message, "https://youtu.be/k3NX7u8tTjI")
             }
             let songName = args.slice(0).join(" ")
             if (!songName) {
