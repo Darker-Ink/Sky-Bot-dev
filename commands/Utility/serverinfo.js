@@ -48,7 +48,7 @@ module.exports = {
         const channels = message.guild.channels.cache;
         const emojis = message.guild.emojis.cache;
         let rolemap = message.guild.roles.cache
-
+        let owner = client.users.cache.get(message.guild.ownerID)
 
         var roles = ''
         var rc = 0
