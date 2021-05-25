@@ -6,12 +6,9 @@ module.exports = {
     description: "Use This To Unmute A Muted Person!",
     category: "Admin",
     perms: ["MANAGE_ROLES"],
+    botperms: ["MANAGE_ROLES"],
     run: async (client, message, args) => {
         try {
-            if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
-                return message.channel.send("Sorry, But I don\'t Have Permissions To Unmute Anyone!")
-
-            }
 
             const user = message.mentions.members.first();
 
