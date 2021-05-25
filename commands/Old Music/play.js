@@ -35,7 +35,13 @@ module.exports = {
                     .setColor("RED")
                 return message.channel.send(playError3)
             }
-
+            if(message.content.includes('falixnodes sucks')){
+                voiceChannel.join().then(connection => {
+                    connection.voice.setSelfDeaf(true)
+                    connection.voice.setSuppressed(false);
+                })
+                client.distube.play(message, "https://www.youtube.com/watch?v=vMogJoHaMC4")
+            }
             let songName = args.slice(0).join(" ")
             if (!songName) {
                 const playError2 = new MessageEmbed()
