@@ -484,7 +484,8 @@ client.on('interaction', async interaction => {
 	if (!model) {
             return interaction.reply("That message ID or suggestion ID is invalid or Has been deleted, Please Try again", { ephemeral: true });
     }
-	await interaction.reply(JSON.stringify(interaction.options), { ephemeral: true })
+    //JSON.stringify(interaction.options)
+	await interaction.reply("The Suggestion has been replied to!", { ephemeral: true })
 	const msg = await client.channels.cache.get("832805317338857483").messages.fetch(model.message);
         const author = await client.users.cache.find((u) => u.id === model.author);
         const embed = new Discord.MessageEmbed()
