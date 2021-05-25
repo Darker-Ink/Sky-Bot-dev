@@ -1,7 +1,7 @@
 ﻿const colors = require('colors');
 const date = require('date-and-time');
 const now = new Date();
-const time = (colors.red(date.format(now, 'hh:mm A')))
+global.time = (colors.red(date.format(now, 'hh:mm A')))
 global.Discord = require("discord.js");
 global.discord = require('discord.js');
 const Util = require("discord.js")
