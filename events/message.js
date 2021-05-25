@@ -14,7 +14,7 @@ module.exports = {
             if (message.channel.type === "text" && !message.guild.me.permissions.has("SEND_MESSAGES")) return;
             // If the message is a dm doesn't reply used to stop errors with afk
             //db stuff
-            const settings = await Guild.findOne({
+            global.settings = await Guild.findOne({
                 guildID: message.guild.id
             }, (err, guild) => {
                 if (err) console.error(err)

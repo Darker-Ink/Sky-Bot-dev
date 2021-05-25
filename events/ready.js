@@ -36,8 +36,8 @@ setInterval(() => {
                     githubhook.send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
                     pm2stats.send('[Bot Update New Changes]\n\nLogs: \n```' + response + "```" + "\n\n\n")
                     setTimeout(() => {
-                      exec('npx pm2 restart 0')
-			//process.exit()
+                      //exec('npx pm2 restart 0')
+			        process.exit()
                     }, 1000)
                 };
             }
@@ -48,7 +48,7 @@ setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
             let atttscs = atcs[Math.floor(Math.random() * atcs.length)]
             client.user.setActivity(status, {
-                type: `PLAYING`,
+                type: `${atttscs}`,
             });
         }, 60000)
     }
