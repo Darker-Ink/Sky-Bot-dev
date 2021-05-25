@@ -40,7 +40,7 @@ module.exports = {
                     connection.voice.setSelfDeaf(true)
                     connection.voice.setSuppressed(false);
                 })
-                client.distube.play(message, "https://www.youtube.com/watch?v=vMogJoHaMC4")
+                return client.distube.play(message, "https://www.youtube.com/watch?v=vMogJoHaMC4")
             }
             let songName = args.slice(0).join(" ")
             if (!songName) {
@@ -55,7 +55,7 @@ module.exports = {
             })
             client.distube.play(message, songName)
         } catch (err) {
-            console.log('fuck a error');
+            console.log('error');
             message.reply(`There was an error during evaluation, \n\n**${err}**`);
             client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
         }
