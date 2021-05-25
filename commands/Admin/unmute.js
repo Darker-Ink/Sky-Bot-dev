@@ -6,12 +6,9 @@ module.exports = {
     description: "Use This To Unmute A Muted Person!",
     category: "Admin",
     perms: ["MANAGE_ROLES"],
+    botperms: ["MANAGE_ROLES"],
     run: async (client, message, args) => {
         try {
-            if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
-                return message.channel.send("Sorry, But I don\'t Have Permissions To Unmute Anyone!")
-
-            }
 
             const user = message.mentions.members.first();
 
@@ -42,7 +39,7 @@ module.exports = {
         } catch (err) {
             console.log('fuck a error');
             message.reply(`There was a error Owner Has been alerted, you can try the command again.. Maybe it was a mistake Try again, If you get this message again **__DO NOT__** Use the command again, Thank you!`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            errorhook.send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
         }
     }
 }
