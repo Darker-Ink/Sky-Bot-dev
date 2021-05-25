@@ -42,7 +42,7 @@ module.exports = {
                 return message.channel.send(`You need the prefix? Well thats Fine its \`\`${settings.prefix}\`\``);
             };
 
-
+            global.errorMessage = `oh No You got a error, Please report this command by doing ${settings.prefix}report-command <command_name> <reason_for_report>`
 
             if (!message.content.startsWith(prefix)) return;
 
