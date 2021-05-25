@@ -11,7 +11,6 @@ module.exports = {
     aliases: ["rm"],
     category: "Admin",
     perms: ["KICK_MEMBERS", "BAN_MEMBERS"],
-    botperms: ["MANAGE_ROLES"],
     run: async (client, message, args) => {
         try {
             const mentionedUser = message.mentions.users.first();
