@@ -10,5 +10,5 @@ module.exports = {
     category: "Utility",
   run: async (client, message, args) => {
     const owner = await message.guild.fetchOwner()
-      message.channel.send(`${owner.tag}`)
+      message.channel.send(`${owner.user.tag}`)
   }}
