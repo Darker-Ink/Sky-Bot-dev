@@ -52,7 +52,7 @@ module.exports = {
 
 
             if (cmd.length === 0) return;
-            let command = client.commands.get(cmd);
+            global.command = client.commands.get(cmd);
             //if (cmd.name = null) return;
 
             try {
