@@ -1,4 +1,6 @@
-const Discord = require('discord.js');
+const {
+    inspect
+} = require('util');
 
 module.exports = {
     name: 'example', //This is for the Name of the command
