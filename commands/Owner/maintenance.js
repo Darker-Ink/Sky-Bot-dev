@@ -18,6 +18,9 @@ module.exports = {
     botperms: [], // The perms the bot needs
     darkinkonly: true, // If its only for DarkerInk
     run: async (client, message, data) => {
+        if(args[1].toLowerCase() == "enable") {
+            return message.channel.send('You enabled the command')
+        }
         message.channel.send('You can use this')
         /*
             try {
