@@ -22,8 +22,8 @@ module.exports = {
                 const newmaintenance = new maintenance({
                     _id: mongoose.Types.ObjectId(),
                     ino: message.author.id,
-                    reason: null,
-                    enabled: null
+                    reason: '',
+                    enabled: false
                 })
 
                 newmaintenance.save()
