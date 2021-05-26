@@ -18,10 +18,11 @@ module.exports = {
     botperms: [], // The perms the bot needs
     darkinkonly: true, // If its only for DarkerInk
     run: async (client, message, args, data) => {
-        if(args[1].toLowerCase() == "enable") {
+        if(args[1] == "enable") {
             return message.channel.send('You enabled the command')
+        } else {
+         return message.channel.send('You can use this')
         }
-        message.channel.send('You can use this')
         /*
             try {
                 let embed = new Discord.MessageEmbed()
