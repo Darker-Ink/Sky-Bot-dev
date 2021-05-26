@@ -14,7 +14,7 @@ module.exports = {
     perms: [], // The perms the user needs
     botperms: [], // The perms the bot needs
     readbotrules: false, // This is **VERY** userful It is for commands I.E. Logging If it is turned on The user needs to read the rules and Accpet them, This is to save my ass for people who don't want to get logged I.E. messages and So discord can Verify me or maybe a Log bot I make
-    run: async (client, message, args, data) => {
+    run: async (client, message, data) => {
         const stringOne = `[WARN] ${message.author.tag} Used the eval command`.yellow;
         console.log(stringOne)
         const args = message.content.split(' ');
