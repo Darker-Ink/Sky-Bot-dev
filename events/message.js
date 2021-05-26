@@ -83,6 +83,9 @@ module.exports = {
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
                 }
+                if (command.darkinkonly && !config.darkink.includes(message.author.id)) {
+                    return message.channel.send('[DEBUG] Seems like you can\'t use this command')
+                }
                 const {
                     cooldowns
                 } = client;
