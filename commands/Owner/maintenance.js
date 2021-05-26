@@ -1,4 +1,6 @@
 const maintenance = require('../../models/maintenance.js')
+const mongoose = require('mongoose');
+
 module.exports = {
     name: 'maintenance', //This is for the Name of the command
     usage: "maintenance <enable/disable> <reason>", //This lets the user Know how to use the command
@@ -39,7 +41,7 @@ module.exports = {
         if (!args[0]) {
             return message.channel.send('Please enable or disable maintenance mode')
         }
-        if (!reason) {
+        if (!reason2) {
             return message.channel.send('You need to add a reason')
         }
         if(args[0] == "enable") {
