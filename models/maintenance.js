@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const MaintenanceMode = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    guildID: String,
-    guildName: String,
-    prefix: String
+    ino: String,
+    reason: String,
+    enabled: String
 });
 
 module.exports = mongoose.model('Maintenance', MaintenanceMode, 'maintenance');
