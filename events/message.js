@@ -54,6 +54,9 @@ module.exports = {
             if (cmd.length === 0) return;
             global.command = client.commands.get(cmd);
             //if (cmd.name = null) return;
+            let errorcommand = command
+            .replace(settings.prefix, "")            
+            global.errorMessage = `oh No You got a error, Please report this command by doing ${settings.prefix}report-command ${errorcommand} <reason_for_report>`
 
             try {
                 if (!command) command = client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
