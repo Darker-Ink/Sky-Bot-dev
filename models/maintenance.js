@@ -1,14 +1,10 @@
-const mongoose = require("mongoose"),
-config = require("../config/config.json");
+const mongoose = require('mongoose');
 
-module.exports = mongoose.model("MaintenanceMode", new mongoose.Schema({
-  addons: { type: Object, default: { 
-    maintenance: {
-      enabled: false, 
-      author:  null,
-      reason:  null,
-      dateandtime: null,
-    }
-  }}
+const ServerSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    guildID: String,
+    guildName: String,
+    prefix: String
+});
 
-}));
+module.exports = mongoose.model('Servers', ServerSchema, 'servers');

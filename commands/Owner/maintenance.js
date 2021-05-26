@@ -1,8 +1,4 @@
-const {
-    MessageEmbed
-} = require("discord.js")
-const Discord = require('discord.js');
-
+const maintenance = require('../../models/maintenance.js')
 module.exports = {
     name: 'maintenance', //This is for the Name of the command
     usage: "maintenance <enable/disable> <reason>", //This lets the user Know how to use the command
@@ -18,7 +14,28 @@ module.exports = {
     botperms: [], // The perms the bot needs
     darkinkonly: true, // If its only for DarkerInk
     run: async (client, message, args, data) => {
-        let reason = args.slice(1).join(" ")
+      const settingsss = await maintenance.findOne({
+            ino: message.author.id
+        }, (err, maintenance) => {
+            if (err) console.error(err)
+            if (!maintenance) {
+                const newmaintenance = new maintenance({
+                    _id: mongoose.Types.ObjectId(),
+                    ino: message.author.id,
+                    reason: null,
+                    enabled: null
+                })
+
+                newmaintenance.save()
+                    //sends a msg to the channel saying someone has been added to the database
+                    .then(result => client.channels.cache.get("827719237116231702").send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
+                    .catch(err => console.error(err));
+
+                //used to stop a error
+                return console.log('')
+            }
+        });
+        let reason2 = args.slice(1).join(" ")
         if (!args[0]) {
             return message.channel.send('Please enable or disable maintenance mode')
         }
@@ -26,7 +43,12 @@ module.exports = {
             return message.channel.send('You need to add a reason')
         }
         if(args[0] == "enable") {
-            return message.channel.send('You enabled maintenance Mode because of \`' + reason + '\`')
+            await settingsss.updateOne({
+                reason: reason2,
+                enabled: true
+            })
+            return message.channel.send('You enabled maintenance Mode because of \`' + reason2 + '\`')
+            
         } else if(args[0] == "disable") {
             return message.channel.send('You disabled maintenance Mode')
         } else {
