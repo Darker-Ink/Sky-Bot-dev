@@ -71,8 +71,8 @@ for (const file of commandFiles) {
         command = require(`./commands/${file}`);
     }
     client.commands.set(command.name, command);
-    //console.log(colors.green(`[${time}] Command Loaded: ${command.name}`));
-    pm2stats.send(`Command Loaded: ${command.name}`)
+    console.log(colors.green(`[${time}] Command Loaded: ${command.name}`));
+    //pm2stats.send(`Command Loaded: ${command.name}`)
 }
 
 //Event Handler
