@@ -30,6 +30,7 @@ client.distube = new Distube(client, {
     leaveOnFinish: false,
     leaveOnStop: true,
     leaveOnEmpty: true,
+    nsfw: true,
 });
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
