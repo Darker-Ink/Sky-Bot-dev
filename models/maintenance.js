@@ -7,4 +7,4 @@ const MaintenanceMode = mongoose.Schema({
     prefix: String
 });
 
-module.exports = mongoose.model('Servers', MaintenanceMode, 'servers');
+module.exports = mongoose.model('Maintenance', MaintenanceMode, 'maintenance');
