@@ -23,8 +23,8 @@ module.exports = {
         }
         if(args[0] == "enable") {
             return message.channel.send('You enabled the command')
-        } else if(args[0] == "enable") {
-            return message.channel.send('You enabled the command')
+        } else if(args[0] == "disable") {
+            return message.channel.send('You disabled the command')
         } else {
             return message.channel.send('Well I can\'t null maintenance mode so enable it or disable it')
         }
