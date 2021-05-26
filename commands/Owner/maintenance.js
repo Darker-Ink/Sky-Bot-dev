@@ -18,13 +18,17 @@ module.exports = {
     botperms: [], // The perms the bot needs
     darkinkonly: true, // If its only for DarkerInk
     run: async (client, message, args, data) => {
+        let reason = args.slice(1).join(" ")
         if (!args[0]) {
             return message.channel.send('Please enable or disable maintenance mode')
         }
+        if (!reason) {
+            return message.channel.send('You need to add a reason')
+        }
         if(args[0] == "enable") {
-            return message.channel.send('You enabled the command')
+            return message.channel.send('You enabled maintenance Mode because of \`' + reason + '\`')
         } else if(args[0] == "disable") {
-            return message.channel.send('You disabled the command')
+            return message.channel.send('You disabled maintenance Mode')
         } else {
             return message.channel.send('Well I can\'t null maintenance mode so enable it or disable it')
         }
