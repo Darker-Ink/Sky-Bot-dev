@@ -121,7 +121,7 @@ module.exports = {
               message.channel.send(embed);
               const memberPerms = member.permissions.json
               console.log(permsss)
-              let perms = await member.user.flags
+              let perms = await member.permissions
             perms = await perms ? perms.toArray() : ["None"]
 
             let newperms = [];
