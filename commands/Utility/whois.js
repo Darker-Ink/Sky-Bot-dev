@@ -30,19 +30,6 @@ module.exports = {
             VERIFIED_BOT: 'Verified Bot',
             VERIFIED_DEVELOPER: '<:Developer:846447890523881572>',
         };
-        const perms = {
-          administrator: 'Administrator',
-          manageGuild: 'Manage Server',
-          manageRoles: 'Manage Roles',
-          manageChannels: 'Manage Channels',
-          manageMessages: 'Manage Messages',
-          manageWebhooks: 'Manage Webhooks',
-          manageNicknames: 'Manage Nicknames',
-          manageEmojis: 'Manage Emojis',
-          kickMembers: 'Kick Members',
-          banMembers: 'Ban Members',
-          mentionEveryone: 'Mention Everyone',
-        };
             let user;
         
             if (!args[0]) {
@@ -77,6 +64,15 @@ module.exports = {
               newbadges.push(m.replace("_", " "))
             })
         
+
+            let perms = await user.user.permissions
+            perms = await perms ? perms.toArray() : ["None"]
+
+            let newperms = [];
+            perms.forEach(m => {
+              newperms.push(m.replace("_", " "))
+            })
+
             let embed = new MessageEmbed()
               .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
         
