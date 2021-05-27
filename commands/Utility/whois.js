@@ -125,9 +125,8 @@ module.exports = {
               let newpermsa = [];
               newpermsa.forEach(m => {
                 m.replace("_", " ")
-                console.log(m)
               })
-              //console.log(perms)
+              console.log(newpermsa)
             }
           }
                 
