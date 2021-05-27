@@ -112,6 +112,7 @@ module.exports = {
         const member = getMember(message, args.join(" "));
         const userFlags = user.user.flags
         .toArray()
+        .join(", ")
         .replace("DISCORD_EMPLOYEE", 'Discord Employee')
         .replace("DISCORD_PARTNER", 'Discord Partner')
         .replace("BUGHUNTER_LEVEL_1", '<:BugHunter:846460263229554778>')
