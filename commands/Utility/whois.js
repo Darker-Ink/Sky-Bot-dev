@@ -127,7 +127,7 @@ module.exports = {
               .addField('Highest role:', `<@&${weed}>`, true)
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
-              console.log(user.user.permissions)
+              console.log(member.permissions)
             }
           }
                 
