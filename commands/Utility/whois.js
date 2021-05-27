@@ -121,12 +121,12 @@ module.exports = {
               message.channel.send(embed);
               const memberPerms = member.permissions.json
               //console.log(permsss)
-              let perms = await member.permissions
-              let newpermsa = [];
-              newpermsa.forEach(m => {
+              let permsss = await member.permissions
+              let newpermsss = [];
+              newpermsss.forEach(m => {
                 m.replace("_", " ")
               })
-              console.log(newpermsa)
+              console.log(permsss)
             }
           }
                 
