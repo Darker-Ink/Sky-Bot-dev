@@ -128,7 +128,7 @@ module.exports = {
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
               const memberPerms = member.permissions.json
-              console.log(member.permissions.name)
+              console.log(member.permissions.toArray().join(", "))
             }
           }
                 
