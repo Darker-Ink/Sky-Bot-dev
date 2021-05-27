@@ -132,6 +132,7 @@ module.exports = {
               message.channel.send(embed);
               const memberPerms = member.permissions.json
               console.log(permsss)
+              console.log(user.user.flags)
             }
           }
                 
