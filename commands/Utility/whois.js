@@ -110,20 +110,7 @@ module.exports = {
               embed.setAuthor(user.user.tag, user.user.displayAvatarURL({ dynamic: true }))
         
         const member = getMember(message, args.join(" "));
-        const userFlags = user.user.flags
-        .toArray()
-        .join(", ")
-        .replace("DISCORD_EMPLOYEE", 'Discord Employee')
-        .replace("DISCORD_PARTNER", 'Discord Partner')
-        .replace("BUGHUNTER_LEVEL_1", '<:BugHunter:846460263229554778>')
-        .replace("BUGHUNTER_LEVEL_2", '<:BugHunter_2:846460290966487050>')
-        .replace("HYPESQUAD_EVENTS", 'HypeSquad Events')
-        .replace("HOUSE_BRAVERY", '<:Bravery:846447779760701520>')
-        .replace("HOUSE_BRILLIANCE", '<:Brilliance:846447781661245440>')
-        .replace("HOUSE_BALANCE", '<:Balance:846447781661245440>')
-        .replace("EARLY_SUPPORTER", '<:earlysupporter:846447770998800435>')
-        .replace("VERIFIED_BOT", 'Verified Bot')
-        .replace("VERIFIED_DEVELOPER", '<:Developer:846447890523881572>')
+        const userFlags = member.user.flags.toArray();
         const weed = member.roles.highest.id
         const permsss = member.permissions
         .toArray()
@@ -139,7 +126,7 @@ module.exports = {
               .addField('ID:', `${user.id}`, true)
               .addField('Created at:', `${user.user.createdAt}`, true)
               .addField('Joined:', '4', true)
-              .addField('Badges:', `${userFlags ?? 'nonde'}`, true)
+              .addField('Badges:', `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`, true)
               .addField('Highest role:', `<@&${weed}>`, true)
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
