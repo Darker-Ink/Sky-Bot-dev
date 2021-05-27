@@ -122,12 +122,12 @@ module.exports = {
               const memberPerms = member.permissions.json
               //console.log(permsss)
               let perms = await member.permissions
-              .toArray()
-              .join(", ")
-              .forEach(m => {
-              m.replace("_", " ")
-            })
-              console.log(perms)
+              let newbadges = [];
+              newpermsa.forEach(m => {
+                m.replace("_", " ")
+                console.log(m)
+              })
+              //console.log(perms)
             }
           }
                 
