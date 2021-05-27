@@ -65,13 +65,6 @@ module.exports = {
             })
         
 
-            let perms = await member.user.flags
-            perms = await perms ? perms.toArray() : ["None"]
-
-            let newperms = [];
-            perms.forEach(m => {
-              newperms.push(m.replace("_", " "))
-            })
 
             let embed = new MessageEmbed()
               .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
@@ -128,6 +121,13 @@ module.exports = {
               message.channel.send(embed);
               const memberPerms = member.permissions.json
               console.log(permsss)
+              let perms = await member.user.flags
+            perms = await perms ? perms.toArray() : ["None"]
+
+            let newperms = [];
+            perms.forEach(m => {
+              newperms.push(m.replace("_", " "))
+            })
               console.log(perms)
             }
           }
