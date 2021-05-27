@@ -65,7 +65,7 @@ module.exports = {
             })
         
 
-            let perms = await user.user.permissions
+            let perms = await member.user.flags
             perms = await perms ? perms.toArray() : ["None"]
 
             let newperms = [];
