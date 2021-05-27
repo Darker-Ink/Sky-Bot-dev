@@ -112,14 +112,6 @@ module.exports = {
         const member = getMember(message, args.join(" "));
         const userFlags = member.user.flags.toArray();
         const weed = member.roles.highest.id
-        const memberPerms = member.permission.json;
-              const infoPerms = [];
-              for (let key in memberPerms) {
-                  if (!perms[key] || memberPerms[key] !== true) continue;
-                  if (memberPerms[key]) {
-                      infoPerms.push(perms[key]);
-                  }
-              }
   
             const roles = member.roles.cache
                     .filter(r => r.id !== message.guild.id)
@@ -127,9 +119,6 @@ module.exports = {
         
               //CHECK IF USER HAVE NICKNAME
               if (user.nickname !== null) embed.addField("Nickname", user.nickname)
-              if (infoPerms.length) {
-                embed.fields.push({ name: 'Key Permissions', value: infoPerms.join(', '), inline: false });
-            }
               embed.addField('Name:', `${user.user.tag}`, true)
               .addField('ID:', `${user.id}`, true)
               .addField('Created at:', `${user.user.createdAt}`, true)
@@ -137,7 +126,7 @@ module.exports = {
               .addField('Badges:', `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`, true)
               .addField('Highest role:', `<@&${weed}>`, true)
               .addField('Roles:', `${roles}`, false)
-              message.channel.send(embed);
+              message.channel.send(member.permissions);
             }
           }
                 
