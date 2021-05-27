@@ -115,7 +115,7 @@ module.exports = {
         const permsss = member.permissions
         .toArray()
         .join(", ")
-        .replace("CREATE_INSTANT_INVITE", "This is a perm")
+        .toLowerCase()
             const roles = member.roles.cache
                     .filter(r => r.id !== message.guild.id)
                     .map(r => r).join(", ") || 'none';
