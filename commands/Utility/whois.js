@@ -30,7 +30,19 @@ module.exports = {
             VERIFIED_BOT: 'Verified Bot',
             VERIFIED_DEVELOPER: '<:Developer:846447890523881572>',
         };
-        
+        const perms = {
+          administrator: 'Administrator',
+          manageGuild: 'Manage Server',
+          manageRoles: 'Manage Roles',
+          manageChannels: 'Manage Channels',
+          manageMessages: 'Manage Messages',
+          manageWebhooks: 'Manage Webhooks',
+          manageNicknames: 'Manage Nicknames',
+          manageEmojis: 'Manage Emojis',
+          kickMembers: 'Kick Members',
+          banMembers: 'Ban Members',
+          mentionEveryone: 'Mention Everyone',
+        };
             let user;
         
             if (!args[0]) {
@@ -100,12 +112,24 @@ module.exports = {
         const member = getMember(message, args.join(" "));
         const userFlags = member.user.flags.toArray();
         const weed = member.roles.highest.id
+        const memberPerms = member.permission.json;
+              const infoPerms = [];
+              for (let key in memberPerms) {
+                  if (!perms[key] || memberPerms[key] !== true) continue;
+                  if (memberPerms[key]) {
+                      infoPerms.push(perms[key]);
+                  }
+              }
+  
             const roles = member.roles.cache
                     .filter(r => r.id !== message.guild.id)
                     .map(r => r).join(", ") || 'none';
         
               //CHECK IF USER HAVE NICKNAME
               if (user.nickname !== null) embed.addField("Nickname", user.nickname)
+              if (infoPerms.length) {
+                embed.fields.push({ name: 'Key Permissions', value: infoPerms.join(', '), inline: false });
+            }
               embed.addField('Name:', `${user.user.tag}`, true)
               .addField('ID:', `${user.id}`, true)
               .addField('Created at:', `${user.user.createdAt}`, true)
