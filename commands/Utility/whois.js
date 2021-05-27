@@ -122,7 +122,7 @@ module.exports = {
               const memberPerms = member.permissions.json
               //console.log(permsss)
               let perms = await member.permissions
-            perms.forEach(m => {
+              .forEach(m => {
               m.replace("_", " ")
             })
               console.log(perms)
