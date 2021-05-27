@@ -57,9 +57,9 @@ module.exports = {
 
             try {
                 if (!command) command = client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
+                if (!command) return;
                 global.errorcommand = command//.replace(settings.prefix, "")           
                 global.errorMessage = `oh No You got a error, Please report this command by doing \`${settings.prefix}report-command ${errorcommand.name} <reason_for_report>\``
-                if (!command) return;
 
                 if (command.ownerOnly && !config.owners.includes(message.author.id)) {
                     return
