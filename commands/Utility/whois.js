@@ -124,7 +124,6 @@ module.exports = {
         .replace("EARLY_SUPPORTER", '<:earlysupporter:846447770998800435>')
         .replace("VERIFIED_BOT", 'Verified Bot')
         .replace("VERIFIED_DEVELOPER", '<:Developer:846447890523881572>')
-        .replace("", "None")
         const weed = member.roles.highest.id
         const permsss = member.permissions
         .toArray()
