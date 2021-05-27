@@ -110,7 +110,7 @@ module.exports = {
               embed.setAuthor(user.user.tag, user.user.displayAvatarURL({ dynamic: true }))
         
         const member = getMember(message, args.join(" "));
-        const userFlags = member.user.flags
+        const userFlags = user.user.flags
         .toArray()
         .replace("DISCORD_EMPLOYEE", 'Discord Employee')
         .replace("DISCORD_PARTNER", 'Discord Partner')
