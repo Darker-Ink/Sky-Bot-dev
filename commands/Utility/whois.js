@@ -101,10 +101,6 @@ module.exports = {
         const member = getMember(message, args.join(" "));
         const userFlags = member.user.flags.toArray();
         const weed = member.roles.highest.id
-        const permsss = member.permissions
-        .toArray()
-        .join(", ")
-        .toLowerCase()
             const roles = member.roles.cache
                     .filter(r => r.id !== message.guild.id)
                     .map(r => r).join(", ") || 'none';
@@ -119,14 +115,6 @@ module.exports = {
               .addField('Highest role:', `<@&${weed}>`, true)
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
-              const memberPerms = member.permissions.json
-              //console.log(permsss)
-              let permsssss = await member.permissions
-              let newpermsssss = [];
-              newpermsssss.forEach(m => {
-                m.replace("_", " ")
-              })
-              console.log(permsssss)
             }
           }
                 
