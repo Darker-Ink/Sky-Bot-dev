@@ -112,7 +112,10 @@ module.exports = {
         const member = getMember(message, args.join(" "));
         const userFlags = member.user.flags.toArray();
         const weed = member.roles.highest.id
-  
+        const permsss = member.permissions
+        .toArray()
+        .join(", ")
+        .replace("CREATE_INSTANT_INVITE", "This is a perm")
             const roles = member.roles.cache
                     .filter(r => r.id !== message.guild.id)
                     .map(r => r).join(", ") || 'none';
@@ -128,7 +131,7 @@ module.exports = {
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
               const memberPerms = member.permissions.json
-              console.log(member.permissions.toArray().join(", "))
+              console.log(permsss)
             }
           }
                 
