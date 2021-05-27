@@ -120,13 +120,10 @@ module.exports = {
               .addField('Roles:', `${roles}`, false)
               message.channel.send(embed);
               const memberPerms = member.permissions.json
-              console.log(permsss)
+              //console.log(permsss)
               let perms = await member.permissions
-            perms = await perms ? perms.toArray() : ["None"]
-
-            let newperms = [];
             perms.forEach(m => {
-              newperms.push(m.replace("_", " "))
+              m.replace("_", " ")
             })
               console.log(perms)
             }
