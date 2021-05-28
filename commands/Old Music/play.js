@@ -35,6 +35,7 @@ module.exports = {
                     .setColor("RED")
                 return message.channel.send(playError3)
             }
+            let songName = args.slice(0).join(" ")
             if(message.content.includes('falixnodes sucks')){
                 voiceChannel.join().then(connection => {
                     connection.voice.setSelfDeaf(true)
@@ -42,7 +43,7 @@ module.exports = {
                 })
                 return client.distube.play(message, "https://youtu.be/k3NX7u8tTjI")
             }
-            let songName = args.slice(0).join(" ")
+            
             if (!songName) {
                 const playError2 = new MessageEmbed()
                     .setDescription("You Need to provide a Song name or URL!")
