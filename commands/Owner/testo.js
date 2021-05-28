@@ -22,7 +22,7 @@ module.exports = {
       if (amount >= 100) return message.channel.send("Can only delete a max of 100 messages")
       if(user) {
         return message.channel.messages.fetch({
-          limit: amount
+          limit: `${amount - 1}`
       }).then((messages) => { 
           const botMessages = [];
           messages.filter(m => m.author.id === `${user.id}`).forEach(msg => botMessages.push(msg))
