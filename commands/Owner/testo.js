@@ -16,7 +16,10 @@ module.exports = {
     readbotrules: false, // This is **VERY** userful It is for commands I.E. Logging If it is turned on The user needs to read the rules and Accpet them, This is to save my ass for people who don't want to get logged I.E. messages and So discord can Verify me or maybe a Log bot I make
     run: async (client, message, args, data) => {
       const user = message.mentions.users.first()
-
+      const amount = !!parseInt(message.content.split(' ')[2]) ? parseInt(message.content.split(' ')[2]) : parseInt(message.content.split(' ')[1])
+      if (!amount) return message.channel.send("You need to give an amount");
+      if (amount <= 1) return message.channel.send("Can only delete a min of 2 messages")
+      if (amount >= 100) return message.channel.send("Can only delete a max of 100 messages")
       if(user) {
         //return message.channel.send(`you mentioned someone ${user.id}`)
         return message.channel.messages.fetch({
