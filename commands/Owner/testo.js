@@ -19,13 +19,13 @@ module.exports = {
 
       if(user) {
         //return message.channel.send(`you mentioned someone ${user.id}`)
-         message.channel.messages.fetch({
+        return message.channel.messages.fetch({
           limit: args[0] // Change `100` to however many messages you want to fetch
       }).then((messages) => { 
           const botMessages = [];
           messages.filter(m => m.author.id === `${user.id}`).forEach(msg => botMessages.push(msg))
         message.channel.bulkDelete(botMessages).then(() => {
-          return message.channel.send("Cleared bot messages").then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
+         message.channel.send("Cleared bot messages").then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
           });
       })
       }
