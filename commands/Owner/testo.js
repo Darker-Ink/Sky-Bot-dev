@@ -21,16 +21,17 @@ module.exports = {
       if (amount <= 1) return message.channel.send("Can only delete a min of 2 messages")
       if (amount >= 100) return message.channel.send("Can only delete a max of 100 messages")
       if(user) {
-        //return message.channel.send(`you mentioned someone ${user.id}`)
         return message.channel.messages.fetch({
-          limit: args[0] // Change `100` to however many messages you want to fetch
+          limit: amount
       }).then((messages) => { 
           const botMessages = [];
           messages.filter(m => m.author.id === `${user.id}`).forEach(msg => botMessages.push(msg))
         message.channel.bulkDelete(botMessages).then(() => {
-         message.channel.send("Cleared bot messages").then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
+         message.channel.send(`Cleared \`${amount}\` Messages from \`${user.username}\``).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
           });
       })
       }
-message.channel.send('you didn\'t mention someone')
+      await message.channel.bulkDelete(amount, true).then(() => {
+        message.channel.send(`Cleared \`${amount}\` Messages from \`${message.channel.name}\``).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
+         });
     }}
