@@ -18,7 +18,7 @@ module.exports = {
       const user = message.mentions.users.first()
 
       if(user) {
-        return message.channel.send('you mentioned someone')
+        return message.channel.send(`you mentioned someone ${user.user.id}`)
       }
 message.channel.send('you didn\'t mention someone')
     }}
