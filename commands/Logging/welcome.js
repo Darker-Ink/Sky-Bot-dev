@@ -21,15 +21,13 @@ module.exports = {
 
             // If no arguments return error
             if (!args[0]) {
-                embed.setTitle("Error")
-                    .setDescription("Missing argument!```welcome set #channel\nwelcome custom <text>\nwelcome disable```")
+                embed.setTitle("ERROR")
+                    .setDescription("You Didn't Use the command right\n\nwelcome set <#channel>\nwelcome custom <message>\nwelcome disable ")
                 return message.channel.send(embed); // Error message
             }
 
             if (args[0].toLowerCase() === "set" && !args[1]) {
-                embed.setTitle("Error")
-                    .setDescription("Unable to find a valid channel.\n\nMissing argument!```welcome set #channel\nwelcome custom <text>\nwelcome disable```")
-                return message.channel.send(embed); // Error message
+                return message.channel.send(`Couldn't find the channel \`${args[1]}\``)
             }
 
             // Enable welcome messages and set channel to mentioned channel
