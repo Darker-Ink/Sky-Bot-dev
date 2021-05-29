@@ -41,10 +41,10 @@ module.exports = {
         if (!args[0]) {
             return message.channel.send('Please enable or disable maintenance mode')
         }
-        if (!reason2) {
-            return message.channel.send('You need to add a reason')
-        }
         if(args[0] == "enable") {
+            if (!reason2) {
+                return message.channel.send('You need to add a reason')
+            }
             await settingsss.updateOne({
                 reason: reason2,
                 enabled: true
@@ -52,6 +52,10 @@ module.exports = {
             return message.channel.send('You enabled maintenance Mode because of \`' + reason2 + '\`')
             
         } else if(args[0] == "disable") {
+            await settingsss.updateOne({
+                reason: '',
+                enabled: false
+            })
             return message.channel.send('You disabled maintenance Mode')
         } else {
             return message.channel.send('Well I can\'t null maintenance mode so enable it or disable it')
