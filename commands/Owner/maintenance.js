@@ -1,4 +1,4 @@
-const maintenance = require('../../models/maintenance.js')
+const Maintenance = require('../../models/maintenance.js')
 const mongoose = require('mongoose');
 
 module.exports = {
@@ -18,17 +18,17 @@ module.exports = {
     run: async (client, message, args, data) => {
       const settingsss = await maintenance.findOne({
             ino: message.author.id
-        }, (err, maintenance) => {
+        }, (err, guild) => {
             if (err) console.error(err)
-            if (!maintenance) {
-                const newmaintenance = new maintenance({
+            if (!guild) {
+                const newMaintenance = new Maintenance({
                     _id: mongoose.Types.ObjectId(),
                     ino: message.author.id,
                     reason: '',
                     enabled: false
                 })
 
-                newmaintenance.save()
+                newMaintenance.save()
                     //sends a msg to the channel saying someone has been added to the database
                     .then(result => client.channels.cache.get("827719237116231702").send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
                     .catch(err => console.error(err));
