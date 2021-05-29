@@ -78,15 +78,33 @@ module.exports = {
                     message.channel.send(`You do Not have the right perms to use this command You need \`\`${command.perms.join(", ")}\`\` To use this command!`, command.perms)
                     return;
                 }
-                if(!config.darkinkonly.includes(message.author.id)) {
-                    global.settingssss = await Maintenance.findOne({
-                        ino: message.author.id
-                    })
-                }
                 if (!message.guild.me.permissions.has(command.botperms)) {
                     const mIm = (`${command.perms}`)
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
+                }
+                if(!config.darkinkonly.includes(message.author.id)) {
+                    global.settingsss = await Maintenance.findOne({
+                        ino: message.author.id
+                    }, (err, guild) => {
+                        if (err) console.error(err)
+                        if (!guild) {
+                            const newMaintenance = new Maintenance({
+                                _id: mongoose.Types.ObjectId(),
+                                ino: message.author.id,
+                                reason: '',
+                                enabled: false
+                            })
+            
+                            newMaintenance.save()
+                                //sends a msg to the channel saying someone has been added to the database
+                                .then(result => client.channels.cache.get("827719237116231702").send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
+                                .catch(err => console.error(err));
+            
+                            //used to stop a error
+                            return console.log('')
+                        }
+                    });
                 }
                 if (command.darkinkonly && !config.darkink.includes(message.author.id)) {
                     return message.channel.send('[DEBUG] Seems like you can\'t use this command')
