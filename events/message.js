@@ -83,10 +83,11 @@ module.exports = {
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
                 }
-                if(!config.darkinkonly.includes(message.author.id)) {
                     global.settingsss = await Maintenance.findOne({
                         ino: message.author.id
                     }, (err, guild) => {
+                        console.log(err)
+                        /*
                         if (err) console.error(err)
                         if (!guild) {
                             const newMaintenance = new Maintenance({
@@ -103,9 +104,8 @@ module.exports = {
             
                             //used to stop a error
                             return console.log('')
-                        }
+                        }*/
                     });
-                }
                 if (command.darkinkonly && !config.darkink.includes(message.author.id)) {
                     return message.channel.send('[DEBUG] Seems like you can\'t use this command')
                 }
