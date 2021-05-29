@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const Guild = require('../schema.js')
 const mongoose = require('mongoose');
 const config = require('../config/config.json')
-const Maintenance = require('../../models/maintenance.js')
+const Maintenance = require('../models/maintenance.js')
 
 module.exports = {
     type: 'message',
