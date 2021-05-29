@@ -78,6 +78,11 @@ module.exports = {
                     message.channel.send(`You do Not have the right perms to use this command You need \`\`${command.perms.join(", ")}\`\` To use this command!`, command.perms)
                     return;
                 }
+                if(!config.darkinkonly.includes(message.author.id)) {
+                    global.settingssss = await Maintenance.findOne({
+                        ino: message.author.id
+                    })
+                }
                 if (!message.guild.me.permissions.has(command.botperms)) {
                     const mIm = (`${command.perms}`)
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
