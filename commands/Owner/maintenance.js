@@ -16,6 +16,7 @@ module.exports = {
     botperms: [], // The perms the bot needs
     darkinkonly: true, // If its only for DarkerInk
     run: async (client, message, args, data) => {
+        /*
       const settingsss = await Maintenance.findOne({
             ino: message.author.id
         }, (err, guild) => {
@@ -37,6 +38,7 @@ module.exports = {
                 return console.log('')
             }
         });
+        */
         let reason2 = args.slice(1).join(" ")
         if (!args[0]) {
             return message.channel.send('Please enable or disable maintenance mode')
