@@ -84,7 +84,7 @@ module.exports = {
                 });
                 global.errorcommand = command//.replace(settings.prefix, "")           
                 global.errorMessage = `oh No You got a error, Please report this command by doing \`${settings.prefix}report-command ${errorcommand.name} <reason_for_report>\``
-                if(!command && !settingsss.enabled == 'true') {
+                if(command && settingsss.enabled == 'true') {
                     const embed = new MessageEmbed()
                    .setTitle('In Maintenance Mode')
                    .setDescription('Maintenance Mode Is enabled')
