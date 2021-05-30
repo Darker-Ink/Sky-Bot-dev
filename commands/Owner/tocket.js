@@ -19,6 +19,7 @@ module.exports = {
             if (m.content.toLowerCase() === "confirm") {
                 message.channel.send("**Closing ticket.**", null).then(setTimeout(() => {
                     message.channel.delete()
+                    const { create } = require("sourcebin");
                     message.channel.messages.fetch().then(async (messages) => {
                         const script = messages.array().reverse().map(m => `${m.author.tag}: ${m.attachments.size > 0 ? m.attachments.first().proxyURL : m.content}`).join('\n')
     
