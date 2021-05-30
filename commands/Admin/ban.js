@@ -1,3 +1,4 @@
+  
 const {
     Message,
     MessageEmbed
@@ -13,13 +14,8 @@ module.exports = {
     run: async (client, message, args) => {
         try {
             if (!args[0]) return message.channel.send('Please Use a ID or Mention someone');
-<<<<<<< HEAD
-            let person = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || await client.users.fetch(args[0])
-
-=======
             let person = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 		if(!person) return message.channel.send('Hey please mention someone ty')
->>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
             const allBans = await message.guild.fetchBans()
 
             if (allBans.get(person.id)) {
@@ -94,8 +90,4 @@ module.exports = {
             client.channels.cache.get("827716948087013406").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
