@@ -167,11 +167,7 @@ module.exports = {
 
                         ddcmdused.setTimestamp()
                         ddcmdused.setColor('RANDOM')
-<<<<<<< HEAD
                         client.channels.cache.get("827719216923934741").send(ddcmdused)
-=======
-                        //client.channels.cache.get("827719216923934741").send(ddcmdused)
->>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
                     }
                 } catch (err) {
                     console.log(err)
@@ -180,12 +176,4 @@ module.exports = {
             console.log(err)
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
-=======
-}
->>>>>>> 8dca92e0bfe3b29f2401a554fff6ceb0fa5f2e68
