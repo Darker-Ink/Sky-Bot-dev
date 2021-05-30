@@ -155,19 +155,6 @@ module.exports = {
                     data.Msg = msgDB;
                     data.cmd = cmd;
                     command.run(client, message, args, data);
-
-                    //when command ran:
-                    const darklog = (`${settings.prefix}${command.name}`)
-                    if (message.content.startsWith(darklog)) {
-                        const ddcmdused = new Discord.MessageEmbed()
-                            .setTitle("Command Used In " + message.guild.name)
-                        ddcmdused.addField(`\n${message.author.tag}`, `${message.author.id}`);
-
-                        ddcmdused.setDescription(`\n**PREFIX:**\n${settings.prefix}\n\n**COMMAND:**\n${message.content}\n\n`)
-
-                        ddcmdused.setTimestamp()
-                        ddcmdused.setColor('RANDOM')
-                        client.channels.cache.get("827719216923934741").send(ddcmdused)
                     }
                 } catch (err) {
                     console.log(err)
