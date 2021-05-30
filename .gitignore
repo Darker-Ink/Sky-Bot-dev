@@ -27,3 +27,7 @@ snipe.json
 restart.bat
 test.bat
 install.bat
+.git-credentials
+.pm2
+.config/configstore
+.cache
