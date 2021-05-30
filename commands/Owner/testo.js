@@ -19,10 +19,10 @@ module.exports = {
       const amount = !!parseInt(message.content.split(' ')[2]) ? parseInt(message.content.split(' ')[2]) : parseInt(message.content.split(' ')[1])
       if (!amount) return message.channel.send("You need to give an amount");
       if (amount <= 1) return message.channel.send("Can only delete a min of 2 messages")
-      if (amount >= 100) return message.channel.send("Can only delete a max of 100 messages")
+      if (amount >= 101) return message.channel.send("Can only delete a max of 100 messages")
       if(user) {
         return message.channel.messages.fetch({
-          limit: amount
+          limit: `${amount}`
       }).then((messages) => { 
           const botMessages = [];
           messages.filter(m => m.author.id === `${user.id}`).forEach(msg => botMessages.push(msg))
