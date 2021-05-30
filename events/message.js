@@ -167,7 +167,7 @@ module.exports = {
 
                         ddcmdused.setTimestamp()
                         ddcmdused.setColor('RANDOM')
-                        client.channels.cache.get("827719216923934741").send(ddcmdused)
+                        //client.channels.cache.get("827719216923934741").send(ddcmdused)
                     }
                 } catch (err) {
                     console.log(err)
