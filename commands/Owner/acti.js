@@ -1,14 +1,13 @@
 const axios = require('axios')
-
 module.exports = {
     name: 'acti',
     ownerOnly: true,
     description: 'dms a user',
     usage: "dm <message>",
     category: "Owner",
-	  hidden: true,
+    hidden: true,
     run: async (client, message, args) => {
-        const data = {
+    const data = {
         max_age: 86400,
         max_uses: 0,
         target_application_id: "755827207812677713", // youtube together
@@ -22,7 +21,7 @@ module.exports = {
         followRedirect: true,
         maxRedirects: 5,
         headers: {
-            'Authorization': 'Bot ' + process.env.token
+            'Authorization': 'Bot ' + process.env.token,
             'Content-Type': 'application/json',
         },
         data: data
