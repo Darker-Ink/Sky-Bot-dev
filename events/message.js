@@ -155,7 +155,6 @@ module.exports = {
                     data.Msg = msgDB;
                     data.cmd = cmd;
                     command.run(client, message, args, data);
-                    }
                 } catch (err) {
                     console.log(err)
                 }
