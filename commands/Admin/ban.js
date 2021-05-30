@@ -1,3 +1,4 @@
+  
 const {
     Message,
     MessageEmbed
@@ -14,12 +15,17 @@ module.exports = {
         try {
             if (!args[0]) return message.channel.send('Please Use a ID or Mention someone');
 <<<<<<< HEAD
+<<<<<<< HEAD
             let person = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || await client.users.fetch(args[0])
 
 =======
             let person = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 		if(!person) return message.channel.send('Hey please mention someone ty')
 >>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
+=======
+            let person = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+		if(!person) return message.channel.send('Hey please mention someone ty')
+>>>>>>> 8dca92e0bfe3b29f2401a554fff6ceb0fa5f2e68
             const allBans = await message.guild.fetchBans()
 
             if (allBans.get(person.id)) {
@@ -95,7 +101,11 @@ module.exports = {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
+=======
+}
+>>>>>>> 8dca92e0bfe3b29f2401a554fff6ceb0fa5f2e68

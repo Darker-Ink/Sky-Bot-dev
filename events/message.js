@@ -181,7 +181,11 @@ module.exports = {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
+=======
+}
+>>>>>>> 8dca92e0bfe3b29f2401a554fff6ceb0fa5f2e68
