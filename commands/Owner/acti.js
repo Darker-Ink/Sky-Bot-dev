@@ -22,7 +22,7 @@ module.exports = {
         followRedirect: true,
         maxRedirects: 5,
         headers: {
-            'Authorization': 'Bot ' + config.DiscordBot.Token,
+            'Authorization': 'Bot ' + process.env.token
             'Content-Type': 'application/json',
         },
         data: data
