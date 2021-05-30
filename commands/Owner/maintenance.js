@@ -15,6 +15,7 @@ module.exports = {
     perms: [], // The perms the user needs
     botperms: [], // The perms the bot needs
     darkinkonly: true, // If its only for DarkerInk
+    notneeded: true,
     run: async (client, message, args, data) => {
         /*
       const settingsss = await Maintenance.findOne({
