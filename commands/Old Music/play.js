@@ -35,7 +35,6 @@ module.exports = {
                     .setColor("RED")
                 return message.channel.send(playError3)
             }
-
             let songName = args.slice(0).join(" ")
             if(message.content.includes('falixnodes sucks')){
                 voiceChannel.join().then(connection => {
@@ -44,6 +43,7 @@ module.exports = {
                 })
                 return client.distube.play(message, "https://youtu.be/k3NX7u8tTjI")
             }
+            
             if (!songName) {
                 const playError2 = new MessageEmbed()
                     .setDescription("You Need to provide a Song name or URL!")
@@ -56,7 +56,7 @@ module.exports = {
             })
             client.distube.play(message, songName)
         } catch (err) {
-            console.log('fuck a error');
+            console.log('error');
             message.reply(`There was an error during evaluation, \n\n**${err}**`);
             client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
         }

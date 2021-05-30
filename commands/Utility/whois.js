@@ -30,7 +30,6 @@ module.exports = {
             VERIFIED_BOT: 'Verified Bot',
             VERIFIED_DEVELOPER: '<:Developer:846447890523881572>',
         };
-        
             let user;
         
             if (!args[0]) {
@@ -65,6 +64,8 @@ module.exports = {
               newbadges.push(m.replace("_", " "))
             })
         
+
+
             let embed = new MessageEmbed()
               .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
         

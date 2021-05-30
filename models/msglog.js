@@ -10,7 +10,8 @@ module.exports = mongoose.model("Msg", new mongoose.Schema({
     log: {
       enabled: false, 
       channel:  null,
-      webhook:  null
+      webhookid:  null,
+      webhooktoken: null,
     }
   }}
 

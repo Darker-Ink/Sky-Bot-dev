@@ -1,7 +1,7 @@
-﻿const colors = require('colors');
+const colors = require('colors');
 const date = require('date-and-time');
 const now = new Date();
-const time = (colors.red(date.format(now, 'hh:mm A')))
+global.time = (colors.red(date.format(now, 'hh:mm A')))
 global.Discord = require("discord.js");
 global.discord = require('discord.js');
 const Util = require("discord.js")
@@ -30,6 +30,7 @@ client.distube = new Distube(client, {
     leaveOnFinish: false,
     leaveOnStop: true,
     leaveOnEmpty: true,
+    nsfw: true,
 });
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -45,7 +46,7 @@ global.MessageEmbed = require('discord.js')
 global.Embed = new Discord.MessageEmbed()
 global.errorHook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
 global.errorhook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
-
+const pm2stats = new Discord.WebhookClient('846411328234717215', 'i9GUJQlHHY11haR-MfkJIuYf7kGeEGTE6dLh_s--InaYgleYbDucH6KWk25J9F5nOHx2')
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
@@ -72,6 +73,7 @@ for (const file of commandFiles) {
     }
     client.commands.set(command.name, command);
     console.log(colors.green(`[${time}] Command Loaded: ${command.name}`));
+    //pm2stats.send(`Command Loaded: ${command.name}`)
 }
 
 //Event Handler
@@ -160,32 +162,6 @@ client.distube
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
 
-const {
-    GiveawaysManager
-} = require('discord-giveaways');
-client.giveawaysManager = new GiveawaysManager(client, {
-    storage: "./giveaways.json",
-    updateCountdownEvery: 5000,
-    default: {
-        botsCanWin: false,
-        embedColor: "#FF0000",
-        reaction: "🎉"
-    }
-});
-/*
-client.giveawaysManager.on("giveawayReactionAdded", (giveaway, member, reaction) => {
-    console.log(`${member.user.tag} entered giveaway #${giveaway.messageID} (${reaction.emoji.name})`);
-});
-
-client.giveawaysManager.on("giveawayReactionRemoved", (giveaway, member, reaction) => {
-    console.log(`${member.user.tag} unreact to giveaway #${giveaway.messageID} (${reaction.emoji.name})`);
-});
-
-client.giveawaysManager.on("giveawayEnded", (giveaway, winners) => {
-    console.log(`Giveaway #${giveaway.messageID} ended! Winners: ${winners.map((member) => member.user.username).join(', ')}  ${giveaway.messageURL}`);
-});
-*/
-
 client.on("guildCreate", guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
     const DarkerInk = client.users.cache.find(u => u.id === '379781622704111626').tag
@@ -272,34 +248,6 @@ client.on("messageUpdate", async (oldMessage, message) => {
         }
 
     });
-client.db2 = require("quick.db");
-client.request = new (require("rss-parser"))();
-client.config3 = require("./config.js");
-client.on("ready", () => {
-    handleUploads();
-});
-function handleUploads() {
-    if (client.db2.fetch(`postedVideos`) === null) client.db2.set(`postedVideos`, []);
-    setInterval(() => {
-        client.request.parseURL(`https://www.youtube.com/feeds/videos.xml?channel_id=${client.config3.channel_id}`)
-        .then(data => {
-            if (client.db2.fetch(`postedVideos`).includes(data.items[0].link)) return;
-            else {
-                client.db2.set(`videoData`, data.items[0]);
-                client.db2.push("postedVideos", data.items[0].link);
- 		const webhookClient = new Discord.WebhookClient('845412211517030470', 'WzyAItNNHD68BoS_hXr56rhYWaCXqRY3OwD90WY1NNM-6skwpww7xjpYEO8Vl6vLfR9r');
-                let parsed = client.db2.fetch(`videoData`);
-                let channel = client.channels.cache.get(client.config3.channel);
-                if (!channel) return;
-                let message = client.config3.messageTemplate
-                    .replace(/{author}/g, parsed.author)
-                    .replace(/{title}/g, Discord.Util.escapeMarkdown(parsed.title))
-                    .replace(/{url}/g, parsed.link);
-		webhookClient.send(message);
-            }
-        });
-    }, client.config3.watchInterval);
-}
 
 client.on('message', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
@@ -483,7 +431,8 @@ client.on('interaction', async interaction => {
 	if (!model) {
             return interaction.reply("That message ID or suggestion ID is invalid or Has been deleted, Please Try again", { ephemeral: true });
     }
-	await interaction.reply(JSON.stringify(interaction.options), { ephemeral: true })
+    //JSON.stringify(interaction.options)
+	await interaction.reply("The Suggestion has been replied to!", { ephemeral: true })
 	const msg = await client.channels.cache.get("832805317338857483").messages.fetch(model.message);
         const author = await client.users.cache.find((u) => u.id === model.author);
         const embed = new Discord.MessageEmbed()

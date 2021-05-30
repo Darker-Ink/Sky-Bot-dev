@@ -2,19 +2,19 @@ const Discord = require('discord.js');
 const Guild = require('../schema.js')
 const mongoose = require('mongoose');
 const config = require('../config/config.json')
+const Maintenance = require('../models/maintenance.js')
 
 module.exports = {
     type: 'message',
     run: async (client, message) => {
         try {
-            //console.log(`${debug}`)
 
             let guildDB = await client.data.getGuildDB(message.guild.id)
             let msgDB = await client.data.getMsgDB(message.guild.id)
             if (message.channel.type === "text" && !message.guild.me.permissions.has("SEND_MESSAGES")) return;
             // If the message is a dm doesn't reply used to stop errors with afk
             //db stuff
-            const settings = await Guild.findOne({
+            global.settings = await Guild.findOne({
                 guildID: message.guild.id
             }, (err, guild) => {
                 if (err) console.error(err)
@@ -23,7 +23,7 @@ module.exports = {
                         _id: mongoose.Types.ObjectId(),
                         guildID: message.guild.id,
                         guildName: message.guild.name,
-                        prefix: process.env.PREFIX
+                        prefix: '!'
                     })
 
                     newGuild.save()
@@ -37,14 +37,13 @@ module.exports = {
             });
 
             const prefix = settings.prefix;
-            if (!message.guild) return;
-            if (message.channel.name == "chatbot") return;
+         //   if (!message.guild) return;
             //if someone pings the bot says the prefix in the server
             if (message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>`) {
                 return message.channel.send(`You need the prefix? Well thats Fine its \`\`${settings.prefix}\`\``);
             };
 
-
+            global.errorMessage = `oh No You got a error, Please report this command by doing ${settings.prefix}report-command <command_name> <reason_for_report>`
 
             if (!message.content.startsWith(prefix)) return;
 
@@ -54,14 +53,46 @@ module.exports = {
 
 
             if (cmd.length === 0) return;
-            let command = client.commands.get(cmd);
-            if (cmd.name = null) return;
+            global.command = client.commands.get(cmd);
+            //if (cmd.name = null) return; .toString()
 
             try {
                 if (!command) command = client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
-
                 if (!command) return;
-
+                global.settingsss = await Maintenance.findOne({
+                    ino: message.author.id
+                }, (err, guild) => {
+                    console.log(err)
+                    /*
+                    if (err) console.error(err)
+                    if (!guild) {
+                        const newMaintenance = new Maintenance({
+                            _id: mongoose.Types.ObjectId(),
+                            ino: message.author.id,
+                            reason: '',
+                            enabled: false
+                        })
+        
+                        newMaintenance.save()
+                            //sends a msg to the channel saying someone has been added to the database
+                            .then(result => client.channels.cache.get("827719237116231702").send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
+                            .catch(err => console.error(err));
+        
+                        //used to stop a error
+                        return console.log('')
+                    }*/
+                });
+                global.errorcommand = command//.replace(settings.prefix, "")           
+                global.errorMessage = `oh No You got a error, Please report this command by doing \`${settings.prefix}report-command ${errorcommand.name} <reason_for_report>\``
+                if(command && !command.notneeded && settingsss.enabled == 'true') {
+                    const embed = new Discord.MessageEmbed()
+                   .setTitle('In Maintenance Mode')
+                   .setDescription('Maintenance Mode Is enabled')
+                   .addField('reason', `${settingsss.reason}`)
+                   .setColor('GREEN')
+                   .setTimestamp()
+                  return message.channel.send(embed)
+                   }
                 if (command.ownerOnly && !config.owners.includes(message.author.id)) {
                     return
                 }
@@ -84,15 +115,8 @@ module.exports = {
                     message.channel.send(`I am **Missing Perms** Please Add these: \`\`${command.botperms.join(", ")}\`\``, command.botperms)
                     return;
                 }
-                if (message.channel.type == "dm") {
-                    let userDB = await client.data.getUserDB(message.author.id);
-                    let data = {};
-                    data.config = config;
-                    data.user = userDB;
-                    data.guild = guildDB;
-                    data.Msg = msgDB;
-                    data.cmd = cmd;
-                    command.run(client, message, args, data);
+                if (command.darkinkonly && !config.darkink.includes(message.author.id)) {
+                    return message.channel.send('[DEBUG] Seems like you can\'t use this command')
                 }
                 const {
                     cooldowns
@@ -143,7 +167,11 @@ module.exports = {
 
                         ddcmdused.setTimestamp()
                         ddcmdused.setColor('RANDOM')
+<<<<<<< HEAD
+                        client.channels.cache.get("827719216923934741").send(ddcmdused)
+=======
                         //client.channels.cache.get("827719216923934741").send(ddcmdused)
+>>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
                     }
                 } catch (err) {
                     console.log(err)
@@ -152,4 +180,8 @@ module.exports = {
             console.log(err)
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1ce78e036fdb4393719c3633d1bc1a18dde97a06
