@@ -13,8 +13,8 @@ module.exports = {
     run: async (client, message, args) => {
         try {
             if (!args[0]) return message.channel.send('Please Use a ID or Mention someone');
-            let person = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || await client.users.fetch(args[0])
-
+            let person = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+		if(!person) return message.channel.send('Hey please mention someone ty')
             const allBans = await message.guild.fetchBans()
 
             if (allBans.get(person.id)) {
