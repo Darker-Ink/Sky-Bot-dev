@@ -20,6 +20,7 @@ module.exports = {
                 message.channel.send("**Closing ticket.**", null).then(setTimeout(() => {
                     message.channel.delete()
                     message.channel.messages.fetch().then(async (messages) => {
+                        const fs = require('fs')
                         const script = messages.array().reverse().map(m => `${m.author.tag}: ${m.attachments.size > 0 ? m.attachments.first().proxyURL : m.content}`).join('\n')
                         fs.writeFile(`script.txt`, `${script}`);
                     const Discord = require('discord.js') 
