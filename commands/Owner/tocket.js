@@ -19,26 +19,19 @@ module.exports = {
             if (m.content.toLowerCase() === "confirm") {
                 message.channel.send("**Closing ticket.**", null).then(setTimeout(() => {
                     message.channel.delete()
-                    const { create } = require("sourcebin");
                     message.channel.messages.fetch().then(async (messages) => {
                         const script = messages.array().reverse().map(m => `${m.author.tag}: ${m.attachments.size > 0 ? m.attachments.first().proxyURL : m.content}`).join('\n')
-    
-                        create([
-                    {
-                        content: script,
-                        language: "text",
-                    },
-                    ]).then(bin=> {
+                        fs.writeFile(`script.txt`, `${script}`);
                     const Discord = require('discord.js') 
-                        const channel = client.channels.cache.get('839248172383731763') //OwO You need a channel ID I suggest making a new one :)
+                        const channel = client.channels.cache.get('channel id UwU') //OwO You need a channel ID I suggest making a new one :)
                         const embed = new Discord.MessageEmbed()
                         .setColor('RED')
                         .setTitle(`A Ticket Has Been Closed`)
                         .setDescription(`User: <@!${message.author.id}>\n\n Ticket Name: **${message.channel.name}**`)
                         .setFooter(message.author.id)
                         .setTimestamp()
-                        channel.send(`Transcript: ${bin.url}`, embed)
-                })
+                        channel.send(embed, { files: ["./script.txt"] })
+    
             })
                 }, 5000))
             } else if (m.content.toLowerCase() === "cancel") {
