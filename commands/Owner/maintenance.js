@@ -17,50 +17,44 @@ module.exports = {
     darkinkonly: true, // If its only for DarkerInk
     notneeded: true,
     run: async (client, message, args, data) => {
-        /*
-      const settingsss = await Maintenance.findOne({
-            ino: message.author.id
-        }, (err, guild) => {
-            if (err) console.error(err)
-            if (!guild) {
-                const newMaintenance = new Maintenance({
-                    _id: mongoose.Types.ObjectId(),
-                    ino: message.author.id,
-                    reason: '',
-                    enabled: false
-                })
+   if(!args[0]) return message.channel.send('Would you like to enable or disable maintenance mode?')
+      
+      const maintenance = await Maintenance.findOne({maintenance: 'maintenance'})
+      let reason2 = args.slice(1).join(" ")
+      if(args[0].toLowerCase() == "enable"){
+      if(maintenance){
+      if (!reason2) return message.channel.send('You need to add a reason')
+      maintenance.toggle = "true"
+      maintenance.reason = `${reason2}`
+      await maintenance.save();
 
-                newMaintenance.save()
-                    //sends a msg to the channel saying someone has been added to the database
-                    .then(result => client.channels.cache.get("827719237116231702").send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
-                    .catch(err => console.error(err));
+      } else {
+        const newMain = new Maintenance({
+          toggle: "false",
+          reason: ""
+        })
+        newMain.save().catch(()=>{})
+      }
+      await message.channel.send(`You enabled maintenance Mode because of \`${reason2}\``)
 
-                //used to stop a error
-                return console.log('')
-            }
-        });
-        */
-        let reason2 = args.slice(1).join(" ")
-        if (!args[0]) {
-            return message.channel.send('Please enable or disable maintenance mode')
-        }
-        if(args[0] == "enable") {
-            if (!reason2) {
-                return message.channel.send('You need to add a reason')
-            }
-            await settingsss.updateOne({
-                reason: reason2,
-                enabled: true
-            })
-            return message.channel.send('You enabled maintenance Mode because of \`' + reason2 + '\`')
-            
-        } else if(args[0] == "disable") {
-            await settingsss.updateOne({
-                reason: '',
-                enabled: false
-            })
-            return message.channel.send('You disabled maintenance Mode')
-        } else {
-            return message.channel.send('Well I can\'t null maintenance mode so enable it or disable it')
-        }
-}}
+      } else if(args[0].toLowerCase() == "disable"){
+
+ if(maintenance){
+      maintenance.toggle = "false"
+      await maintenance.save();
+
+      } else {
+        const newMain = new Maintenance({
+          toggle: "false",
+          reason: ""
+        })
+        newMain.save().catch(()=>{})
+      }
+      await message.channel.send('Disabling maintenance Mode')
+
+      } else {
+        message.channel.send('Invalid Response')
+      }
+      
+    }
+}
