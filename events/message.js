@@ -68,7 +68,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                    .setTitle('In Maintenance Mode')
                    .setDescription('Maintenance Mode Is enabled')
-                   .addField('reason', `${settingsss.reason}`)
+                   .addField('reason', `There Is No reason`)
                    .setColor('GREEN')
                    .setTimestamp()
                   return message.channel.send(embed)
