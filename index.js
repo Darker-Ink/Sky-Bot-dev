@@ -97,7 +97,6 @@ client.on('ready', () => {
 })
 
 client.login(process.env.token);
-
 const status = (queue) =>
  `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"
   }\` | Loop: \`${queue.repeatMode
