@@ -35,7 +35,7 @@ module.exports = {
         })
         newMain.save().catch(()=>{})
       }
-      await message.channel.send('You enabled maintenance Mode because of \`${reason2}\`')
+      await message.channel.send(`You enabled maintenance Mode because of \`${reason2}\``)
 
       } else if(args[0].toLowerCase() == "disable"){
 
