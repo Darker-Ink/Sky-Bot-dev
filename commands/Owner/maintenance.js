@@ -34,7 +34,6 @@ module.exports = {
         newMain.save().catch(()=>{})
       }
       await message.channel.send('Enabling maintenance Mode')
-      process.exit(1)
 
       } else if(args[0].toLowerCase() == "disable"){
 
