@@ -20,16 +20,18 @@ module.exports = {
    if(!args[0]) return message.channel.send('Would you like to enable or disable maintenance mode?')
       
       const maintenance = await Maintenance.findOne({maintenance: 'maintenance'})
-
+      let reason2 = args.slice(1).join(" ")
       if(args[0].toLowerCase() == "enable"){
       if(maintenance){
-
+      if (!reason2) return message.channel.send('You need to add a reason')
       maintenance.toggle = "true"
+      maintenance.reason = `${reason2}`
       await maintenance.save();
 
       } else {
         const newMain = new Maintenance({
-          toggle: "true"
+          toggle: "true",
+          reason: ""
         })
         newMain.save().catch(()=>{})
       }
@@ -43,12 +45,12 @@ module.exports = {
 
       } else {
         const newMain = new Maintenance({
-          toggle: "false"
+          toggle: "false",
+          reason: ""
         })
         newMain.save().catch(()=>{})
       }
       await message.channel.send('Disabling maintenance Mode')
-      process.exit(1)
 
       } else {
         message.channel.send('Invalid Response')
