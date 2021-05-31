@@ -10,7 +10,7 @@ module.exports = {
     const data = {
         max_age: 86400,
         max_uses: 0,
-        target_application_id: "755827207812677713", // youtube together
+        target_application_id: "814288819477020702", // youtube together
         target_type: 2,
         temporary: false,
         validate: null
