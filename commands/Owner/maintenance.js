@@ -30,12 +30,12 @@ module.exports = {
 
       } else {
         const newMain = new Maintenance({
-          toggle: "true",
+          toggle: "false",
           reason: ""
         })
         newMain.save().catch(()=>{})
       }
-      await message.channel.send('Enabling maintenance Mode')
+      await message.channel.send('Just added you to the DataBase try again')
 
       } else if(args[0].toLowerCase() == "disable"){
 
