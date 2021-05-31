@@ -59,32 +59,12 @@ module.exports = {
             try {
                 if (!command) command = client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
                 if (!command) return;
-                global.settingsss = await Maintenance.findOne({
-                    ino: message.author.id
-                }, (err, guild) => {
-                    console.log(err)
-                    /*
-                    if (err) console.error(err)
-                    if (!guild) {
-                        const newMaintenance = new Maintenance({
-                            _id: mongoose.Types.ObjectId(),
-                            ino: message.author.id,
-                            reason: '',
-                            enabled: false
-                        })
-        
-                        newMaintenance.save()
-                            //sends a msg to the channel saying someone has been added to the database
-                            .then(result => client.channels.cache.get("827719237116231702").send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
-                            .catch(err => console.error(err));
-        
-                        //used to stop a error
-                        return console.log('')
-                    }*/
-                });
+                const maintenance = await Maintenance.findOne({
+                enabled: "enabled"
+                })
                 global.errorcommand = command//.replace(settings.prefix, "")           
                 global.errorMessage = `oh No You got a error, Please report this command by doing \`${settings.prefix}report-command ${errorcommand.name} <reason_for_report>\``
-                if(!settingsss.enabled == 'true') {
+                if(maintenance && maintenance.enabled == "true") {
                     const embed = new Discord.MessageEmbed()
                    .setTitle('In Maintenance Mode')
                    .setDescription('Maintenance Mode Is enabled')
