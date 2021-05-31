@@ -60,8 +60,7 @@ module.exports = {
                 if (!command) command = client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
                 if (!command) return;
                 const maintenance = await Maintenance.findOne({
-                maintenance: "maintenance",
-                reason: "reason"
+                maintenance: "maintenance"
                 })
                 global.errorcommand = command//.replace(settings.prefix, "")           
                 global.errorMessage = `oh No You got a error, Please report this command by doing \`${settings.prefix}report-command ${errorcommand.name} <reason_for_report>\``
@@ -69,7 +68,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                    .setTitle('In Maintenance Mode')
                    .setDescription('Maintenance Mode Is enabled')
-                   .addField('reason', `${reason.reason}`)
+                   .addField('reason', `${maintenance.reason}`)
                    .setColor('GREEN')
                    .setTimestamp()
                   return message.channel.send(embed)
