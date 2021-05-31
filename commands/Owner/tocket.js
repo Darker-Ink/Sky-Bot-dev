@@ -22,7 +22,9 @@ module.exports = {
                     message.channel.messages.fetch().then(async (messages) => {
                         const fs = require('fs')
                         const script = messages.array().reverse().map(m => `${m.author.tag}: ${m.attachments.size > 0 ? m.attachments.first().proxyURL : m.content}`).join('\n')
-                        fs.writeFile(`script.txt`, `${script}`);
+                        fs.writeFile(`script.txt`, `${script}`, (err) => { 
+                            console.log(err)
+                        })
                     const Discord = require('discord.js') 
                         const channel = client.channels.cache.get('channel id UwU') //OwO You need a channel ID I suggest making a new one :)
                         const embed = new Discord.MessageEmbed()
