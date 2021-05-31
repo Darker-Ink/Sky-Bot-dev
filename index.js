@@ -97,7 +97,6 @@ client.on('ready', () => {
 })
 
 client.login(process.env.token);
-const DarkerInk = client.users.cache.find(u => u.id === '379781622704111626').tag
 const status = (queue) =>
  `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"
   }\` | Loop: \`${queue.repeatMode
