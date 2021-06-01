@@ -29,7 +29,7 @@ module.exports = {
             .setTitle('Eval')
             .addField(`InPut`, `\`\`\`js\n${code}\n\`\`\``)
             .addField(`OutPut`, `\`\`\`js\n${evaled}\n\`\`\``)
-            .setcolor('GREEN')
+            .setColor('GREEN')
             return message.channel.send(embed)
         } catch (err) {
             const erroembed = new MessageEmbed()
