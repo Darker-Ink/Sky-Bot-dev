@@ -29,11 +29,15 @@ module.exports = {
             .setTitle('Eval')
             .addField(`InPut`, `\`\`\`js\n${code}\n\`\`\``)
             .addField(`OutPut`, `\`\`\`js\n${evaled}\n\`\`\``)
+            .setColor('GREEN')
             return message.channel.send(embed)
         } catch (err) {
-            console.log(err);
-            message.reply(`There was an error during evaluation, \n\n**${err.stack}**`);
-            client.channels.cache.get("827716948087013406").send(`Someone got a error\`\`\`${err.stack}\`\`\` `)
+            const erroembed = new MessageEmbed()
+            .setTitle('Eval')
+            .addField(`InPut`, `\`\`\`js\n${code}\n\`\`\``)
+            .addField(`OutPut`, `\`\`\`js\n${err.stack}\n\`\`\``)
+            .setColor('RED')
+            return message.channel.send(erroembed)
         }
     }
 };

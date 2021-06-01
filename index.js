@@ -202,7 +202,7 @@ client.on("guildDelete", guild => {
         if (err) console.error(err)
     });
 })
-/*
+
 const {
     inspect
 } = require("util")
@@ -215,7 +215,6 @@ process.on('uncaughtException', (err, origin) => {
 process.on('warning', (warn) => {
     errorHook.send(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn}\n\`\`\``)
 })
-*/
 
 /*
 client.on("error", (e) => console.error(e));
