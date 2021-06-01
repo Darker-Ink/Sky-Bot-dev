@@ -23,7 +23,7 @@ module.exports = {
         const command = args.shift().toLowerCase();
 
         try {
-            let evaled = await eval(code);
+            let evaled = eval(code);
             if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
             const embed = new MessageEmbed()
             .setTitle('Eval')
