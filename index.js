@@ -29,7 +29,7 @@ client.distube = new Distube(client, {
     plugins: [new SpotifyPlugin()],
     leaveOnFinish: false,
     leaveOnStop: true,
-    leaveOnEmpty: true,
+    //leaveOnEmpty: true,
     nsfw: true,
 });
 client.commands = new Discord.Collection();
