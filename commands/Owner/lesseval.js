@@ -9,7 +9,7 @@ const fs = require('fs')
 const colors = require('colors');
 
 module.exports = {
-    name: "lesseval",
+    name: "eval",
     description: "",
     usage: "",
     aliases: [],
