@@ -9,11 +9,11 @@ const fs = require('fs')
 const colors = require('colors');
 
 module.exports = {
-    name: "eval",
+    name: "fulleval",
     description: "",
     ownerOnly: true,
     usage: "",
-    aliases: ["eval", "ev"],
+    aliases: ["feval"],
     category: "Owner",
     hidden: true,
     run: async (client, message) => {
