@@ -45,7 +45,7 @@ module.exports = {
                 }
             });
 */          
-            const prefix = settings.prefix || '!';
+            const prefix = settings.prefix;
          //   if (!message.guild) return;
             //if someone pings the bot says the prefix in the server
             if (message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>`) {
