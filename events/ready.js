@@ -1,4 +1,5 @@
-const githubhook = new Discord.WebhookClient(client.config.gitpullhookid, client.config.gitpullhooktoken);
+const config = require('../config/config.json')
+const githubhook = new Discord.WebhookClient(config.gitpullhookid, config.gitpullhooktoken);
 const exec = require('child_process').exec;
 const date = require('date-and-time');
 const now = new Date();
