@@ -165,6 +165,7 @@ client.distube
     const mongoose = require('mongoose');
     const config = require('./config/config.json')
     const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
+    /*
     global.settings = await Guild.findOne({
         guildID: guild.id
     }, (err, guild) => {
@@ -186,6 +187,9 @@ client.distube
             return console.log('I wasn\'t here')
         }
     });
+    */
+   console.log(guild.id)
+   console.log(guild.name)
     })
 client.on("guildCreate", guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
