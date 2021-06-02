@@ -20,5 +20,4 @@ module.exports = {
   ];
         const dresponses = responses[Math.floor(Math.random() * responses.length)];
 			message.channel.send(`**API:**\`${new Date() - dt}ms\`\n\n**WS:**\`${client.ws.ping}ms\`\n\n**Linux Uptime:**\`${ms(os.uptime() * 1000, { long: true })}\``)
-            console.log(`"API" ${new Date() - dt}ms "WS" ${client.ws.ping}ms`)
     }}
