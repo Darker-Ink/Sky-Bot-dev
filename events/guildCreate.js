@@ -5,7 +5,7 @@ const config = require('../config/config.json')
 
 module.exports = {
     type: 'guildCreate',
-    run: async (client, guild) => {
+    run: async (guild, client) => {
         global.settings = await Guild.findOne({
             guildID: guild.id
         }, (err, guild) => {
