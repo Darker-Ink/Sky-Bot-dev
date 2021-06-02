@@ -10,9 +10,17 @@ module.exports = {
         if (!voiceChannel) return message.channel.send("You must be in a VC to use this command!")
 
         try {
-            await voiceChannel.join().then(connection => {
-                connection.voice.setSelfDeaf(true)
-            })
+            if (voiceChannel.type == 'stage') {
+                await voiceChannel.join().then(connection => {
+                                connection.voice.setSelfDeaf(true)
+                                connection.voice.setSuppressed(false);
+                            })
+                } else {
+                await voiceChannel.join().then(connection => {
+                                connection.voice.setSelfDeaf(true)
+                                //connection.voice.setSuppressed(false);
+                            })
+                }
         } catch (error) {
             console.log(`There Was An Error Connecting To The Voice Channel: ${error}`)
             return message.channel.send(`There Was An Error Connecting To The Voice Channel: ${error}`)
