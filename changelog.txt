@@ -3,4 +3,14 @@
 [+] = Added/Done
 [-] = Probably wont be fixed till later
 ---------------------------------------
-[/] Adding lots of bug fixes
+[+] Bot Updated To discord.js v13. Stage Channels now work With music commands.
+
+[/] Whois Is almost working.
+
+[+] Updated nodejs to v14.
+
+[/] Looking into Prefix command some times breaking and Servers getting added to the database more then once.
+
+[+] Might add a Bot Update Command.
+
+[/] Trying to fix queue command.
