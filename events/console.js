@@ -6,10 +6,7 @@ module.exports = {
         if(config.console.includes(message.channel.id)){
             process.exec(args.join(" "), (error, stdout) => {
                 let result = (stdout || error);
-                message.channel.send(result, {
-                    code: "asciidoc",
-                    split: "\n"
-                })
+                message.channel.send(result, { split: true })
             })
         }
     }}
