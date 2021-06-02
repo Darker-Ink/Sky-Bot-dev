@@ -611,7 +611,7 @@ if (!interaction.options[0]?.value) {
             return interaction.reply(embed);
 }}})
 
-client.on("guildCreate", guild => {
+client.on("guildCreate", async guild => {
     const Guild = require('../schema.js')
 const mongoose = require('mongoose');
 const config = require('../config/config.json')
