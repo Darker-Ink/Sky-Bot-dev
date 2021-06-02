@@ -1,8 +1,15 @@
+const process = require('child_process');
 module.exports = {
     type: 'message',
     run: async (client, message) => {
         if(message.author.bot) return
         if(config.console.includes(message.channel.id)){
-            return message.channel.send('oh my god you did it pog')
+            process.exec(args.join(" "), (error, stdout) => {
+                let result = (stdout || error);
+                message.channel.send(result, {
+                    code: "asciidoc",
+                    split: "\n"
+                })
+            })
         }
     }}
