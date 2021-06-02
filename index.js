@@ -161,7 +161,35 @@ client.distube
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
 
     client.on("guildCreate", async (guild) => {
+    const config = require('./config/config.json')
+    const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
+    const god = guild.id;
+   const godname = guild.name;
+    global.settings = await Guild.findOne({
+        guildID: guild.id
+    }, (err, guild) => {
+        if (err) console.error(err)
+        if (!guild) {
+            const newGuild = new Guild({
+                _id: mongoose.Types.ObjectId(),
+                guildID: `${god}`,
+                guildName: `${godname}`,
+                prefix: '!'
+            })
+    
+            newGuild.save()
+                //sends a msg to the channel saying someone has been added to the database
+                .then(result => joinlog.send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
+                .catch(err => console.error(err));
+    
+            //used to stop a error
+            return console.log('I wasn\'t here')
+        }
+    });
+   console.log(guild.id)
+   console.log(guild.name)
     })
+    /*
 client.on("guildCreate", guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
     const DarkerInk = client.users.cache.find(u => u.id === '379781622704111626').tag
@@ -195,7 +223,7 @@ client.on("guildCreate", guild => {
 
     channel.send(welcomeembed);
 });
-
+*/
 client.on("guildDelete", guild => {
     Guild.findOneAndDelete({
         guildID: guild.id
