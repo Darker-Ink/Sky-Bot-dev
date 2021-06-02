@@ -14,6 +14,15 @@ module.exports = {
             if (message.channel.type === "text" && !message.guild.me.permissions.has("SEND_MESSAGES")) return;
             // If the message is a dm doesn't reply used to stop errors with afk
             //db stuff
+
+            const settings = await Guild.findOne({
+                guildID: message.guild.id
+            })
+
+
+
+            /*
+
             global.settings = await Guild.findOne({
                 guildID: message.guild.id
             }, (err, guild) => {
@@ -35,7 +44,7 @@ module.exports = {
                     return console.log('I wasn\'t here')
                 }
             });
-
+*/
             const prefix = settings.prefix;
          //   if (!message.guild) return;
             //if someone pings the bot says the prefix in the server
