@@ -1,0 +1,6 @@
+[Key Information]
+[/] = In progress
+[+] = Added/Done
+[-] = Probably wont be fixed till later
+---------------------------------------
+[/] Adding lots of bug fixes
