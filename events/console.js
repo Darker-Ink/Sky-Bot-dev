@@ -4,7 +4,7 @@ module.exports = {
     run: async (client, message) => {
         if(message.author.bot) return
         if(config.console.includes(message.channel.id)){
-            process.exec(args.join(" "), (error, stdout) => {
+            process.exec("ls", (error, stdout) => {
                 let result = (stdout || error);
                 message.channel.send(result, { split: true })
             })
