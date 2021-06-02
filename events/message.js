@@ -19,8 +19,6 @@ module.exports = {
                 guildID: message.guild.id
             })
 
-
-
             /*
 
             global.settings = await Guild.findOne({
