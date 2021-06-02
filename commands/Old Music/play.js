@@ -50,7 +50,7 @@ module.exports = {
                     .setColor("RED")
                 return message.channel.send(playError2)
             }
-            if (voiceChannel.channel.type == 'stage') {
+            if (voiceChannel.type == 'stage') {
                 voiceChannel.join().then(connection => {
                                 connection.voice.setSelfDeaf(true)
                                 connection.voice.setSuppressed(false);
