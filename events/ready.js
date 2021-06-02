@@ -43,7 +43,21 @@ setInterval(() => {
             }
         })
     }, 30000)
-
+    setInterval(() => {
+        var oss = require('os-utils');
+const ms = require('ms')
+const os = require('os')
+const channel = client.channels.cache.get('849427878914424852')
+function formatBytes(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(1024));
+                return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
+            }
+oss.cpuUsage(function(v){
+channel.setTopic(`MEM USAGE: ${formatBytes(process.memoryUsage().heapUsed)}\nCPU Usage: ${v.toFixed(2)}%`)
+});
+    }, 30000)
         setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
             let atttscs = atcs[Math.floor(Math.random() * atcs.length)]
