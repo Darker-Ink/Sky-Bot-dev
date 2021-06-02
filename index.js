@@ -163,8 +163,8 @@ client.distube
     client.on("guildCreate", async (guild) => {
     const config = require('./config/config.json')
     const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
-    console.log(guild.id)
-   console.log(guild.name)
+    const god = guild.id;
+   const godname = guild.name;
     global.settings = await Guild.findOne({
         guildID: guild.id
     }, (err, guild) => {
@@ -172,8 +172,8 @@ client.distube
         if (!guild) {
             const newGuild = new Guild({
                 _id: mongoose.Types.ObjectId(),
-                guildID: `${guild.id}`,
-                guildName: `${guild.name}`,
+                guildID: `${god}`,
+                guildName: `${godname}`,
                 prefix: '!'
             })
     
