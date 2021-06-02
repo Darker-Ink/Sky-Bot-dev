@@ -52,7 +52,7 @@ function formatBytes(bytes) {
                 return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
             }
 oss.cpuUsage(function(v){
-channel.setTopic(`MEM USAGE: ${formatBytes(process.memoryUsage().heapUsed)}\nCPU Usage: ${v.toFixed(2)}%`)
+channel.setTopic(`MEM USAGE: ${formatBytes(process.memoryUsage().heapUsed)}\nCPU Usage: ${v.toFixed(2)}%\nUPTIME:${ms(os.uptime() * 1000, { long: true })}\nPING:${client.ws.ping}\nDan Is hot`)
 });
     }, 30000)
         setInterval(() => {
