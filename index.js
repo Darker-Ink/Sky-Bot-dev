@@ -641,7 +641,7 @@ const settings = await Guild.findOne({
 */
 
 
-client.on("guildCreate", guild => {
+client.on("guildCreate", async (guild) => {
     console.log(guild.id)
     console.log(guild.name)
 })
