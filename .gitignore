@@ -31,3 +31,4 @@ install.bat
 .pm2
 .config/configstore
 .cache
+config.json
