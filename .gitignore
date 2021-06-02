@@ -32,3 +32,4 @@ install.bat
 .config/configstore
 .cache
 config.json
+.gitconfig

@@ -27,8 +27,10 @@
 	"682090006151561233",
 	"206481777987026944"
     ],
-    "everyoneMention": false,
-    "hostedBy": true,
+    "errorhooktoken": "TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U",
+    "errorhookid": "845648143058993174",
+    "gitpullhooktoken": "FxTirx2pPs3OHL5MjuR7rn4Rmre8HinUkMjpjdvKye_e-5A2e_uATnyr8vfoo6O67m-c",
+    "gitpullhookid": "832350968837308486",
     "emoji": {
         "play": "▶️",
         "stop": "⏹️",

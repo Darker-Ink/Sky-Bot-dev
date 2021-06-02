@@ -16,6 +16,10 @@
     "owners": [
 	"YOUR OWNERS IDS"
     ],
+    "errorhooktoken": "",
+    "errorhookid": "",
+    "gitpullhooktoken": "",
+    "gitpullhookid": "",
     "emoji": {
         "play": "▶️",
         "stop": "⏹️",

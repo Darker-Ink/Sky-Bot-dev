@@ -44,9 +44,8 @@ client.react = new Map()
 // Global stuff
 global.MessageEmbed = require('discord.js')
 global.Embed = new Discord.MessageEmbed()
-global.errorHook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
-global.errorhook = new Discord.WebhookClient('845648143058993174', 'TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U');
-const pm2stats = new Discord.WebhookClient('846411328234717215', 'i9GUJQlHHY11haR-MfkJIuYf7kGeEGTE6dLh_s--InaYgleYbDucH6KWk25J9F5nOHx2')
+global.errorHook = new Discord.WebhookClient(client.config.errorhookid, client.config.errorhooktoken);
+global.errorhook = new Discord.WebhookClient(client.config.errorhookid, client.config.errorhooktoken);
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
