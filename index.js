@@ -189,6 +189,7 @@ client.distube
    console.log(guild.id)
    console.log(guild.name)
     })
+    /*
 client.on("guildCreate", guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
     const DarkerInk = client.users.cache.find(u => u.id === '379781622704111626').tag
@@ -222,7 +223,7 @@ client.on("guildCreate", guild => {
 
     channel.send(welcomeembed);
 });
-
+*/
 client.on("guildDelete", guild => {
     Guild.findOneAndDelete({
         guildID: guild.id
