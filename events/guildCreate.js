@@ -6,4 +6,5 @@ const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken)
 module.exports = {
     type: 'guildCreate',
     run: async (guild) => {
+        
     }}
