@@ -14,3 +14,5 @@
 [+] Might add a Bot Update Command.
 
 [/] Trying to fix queue command.
+
+[/] Looking into having a new way to add servers to the database.
