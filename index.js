@@ -612,9 +612,9 @@ if (!interaction.options[0]?.value) {
 }}})
 
 client.on("guildCreate", async guild => {
-    const Guild = require('../schema.js')
+    const Guild = require('./schema.js')
 const mongoose = require('mongoose');
-const config = require('../config/config.json')
+const config = require('./config/config.json')
 const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
 const settings = await Guild.findOne({
     guildID: guild.id
