@@ -6,7 +6,8 @@ const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken)
 module.exports = {
     type: 'guildCreate',
     run: async (guild) => {
-        global.settings = await Guild.findOne({
+        /*
+        const settings = await Guild.findOne({
             guildID: guild.id
         }, (err, guild) => {
             if (err) console.error(err)
@@ -27,4 +28,6 @@ module.exports = {
                 return console.log('I wasn\'t here')
             }
         });
+        */
+       console.log(guild.id)
     }}
