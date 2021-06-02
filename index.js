@@ -610,8 +610,8 @@ if (!interaction.options[0]?.value) {
                 .setColor(roleColor);
             return interaction.reply(embed);
 }}})
-/*
-client.on("guildCreate", async guild => {
+
+client.on("guildCreate", async (guild) => {
     const Guild = require('./schema.js')
 const mongoose = require('mongoose');
 const config = require('./config/config.json')
@@ -637,11 +637,4 @@ const settings = await Guild.findOne({
         return console.log('I wasn\'t here')
     }
 });
-})
-*/
-
-
-client.on("guildCreate", async (guild) => {
-    console.log(guild.id)
-    console.log(guild.name)
 })
