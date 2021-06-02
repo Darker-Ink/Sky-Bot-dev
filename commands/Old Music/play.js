@@ -50,10 +50,17 @@ module.exports = {
                     .setColor("RED")
                 return message.channel.send(playError2)
             }
-            voiceChannel.join().then(connection => {
-                connection.voice.setSelfDeaf(true)
-                connection.voice.setSuppressed(false);
-            })
+            if (voiceChannel.channel.type == 'stage') {
+                voiceChannel.join().then(connection => {
+                                connection.voice.setSelfDeaf(true)
+                                connection.voice.setSuppressed(false);
+                            })
+                } else {
+                voiceChannel.join().then(connection => {
+                                connection.voice.setSelfDeaf(true)
+                                //connection.voice.setSuppressed(false);
+                            })
+                }
             client.distube.play(message, songName)
         } catch (err) {
             console.log('error');
