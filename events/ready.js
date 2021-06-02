@@ -34,7 +34,6 @@ setInterval(() => {
                 } else {
                     githubhook.send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
                     setTimeout(() => {
-                      //exec('npx pm2 restart 0')
 			        process.exit()
                     }, 1000)
                 };
