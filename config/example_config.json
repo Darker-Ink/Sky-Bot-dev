@@ -20,6 +20,8 @@
     "errorhookid": "",
     "gitpullhooktoken": "",
     "gitpullhookid": "",
+    "joinlogtoken": "",
+    "joinlogid": "",
     "emoji": {
         "play": "▶️",
         "stop": "⏹️",
