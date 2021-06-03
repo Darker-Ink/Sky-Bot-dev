@@ -159,18 +159,19 @@ client.distube
     message.channel.send(searchembed).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
-
+    client.on("guildCreate", async (guild) => {
+        const config = require('./config/config.json')
+        const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken)
+        joinlog.edit({
+            name: `${guild.name}`,
+            avatar: `${guild.iconURL()}`,
+        })
+    })
     client.on("guildCreate", async (guild) => {
     const config = require('./config/config.json')
     const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
     const god = guild.id;
    const godname = guild.name;
-   const ICON = guild.iconURL()
-
-   joinlog.edit({
-    name: `${guild.name}`,
-    avatar: `${guild.iconURL()}`,
-})
     global.settings = await Guild.findOne({
         guildID: guild.id
     }, (err, guild) => {
