@@ -46,7 +46,9 @@ const roleColor =
                     let file = require(`../../commands/${dir}/${command}`);
                 }).map((command) => {
                     let file = require(`../../commands/${dir}/${command}`);
-
+                    if(!message.channel.nsfw) {
+                        return !file.nsfwOnly;
+                    }
                     if (!file.name) return "No command name.";
 
                     let name = file.name.replace(".js", "");
