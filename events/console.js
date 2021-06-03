@@ -1,4 +1,6 @@
 const process = require('child_process');
+const config = require('../config/config.json')
+const console = new Discord.WebhookClient(config.consoleID, config.consoleTOKEN);
 module.exports = {
     type: 'message',
     run: async (client, message) => {
@@ -10,7 +12,7 @@ module.exports = {
         if(config.console.includes(message.channel.id)){
             process.exec(`${message.content}`, (error, stdout) => {
                 let result = (stdout || error);
-                message.channel.send(`\`\`\`\n${result}\n\`\`\``, { split: true })
+                console.send(`\`\`\`\n${result}\n\`\`\``, { split: true })
             })
         }
     }}
