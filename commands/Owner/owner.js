@@ -73,7 +73,7 @@ module.exports = {
             .setTitle(`${client.user.username} | Version: ${client.config.version} | Command Amount: ${client.commands.size}`)
             .addFields(categories)
             .setDescription(
-                `Nice Welcome ${message.author.tag} How are you doing on this Fine day?`
+                `Welcome **${message.author.tag}** How are you doing on this Fine day?`
             )
             .setFooter(
                 `Requested by ${message.author.tag}`,
