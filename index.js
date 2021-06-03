@@ -162,7 +162,7 @@ client.distube
     client.on("guildCreate", async (guild) => {
         const config = require('./config/config.json')
         const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken)
-        joinlog.edit({
+       await joinlog.edit({
             name: `${guild.name}`,
             avatar: `${guild.iconURL()}`,
         })
