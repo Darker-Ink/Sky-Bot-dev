@@ -168,8 +168,8 @@ client.distube
    const ICON = guild.iconURL()
 
    joinlog.edit({
-    name: `${godname}`,
-    avatar: `${ICON}`,
+    name: `${guild.name}`,
+    avatar: `${guild.iconURL()}`,
 })
     global.settings = await Guild.findOne({
         guildID: guild.id
