@@ -44,7 +44,6 @@ const roleColor =
 
                 const cmds = commands.filter((command) => {
                     let file = require(`../../commands/${dir}/${command}`);
-                    //return  !file.nsfwOnly && message.channel.nsfw
                 }).map((command) => {
                     let file = require(`../../commands/${dir}/${command}`);
 
