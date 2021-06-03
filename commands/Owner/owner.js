@@ -7,14 +7,14 @@ const {
 } = require("fs");
 
 module.exports = {
-    name: 'example', 
-    usage: "This is a example usage",
-    description: 'This is a example Description',
+    name: 'owner', 
+    usage: "",
+    description: 'This is the owner help command',
     category: "Example",
-    aliases: "",
+    aliases: "owner-help",
     cooldown: 0,
-    ownerOnly: false,
-    hidden: false,
+    ownerOnly: true,
+    hidden: true,
     disabledbug: false,
     disabled: false,
     perms: [],
