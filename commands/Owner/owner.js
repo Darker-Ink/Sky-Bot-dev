@@ -31,7 +31,6 @@ module.exports = {
         let categories = [];
 
         readdirSync("./commands/").forEach((dir) => {
-            if (dir === 'Owner') return;
             const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
                 file.endsWith(".js")
             );
