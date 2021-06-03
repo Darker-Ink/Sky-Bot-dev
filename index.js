@@ -239,13 +239,13 @@ const {
     inspect
 } = require("util")
 process.on('unhandledRejection', (reason, promise) => {
-    errorHook.send(`UnhandledRejection\nReason:\n\`\`\`\n${inspect(reason, { depth: 0 })}\n\`\`\` Promise:\n\`\`\`\n${inspect(promise, { depth: 0 })}\n\`\`\``)
+    errorHook.send(`UnhandledRejection\nReason:\n\`\`\`\n${inspect(reason, { depth: 0 })}\n\`\`\` Promise:\n\`\`\`\n${inspect(promise, { depth: 0 })}\n\`\`\``, { split: true })
 })
 process.on('uncaughtException', (err, origin) => {
-    errorHook.send(`UncaughtException\nError:\n\`\`\`\n${inspect(err, { depth: 0 })}\n\`\`\`\nType: ${inspect(origin, { depth: 0 })}`)
+    errorHook.send(`UncaughtException\nError:\n\`\`\`\n${inspect(err, { depth: 0 })}\n\`\`\`\nType: ${inspect(origin, { depth: 0 })}`, { split: true })
 })
 process.on('warning', (warn) => {
-    errorHook.send(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn}\n\`\`\``)
+    errorHook.send(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn}\n\`\`\``, { split: true })
 })
 
 /*
