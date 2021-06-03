@@ -165,6 +165,12 @@ client.distube
     const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
     const god = guild.id;
    const godname = guild.name;
+   const ICON = guild.iconURL()
+
+   joinlog.edit({
+    name: `${godname}`,
+    avatar: `${ICON}`,
+})
     global.settings = await Guild.findOne({
         guildID: guild.id
     }, (err, guild) => {
