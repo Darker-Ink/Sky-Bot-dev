@@ -58,7 +58,7 @@ const roleColor =
 
                 data = {
                     name: dir.toUpperCase(),
-                    value: cmds.length === 0 ? "To See NSFW commands Use Help In a NSFW channel." : cmds.join(" "),
+                    value: cmds.length === 0 ? "This is a Bug." : cmds.join(" "),
                 };
 
                 categories.push(data);
