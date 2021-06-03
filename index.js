@@ -160,18 +160,14 @@ client.distube
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
     client.on("guildCreate", async (guild) => {
-        const config = require('./config/config.json')
-        const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken)
-       await joinlog.edit({
-            name: `${guild.name}`,
-            avatar: `${guild.iconURL()}`,
-        })
-    })
-    client.on("guildCreate", async (guild) => {
     const config = require('./config/config.json')
     const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
     const god = guild.id;
    const godname = guild.name;
+   await joinlog.edit({
+    name: `${guild.name}`,
+    avatar: `${guild.iconURL()}`,
+})
     global.settings = await Guild.findOne({
         guildID: guild.id
     }, (err, guild) => {
