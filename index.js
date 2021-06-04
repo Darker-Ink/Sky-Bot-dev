@@ -611,3 +611,19 @@ if (!interaction.options[0]?.value) {
                 .setColor(roleColor);
             return interaction.reply(embed);
 }}})
+
+var DanBotHosting = require("danbot-hosting");
+ 
+client.on("ready", async () => {
+  console.log("bot is now ready");
+  const API = new DanBotHosting.Client("danbot-vm3g5q", client);
+ 
+  // Start posting
+  let initalPost = await API.autopost();
+ 
+  if (initalPost) {
+    console.error(initalPost); // console the error
+  }
+  let res = await API.botInfo()
+  console.log(res) 
+});
