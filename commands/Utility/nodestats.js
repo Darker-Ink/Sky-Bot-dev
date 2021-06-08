@@ -22,5 +22,5 @@ module.exports = {
   
               let nodes = await fetch("https://danbot.host/nodeStatus")
                 nodes = await nodes.json()
-                return msg.edit(JSON.stringify(nodes), { split: true })
+                return msg.edit(JSON.stringify(nodes[1]), { split: true })
         }}
