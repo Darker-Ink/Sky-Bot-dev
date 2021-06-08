@@ -653,8 +653,7 @@ client.on('message', async message => {
 			description: 'Replies with Pong!',
 		};
 
-		const command = await client.application?.commands.create(data);
-		console.log(command);
+		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
 	}
 });
 
