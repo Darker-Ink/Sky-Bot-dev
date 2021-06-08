@@ -22,5 +22,5 @@ module.exports = {
   
               let nodes = await fetch("https://danbot.host/nodeStatus")
                 nodes = await nodes.json()
-                return msg.edit(`${nodes.Node7.is_vm_online}`)
+                return msg.edit(`${nodes.Node7}`)
         }}
