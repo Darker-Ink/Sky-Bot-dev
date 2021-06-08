@@ -667,7 +667,7 @@ client.on('interaction', async interaction => {
 			.addComponents(new MessageButton()
 				.setCustomID('primary')
 				.setLabel('primary')
-				.setStyle('PRIMARY'));
+				.setStyle('DANGER'));
 
 		const embed = new MessageEmbed()
 			.setColor('#0099ff')
@@ -675,13 +675,18 @@ client.on('interaction', async interaction => {
 			.setURL('https://discord.js.org/')
 			.setDescription('Some description here');
 
-		await interaction.reply('Pong!', { ephemeral: true, embeds: [embed], components: [row] });
+		await interaction.reply('Pong!', { ephemeral: false, embeds: [embed], components: [row] });
 	}
 });
 
 client.on('interaction', async interaction => {
+    const row = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setCustomID('suec')
+				.setLabel('suec')
+				.setStyle('SUCCESS'));
 	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
 	if (interaction.customID === 'primary') {
-		await interaction.update('A button was clicked!', { components: [] });
+		await interaction.update('A button was clicked!', { components: [row] });
 	}
 });
