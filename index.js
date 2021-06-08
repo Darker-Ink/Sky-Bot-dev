@@ -649,7 +649,7 @@ client.on('message', async message => {
 
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
 		const data = {
-			name: 'button',
+			name: 'buttons',
 			description: 'Replies with Pong!',
 		};
 
@@ -662,7 +662,7 @@ const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'button') {
+	if (interaction.commandName === 'buttons') {
 		const row = new MessageActionRow()
 			.addComponents(new MessageButton()
 				.setCustomID('primary')
