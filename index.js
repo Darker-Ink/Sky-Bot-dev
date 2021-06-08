@@ -678,3 +678,11 @@ client.on('interaction', async interaction => {
 		await interaction.reply('Pong!', { ephemeral: true, embeds: [embed], components: [row] });
 	}
 });
+
+client.on('message', message => {
+	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '379781622704111626';
+	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+
+	collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
+	collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+});
