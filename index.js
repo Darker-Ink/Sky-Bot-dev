@@ -643,3 +643,39 @@ if (!interaction.options[0]?.value) {
                 .setColor(roleColor);
             return interaction.reply(embed);
 }}})
+
+client.on('message', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
+
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = {
+			name: 'button',
+			description: 'Replies with Pong!',
+		};
+
+		const command = await client.application?.commands.create(data);
+		console.log(command);
+	}
+});
+
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'button') {
+		const row = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setCustomID('primary')
+				.setLabel('primary')
+				.setStyle('PRIMARY'));
+
+		const embed = new MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('Some title')
+			.setURL('https://discord.js.org/')
+			.setDescription('Some description here');
+
+		await interaction.reply('Pong!', { ephemeral: true, embeds: [embed], components: [row] });
+	}
+});
