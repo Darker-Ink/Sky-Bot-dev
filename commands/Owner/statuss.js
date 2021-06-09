@@ -16,9 +16,6 @@ module.exports = {
     darkinkonly: true, // If its only for DarkerInk
     notneeded: true,
     run: async (client, message, args, data) => {
-
-        if (args[999]) {
-        } else {
     
             if (args[0].match(/[0-9a-z]+/i) == null)
                 return message.channel.send("lol only use english characters.");
@@ -156,5 +153,4 @@ module.exports = {
                     msg.edit("Error: Can't find a server with that ID!")
                 })
             })
-        }
     }}
