@@ -133,7 +133,7 @@ module.exports = {
                                     followRedirect: true,
                                     maxRedirects: 5,
                                     headers: {
-                                        'Authorization': 'Bearer ' + danbot-vm3g5q,
+                                        'Authorization': 'Bearer ' + 'danbot-vm3g5q',
                                         'Content-Type': 'application/json',
                                         'Accept': 'Application/vnd.pterodactyl.v1+json',
                                     },
