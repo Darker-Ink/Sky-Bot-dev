@@ -17,21 +17,17 @@ module.exports = {
     notneeded: true,
     run: async (client, message, args, data) => {
 
-        if (!args[0]) {
-            let embed = new Discord.MessageEmbed()
-                .setColor("GREEN")
-                .addField("__**Server Status**__", "What server would you like to view? \nCommand Format: `" + '1' + "server status serverid")
-            await message.channel.send(embed)
+        if (args[999]) {
         } else {
     
-            if (args[1].match(/[0-9a-z]+/i) == null)
+            if (args[0].match(/[0-9a-z]+/i) == null)
                 return message.channel.send("lol only use english characters.");
     
-            args[1] = args[1].match(/[0-9a-z]+/i)[0];
+            args[0] = args[0].match(/[0-9a-z]+/i)[0];
     
-            message.channel.send('Fetching `' + args[1] + '`. \n\n*This could take a few seconds*').then((msg) => {
+            message.channel.send('Fetching `' + args[0] + '`. \n\n*This could take a few seconds*').then((msg) => {
                 axios({
-                    url: 'https://panel.danbot.host' + "/api/client/servers/" + args[1],
+                    url: 'https://panel.danbot.host' + "/api/client/servers/" + args[0],
                     method: 'GET',
                     followRedirect: true,
                     maxRedirects: 5,
@@ -42,7 +38,7 @@ module.exports = {
                     }
                 }).then(response => {
                     axios({
-                        url: 'https://panel.danbot.host' + "/api/client/servers/" + args[1] + "/resources",
+                        url: 'https://panel.danbot.host' + "/api/client/servers/" + args[0] + "/resources",
                         method: 'GET',
                         followRedirect: true,
                         maxRedirects: 5,
@@ -79,7 +75,7 @@ module.exports = {
                         collector.on('collect', async (reaction, user) => {
                             if (reaction.emoji.name === "🟢") {
                                 axios({
-                                    url: 'https://panel.danbot.host' + "/api/client/servers/" + args[1] + "/power",
+                                    url: 'https://panel.danbot.host' + "/api/client/servers/" + args[0] + "/power",
                                     method: 'POST',
                                     followRedirect: true,
                                     maxRedirects: 5,
@@ -90,7 +86,7 @@ module.exports = {
                                     },
                                     data: {"signal": "start"},
                                 }).then(response => {
-                                    message.reply(args[1] + ' server started!').then((msg2) => {
+                                    message.reply(args[0] + ' server started!').then((msg2) => {
                                         setTimeout(() => {
                                             msg2.delete()
                                         }, 2000)
@@ -98,7 +94,7 @@ module.exports = {
                                 });
                             } else if (reaction.emoji.name === "🔄") {
                                 axios({
-                                    url: `https://panel.danbot.host` + "/api/client/servers/" + args[1] + "/power",
+                                    url: 'https://panel.danbot.host' + "/api/client/servers/" + args[0] + "/power",
                                     method: 'POST',
                                     followRedirect: true,
                                     maxRedirects: 5,
@@ -111,7 +107,7 @@ module.exports = {
                                 }).then(response => {
                                     setTimeout(() => {
                                         axios({
-                                            url: `https://panel.danbot.host` + "/api/client/servers/" + args[1] + "/power",
+                                            url: 'https://panel.danbot.host' + "/api/client/servers/" + args[0] + "/power",
                                             method: 'POST',
                                             followRedirect: true,
                                             maxRedirects: 5,
@@ -122,7 +118,7 @@ module.exports = {
                                             },
                                             data: {"signal": "start"},
                                         }).then(response => {
-                                            message.reply(args[1] + ' server restarted!').then((msg2) => {
+                                            message.reply(args[0] + ' server restarted!').then((msg2) => {
                                                 setTimeout(() => {
                                                     msg2.delete()
                                                 }, 2000)
@@ -132,7 +128,7 @@ module.exports = {
                                 });
                             } else if (reaction.emoji.name === "🔴") {
                                 axios({
-                                    url: `https://panel.danbot.host` + "/api/client/servers/" + args[1] + "/power",
+                                    url: 'https://panel.danbot.host' + "/api/client/servers/" + args[0] + "/power",
                                     method: 'POST',
                                     followRedirect: true,
                                     maxRedirects: 5,
@@ -143,7 +139,7 @@ module.exports = {
                                     },
                                     data: {"signal": "kill"},
                                 }).then(response => {
-                                    message.reply(args[1] + ' server stopped!').then((msg2) => {
+                                    message.reply(args[0] + ' server stopped!').then((msg2) => {
                                         setTimeout(() => {
                                             msg2.delete()
                                         }, 2000)
