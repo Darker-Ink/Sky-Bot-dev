@@ -1,9 +1,9 @@
-const githubhook = new Discord.WebhookClient('832350968837308486', 'FxTirx2pPs3OHL5MjuR7rn4Rmre8HinUkMjpjdvKye_e-5A2e_uATnyr8vfoo6O67m-c');
+const config = require('../config/config.json')
+const githubhook = new Discord.WebhookClient(config.gitpullhookid, config.gitpullhooktoken);
 const exec = require('child_process').exec;
 const date = require('date-and-time');
 const now = new Date();
 const time = (date.format(now, 'YYYY/MM/DD hh:mm'))
-const pm2stats = new Discord.WebhookClient('846411328234717215', 'i9GUJQlHHY11haR-MfkJIuYf7kGeEGTE6dLh_s--InaYgleYbDucH6KWk25J9F5nOHx2');
 module.exports = {
     type: 'ready',
     async run(client) {
@@ -30,20 +30,31 @@ setInterval(() => {
             let response = (error || stdout);
             if (!error) {
                 if (response.includes("Already up to date.")) {
-                   // pm2stats.send(`[Bot already up to date. No changes since last pull]\n\n\`\`\`\n${response}\n\`\`\``)
                     //console.log('Bot already up to date. No changes since last pull')
                 } else {
                     githubhook.send('**[AUTOMATIC]** \nNew update on GitHub. Pulling. \n\nLogs: \n```' + response + "```" + "\n\n\n**Restarting bot**")
-                    pm2stats.send('[Bot Update New Changes]\n\nLogs: \n```' + response + "```" + "\n\n\n")
                     setTimeout(() => {
-                      //exec('npx pm2 restart 0')
 			        process.exit()
                     }, 1000)
                 };
             }
         })
     }, 30000)
-
+    setInterval(() => {
+        var oss = require('os-utils');
+const ms = require('ms')
+const os = require('os')
+const channel = client.channels.cache.get('849427878914424852')
+function formatBytes(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(1024));
+                return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
+            }
+oss.cpuUsage(function(v){
+channel.setTopic(`MEM USAGE: ${formatBytes(process.memoryUsage().heapUsed)}\nCPU Usage: ${v.toFixed(2)}%\nUPTIME: ${ms(os.uptime() * 1000, { long: true })}\nPING: ${client.ws.ping}\nDan Is hot`)
+});
+    }, 30000)
         setInterval(() => {
             let status = statuses[Math.floor(Math.random() * statuses.length)]
             let atttscs = atcs[Math.floor(Math.random() * atcs.length)]

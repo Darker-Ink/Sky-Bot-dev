@@ -11,32 +11,23 @@ module.exports = {
     perms: ["MANAGE_MESSAGES"],
     botperms: ["MANAGE_MESSAGES"],
     run: async (client, message, args) => {
-        try {
-            if (!args[0]) {
-                return message.channel.send("Please Enter An Amount Between 1 and 100")
-            }
-
-            let deleteAmount;
-
-            if (parseInt(args[0]) > 100) {
-                deleteAmount = 100;
-
-            } else {
-                deleteAmount = parseInt(args[0]);
-            }
-
-            await message.channel.bulkDelete(deleteAmount, true);
-
-            const embed = new MessageEmbed()
-                .setDescription(`Successfully Deleted ${deleteAmount} Messages`)
-
-                .setColor('#04E6FF')
-
-            await message.channel.send(embed).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 5000))
-
-
-        } catch (err) {
-            message.reply(`Hey It seems like you got a error, This is not good Please Join https://discord.gg/jKeEgwrrbu and report it, Or if you don't want to join the server just do \n\`<prefix>report-command <command name> <bug>\``)
-        }
-    }
-}
+        const user = message.mentions.users.first()
+      const amount = !!parseInt(message.content.split(' ')[2]) ? parseInt(message.content.split(' ')[2]) : parseInt(message.content.split(' ')[1])
+      if (!amount) return message.channel.send("You need to give an amount");
+      if (amount <= 1) return message.channel.send("Can only delete a min of 2 messages")
+      if (amount >= 101) return message.channel.send("Can only delete a max of 100 messages")
+      if(user) {
+        return message.channel.messages.fetch({
+          limit: `${amount}`
+      }).then((messages) => { 
+          const botMessages = [];
+          messages.filter(m => m.author.id === `${user.id}`).forEach(msg => botMessages.push(msg))
+        message.channel.bulkDelete(botMessages).then(() => {
+         message.channel.send(`Cleared \`${amount}\` Messages from \`${user.username}\``).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
+          });
+      })
+      }
+      await message.channel.bulkDelete(amount, true).then(() => {
+        message.channel.send(`Cleared \`${amount}\` Messages from \`${message.channel.name}\``).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
+         });
+    }}

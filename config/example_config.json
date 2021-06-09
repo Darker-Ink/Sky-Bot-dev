@@ -1,0 +1,33 @@
+{
+    "version": "YOUR VERSION",
+    "prefix": "YOUR PREFIX",
+    "darkink": [
+        "379781622704111626"
+    ],
+    "footer": "ty for using me",
+    "color": "RANDOM",
+    "beta": [
+        "YOUR BETA TESTERS IDS"
+    ],
+    "console": "YOUR CONSOLE IDS",
+    "support": [
+    "YOUR SUPPORT USERS IDS"
+    ],
+    "owners": [
+	"YOUR OWNERS IDS"
+    ],
+    "errorhooktoken": "",
+    "errorhookid": "",
+    "gitpullhooktoken": "",
+    "gitpullhookid": "",
+    "joinlogtoken": "",
+    "joinlogid": "",
+    "emoji": {
+        "play": "▶️",
+        "stop": "⏹️",
+        "queue": "📄",
+        "success": "☑️",
+        "repeat": "🔁",
+        "error": "❌"
+    }
+}

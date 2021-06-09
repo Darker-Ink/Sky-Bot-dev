@@ -14,6 +14,9 @@
         "424418136515936276",
         "206481777987026944"
     ],
+    "console": "849427878914424852",
+    "consoleID": "849854591481937950",
+    "consoleTOKEN": "TKwxexp3SRWLnYjoo7zrftcqiQBnpI0hzpkbNezynpsLvg6UkP7eMtFmjmr5DAB5Pk30",
     "support": [
     "206481777987026944",
     "379781622704111626",
@@ -26,8 +29,12 @@
 	"682090006151561233",
 	"206481777987026944"
     ],
-    "everyoneMention": false,
-    "hostedBy": true,
+    "errorhooktoken": "TZpfpqxDXzI3iHnNjSEn7FB1cMrIUzsNGdeNwijxBJlJakXsKttKUDIzIMq-BPR_u61U",
+    "errorhookid": "845648143058993174",
+    "gitpullhooktoken": "FxTirx2pPs3OHL5MjuR7rn4Rmre8HinUkMjpjdvKye_e-5A2e_uATnyr8vfoo6O67m-c",
+    "gitpullhookid": "832350968837308486",
+    "joinlogtoken": "fjm8TsJAu7E6jI5PmtE60wls2lGl7HRh3vrUmh7wOI-dTZU3Tz3okE8DfCoqNDqg2JLS",
+    "joinlogid": "849829139082117140",
     "emoji": {
         "play": "▶️",
         "stop": "⏹️",
