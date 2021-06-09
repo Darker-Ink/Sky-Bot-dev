@@ -234,7 +234,7 @@ client.on("guildDelete", guild => {
         if (err) console.error(err)
     });
 })
-
+/*
 const {
     inspect
 } = require("util")
@@ -248,7 +248,6 @@ process.on('warning', (warn) => {
     errorHook.send(`Warning\nWarn:\n\`\`\`\n${warn.name}\n${warn.message}\n\n${warn}\n\`\`\``, { split: true })
 })
 
-/*
 client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
