@@ -8,7 +8,7 @@ module.exports = {
     type: 'message',
     run: async (client, message) => {
         try {
-
+            if(message.author.bot) return
             let guildDB = await client.data.getGuildDB(message.guild.id)
             let msgDB = await client.data.getMsgDB(message.guild.id)
             if (message.channel.type === "text" && !message.guild.me.permissions.has("SEND_MESSAGES")) return;
