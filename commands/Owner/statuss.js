@@ -150,7 +150,7 @@ module.exports = {
                         });
                     });
                 }).catch(error => {
-                    msg.edit("Error: Can't find a server with that ID!")
+                    msg.edit("Error: Can't find a server with that ID! " + error.stack)
                 })
             })
     }}
