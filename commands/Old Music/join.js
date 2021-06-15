@@ -28,8 +28,6 @@ const channel = message.member?.voice.channel;
 			try {
                 if (channel.type == 'stage') {
                     const connection = await connectToChannel(channel) 
-                    connection.message.guild.me.voice.setDeaf(true);
-                    connection.message.messageguild.me.voice.setSuppressed(false);
                                     await message.reply('Joined The VC');
                     } else {
                         const connection = await connectToChannel(channel)
