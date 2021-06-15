@@ -23,11 +23,11 @@ module.exports = {
         const command = args.shift().toLowerCase();
 
         try {
-            evaled = await eval(args.join(' '));
-            message.channel.send({ content: inspect(evaled) });
+            evaled = eval(args.join(' '));
+            message.channel.send({ content: `${inspect(evaled)}` });
             console.log(inspect(evaled));
         } catch (err) {
-        message.channel.send({ content: err });
+        message.channel.send({ content: `${err}` });
         }
     }
 };
