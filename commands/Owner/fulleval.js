@@ -17,8 +17,6 @@ module.exports = {
     category: "Owner",
     hidden: true,
     run: async (client, message) => {
-        const stringOne = `[WARN] ${message.author.tag} Used the eval command`.yellow;
-        console.log(stringOne)
         const args = message.content.split(' ');
         const command = args.shift().toLowerCase();
 
@@ -27,7 +25,7 @@ module.exports = {
             message.channel.send({ content: `${inspect(evaled)}` });
             console.log(inspect(evaled));
         } catch (err) {
-        message.channel.send({ content: `${err}` });
+        message.channel.send({ content: `${err}`, split: true });
         }
     }
 };
