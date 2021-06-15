@@ -655,6 +655,10 @@ client.on("ready", async () => {
   if (initalPost) {
     console.error(initalPost); // console the error
   }
-  let res = await API.botInfo()
-  console.log(res) 
 });
+async function connectToChannel(channel) {
+    const connection = joinVoiceChannel({
+        channelId: channel.id,
+        guildId: channel.guild.id,
+        adapterCreator: channel.guild.voiceAdapterCreator,
+    })};
