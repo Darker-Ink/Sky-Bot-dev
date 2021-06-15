@@ -26,8 +26,8 @@ module.exports = {
 			try {
                 if (channel.type == 'stage') {
                     const connection = await connectToChannel(channel) 
-                    connection.guild.me.voice.setDeaf(true);
-                    connection.guild.me.voice.setSuppressed(false);
+                    connection.message.guild.me.voice.setDeaf(true);
+                    connection.message.messageguild.me.voice.setSuppressed(false);
                                     await message.reply('Joined The VC');
                     } else {
                         const connection = await connectToChannel(channel)
