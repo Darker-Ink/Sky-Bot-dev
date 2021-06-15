@@ -25,7 +25,7 @@ module.exports = {
         const embed = new MessageEmbed()
             .setDescription('Stopped!')
             .setColor("BLUE")
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
 
     }
 }

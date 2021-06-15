@@ -78,7 +78,7 @@ module.exports = {
                    .addField('reason', `${maintenance.reason}`)
                    .setColor('GREEN')
                    .setTimestamp()
-                  return message.channel.send(embed)
+                  return message.channel.send({ embeds: [embed] })
                    }
                 if (command.ownerOnly && !config.owners.includes(message.author.id)) {
                     return

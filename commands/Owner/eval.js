@@ -39,7 +39,7 @@ const responses = ["SyntaxError: Unexpected token F in JSON at position 48", "Sy
             .addField(`InPut`, `\`\`\`js\n${code}\n\`\`\``)
             .addField(`OutPut`, `\`\`\`js\n${evaled}\n\`\`\``)
             .setColor('GREEN')
-            return message.channel.send(embed)
+            return message.channel.send({ embeds: [embed] })
         } catch (err) {
             const erroembed = new MessageEmbed()
             .setTitle('Eval')

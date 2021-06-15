@@ -32,6 +32,6 @@ module.exports = {
             .addField(`Result`, `\`\`\`js\n${result}\`\`\``)
             .setColor("BLUE")
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

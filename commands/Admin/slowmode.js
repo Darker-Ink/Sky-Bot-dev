@@ -68,7 +68,7 @@ module.exports = {
                     .addField(`Reason`, reason)
                     .setColor('BLUE')
 
-                return message.channel.send(embed)
+                return message.channel.send({ embeds: [embed] })
             } else if (afterSlowmode === 0) {
                 return message.channel.send(slowmodeError3)
             }

@@ -17,6 +17,6 @@ module.exports = {
             .setDescription(data.slip.advice)
             .setColor("BLUE")
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

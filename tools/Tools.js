@@ -62,6 +62,6 @@ module.exports.fetchCmdList = async function(client, message, data){
     }
   }
 
-  return message.channel.send(embed)
+  return message.channel.send({ embeds: [embed] })
 
 };

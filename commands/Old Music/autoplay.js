@@ -26,6 +26,6 @@ module.exports = {
         const embed = new MessageEmbed()
             .setDescription(`Autoplay Mode Set to:\`` + (mode ? "On" : "Off") + "\`")
             .setColor("BLUE")
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

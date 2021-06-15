@@ -60,7 +60,7 @@ module.exports = {
                 .setTimestamp();
 
 
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
         } catch (err) {
             message.reply(errorMessage)
             errorhook.send('```\n' + err.stack + '\n```')

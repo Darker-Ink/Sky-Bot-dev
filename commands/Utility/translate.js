@@ -23,7 +23,7 @@ module.exports = {
                 .setDescription(result.text)
                 .setColor("BLUE")
 
-            return message.channel.send(embed)
+            return message.channel.send({ embeds: [embed] })
         }).catch(error => {
             const translateError = new MessageEmbed()
                 .setDescription(error)

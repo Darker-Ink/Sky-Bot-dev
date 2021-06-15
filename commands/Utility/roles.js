@@ -31,7 +31,7 @@ module.exports = {
                     .setColor("RANDOM")
                     .setTitle(`Roles`)
                     .setDescription(`${toSend}, @everyone`)
-                message.channel.send(embed)
+                message.channel.send({ embeds: [embed] })
             }
         } catch (error) {
             message.reply(errorMessage)

@@ -21,7 +21,7 @@ module.exports = {
                 .setTitle(`${member.tag}\'s Avatar`)
                 .setImage(avatar)
             	.setTimestamp();
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
         } catch (err) {
             message.reply(errorMessage)
             errorhook.send('```\n' + err.stack + '\n```')    

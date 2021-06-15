@@ -102,6 +102,6 @@ module.exports = {
 
         if (rc > 30 || roles.length > 1023) embed.addField(`Roles [${rc}]`, `_To many to show If you want to see them all do ?roles_`)
         else embed.addField(`Roles [${rc}]`, roles.slice(0, -1))
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
     }
 }

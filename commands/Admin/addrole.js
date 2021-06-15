@@ -48,7 +48,7 @@ module.exports = {
                 .setDescription(`Role ${roleToGive} has been added to ${member}`)
                 .setColor("BLUE")
 
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
 
 
         } catch (err) {

@@ -27,7 +27,7 @@ module.exports = {
                 .setFooter(`Requested by ${message.author.tag}`)
                 .setColor('RANDOM')
 
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
         } else {
             message.channel.send('No message found in this guild!')
         }

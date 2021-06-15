@@ -32,6 +32,6 @@ module.exports = {
 	.setTitle(`${client.emotes.success} Queue Shuffled!`)
     .setDescription(`New Queue:\n ${q}`)
      .setColor("GREEN")
-     message.channel.send(embed)
+     message.channel.send({ embeds: [embed] })
     }
 }

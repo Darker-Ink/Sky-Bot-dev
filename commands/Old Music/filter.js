@@ -41,7 +41,7 @@ module.exports = {
                 .setDescription('Music Filter has been set to: ' + `(${filterOption})` || 'Off')
                 .setColor("BLUE")
 
-            return message.channel.send(embed)
+            return message.channel.send({ embeds: [embed] })
         } catch (error) {
             return;
         }

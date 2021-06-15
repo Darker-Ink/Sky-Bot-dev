@@ -47,7 +47,7 @@ module.exports = {
 
             try {
                 user.roles.add(muterole)
-                await message.channel.send(embed)
+                await message.channel.send({ embeds: [embed] })
                 user.send(`You Are Muted in ${message.guild.name}`)
             } catch (error) {
                 console.log(error)

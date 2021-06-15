@@ -20,7 +20,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter('You have 60s to react')
 
-            em = await message.channel.send(embed)
+            em = await message.channel.send({ embeds: [embed] })
             await em.react('✅')
             await em.react('❌')
 

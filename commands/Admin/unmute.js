@@ -33,7 +33,7 @@ module.exports = {
                 .setColor("BLUE")
 
             user.roles.remove(muterole)
-            await message.channel.send(embed)
+            await message.channel.send({ embeds: [embed] })
             user.send(`You Are Unmuted!`)
 
         } catch (err) {

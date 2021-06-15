@@ -38,7 +38,7 @@ module.exports = {
                 embed.setDescription(`${text}`)
                     .setTimestamp(message.createdAt)
                 status.set(`${message.author.id}_${message.guild.id}`, text)
-                message.channel.send(embed)
+                message.channel.send({ embeds: [embed] })
 
                 message.member.setNickname(`\[AFK\] ${member}`)
             }

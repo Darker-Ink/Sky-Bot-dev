@@ -23,7 +23,7 @@ module.exports = {
             if (!args[0]) {
                 embed.setTitle("ERROR")
                     .setDescription("You Didn't Use the command right\n\nwelcome set <#channel>\nwelcome custom <message>\nwelcome disable ")
-                return message.channel.send(embed); // Error message
+                return message.channel.send({ embeds: [embed] }); // Error message
             }
 
             if (args[0].toLowerCase() === "set" && !args[1]) {
@@ -44,13 +44,13 @@ module.exports = {
                 embed.setTitle("Successfully updated")
                     .setDescription(`welcome messages will be sent to ${welcomeChannel}`)
 
-                return message.channel.send(embed)
+                return message.channel.send({ embeds: [embed] })
             }
 
             if (args[0].toLowerCase() === "custom" && !args[1]) {
                 embed.setTitle("Error")
                     .setDescription("Unable to find a valid channel.\n\nMissing argument!```welcome set #channel\nwelcome custom <text>\nwelcome disable```")
-                return message.channel.send(embed); // Error message
+                return message.channel.send({ embeds: [embed] }); // Error message
             }
 
             if (args[0].toLowerCase() === "custom" && args[1]) {
@@ -58,7 +58,7 @@ module.exports = {
                 if (!data.guild.addons.welcome.enabled) {
                     embed.setTitle("Error")
                         .setDescription("Please enable welcome messages before setting up a custom message.\n\nMissing argument!\nVaribles:```{user.ping} - @Darkerink#1750\n{user.name} - DarkerInk\n{user.id} - 379781622704111626\n{user.tag} - Darkerink#1750\n{guild.name} - Supporting The Sky\n{guild.id} - 827204137829007361\n{guild.totalUser} - 50k```")
-                    return message.channel.send(embed); // Error message
+                    return message.channel.send({ embeds: [embed] }); // Error message
                 }
 
                 await args.shift()
@@ -66,7 +66,7 @@ module.exports = {
                 if (msg.length > 1500) {
                     embed.setTitle("Error")
                         .setDescription("Messages exceeded 1500 characters, please make sure message is under 1500 characters.")
-                    return message.channel.send(embed); // Error message
+                    return message.channel.send({ embeds: [embed] }); // Error message
                 }
 
                 data.guild.addons.welcome.message = msg;
@@ -75,14 +75,14 @@ module.exports = {
 
                 embed.setTitle("Successfully updated")
                     .setDescription("Custom message has been updated.\n\n**New Message**\n```" + msg + "```")
-                return message.channel.send(embed); // Error message
+                return message.channel.send({ embeds: [embed] }); // Error message
             }
 
             if (args[0].toLowerCase() === "disable") {
                 if (!data.guild.addons.welcome.enabled) {
                     embed.setTitle("Successfully updated")
                         .setDescription("welcome messages were already disabled.")
-                    return message.channel.send(embed); // Error message
+                    return message.channel.send({ embeds: [embed] }); // Error message
                 }
 
                 data.guild.addons.welcome.enabled = false;
@@ -92,12 +92,12 @@ module.exports = {
 
                 embed.setTitle("Successfully updated")
                     .setDescription("welcome messages have now been disabled.")
-                return message.channel.send(embed); // Error message
+                return message.channel.send({ embeds: [embed] }); // Error message
             }
 
             embed.setTitle("Error")
                 .setDescription("Missing argument!```welcome set #channel\nwelcome custom <text>\nwelcome disable```")
-            return message.channel.send(embed); // Error message
+            return message.channel.send({ embeds: [embed] }); // Error message
 
         } catch (err) {
             message.reply(errorMessage)

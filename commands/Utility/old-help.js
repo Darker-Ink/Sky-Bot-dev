@@ -28,7 +28,7 @@ module.exports = {
                     .setThumbnail(client.user.displayAvatarURL())
                     .setColor("RANDOM")
                     .setFooter(client.user.username, client.user.displayAvatarURL());
-                return message.channel.send(embed);
+                return message.channel.send({ embeds: [embed] });
       } else {
         const commands = client.commands;
         let helpem= new Discord.MessageEmbed()

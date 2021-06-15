@@ -34,6 +34,6 @@ module.exports = {
             .addField("Status Message", `${dark}`)
             //.addField("steam URL", `${yes}` || "No URL")
             .setColor("#420420")
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

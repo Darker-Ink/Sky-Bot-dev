@@ -38,7 +38,7 @@ module.exports = {
                 .setDescription(`**Channel:** ${channel} \n **Reason:** ${reason}`)
                 .setColor("BLUE")
 
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
 
         } catch (err) {
             message.reply(errorMessage)

@@ -51,7 +51,7 @@ module.exports = {
                         .addField(`Account Created`, moment.utc(created_at).format("dddd, MMMM, Do YYYY"))
                         .setFooter(`Tysm For Using Me! ${message.author.username}`)
 
-                    message.channel.send(embed)
+                    message.channel.send({ embeds: [embed] })
 
                 })
 

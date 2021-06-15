@@ -17,7 +17,7 @@ module.exports = {
             .setDescription(reply)
             .setColor("BLUE")
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
 
     }
 }
