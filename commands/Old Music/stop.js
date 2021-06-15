@@ -15,7 +15,7 @@ module.exports = {
                 .setColor("RED")
             return message.channel.send(stopError)
         }
-        if (!client.distube.isPlaying(message)) {
+        if (!client.distube.queue.playing(message)) {
             const stopError2 = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")

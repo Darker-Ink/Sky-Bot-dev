@@ -15,7 +15,7 @@ module.exports = {
                 .setColor("RED")
             return message.channel.send(resumeError)
         }
-         if(!client.distube.isPlaying(message)) {
+         if(!client.distube.queue.playing(message)) {
              const resumeError2 = new MessageEmbed()
              .setDescription("There is Nothing Playing")
              .setColor("RED")
@@ -28,7 +28,7 @@ module.exports = {
                 .setColor("RED")
             return message.channel.send(queueError)
         }
-        if (!client.distube.isPaused(message)) {
+        if (!client.distube.queue.paused(message)) {
             const resumeError3 = new MessageEmbed()
                 .setDescription('The Music is not Paused')
                 .setColor("RED")
