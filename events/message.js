@@ -3,7 +3,7 @@ const Guild = require('../schema.js')
 const mongoose = require('mongoose');
 const config = require('../config/config.json')
 const Maintenance = require('../models/maintenance.js')
-
+const { entersState, VoiceConnectionStatus, joinVoiceChannel, } = require('@discordjs/voice');
 module.exports = {
     type: 'message',
     run: async (client, message) => {
