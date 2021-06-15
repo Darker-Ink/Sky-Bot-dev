@@ -29,7 +29,7 @@ const responses = ["SyntaxError: Unexpected token F in JSON at position 48", "Sy
             .addField(`InPut`, `\`\`\`js\n${code}\n\`\`\``)
             .addField(`OutPut`, `\`\`\`js\n${dresponses}\n\`\`\``)
             .setColor('RED')
-            return message.channel.send(fakeembed)
+            return message.channel.send({ embeds: [fakeembed] })
 }
         try {
             let evaled = eval(code);
@@ -46,7 +46,7 @@ const responses = ["SyntaxError: Unexpected token F in JSON at position 48", "Sy
             .addField(`InPut`, `\`\`\`js\n${code}\n\`\`\``)
             .addField(`OutPut`, `\`\`\`js\n${err.stack}\n\`\`\``)
             .setColor('RED')
-            return message.channel.send(erroembed)
+            return message.channel.send({ embeds: [erroembed] })
         }
     }
 };
