@@ -22,7 +22,7 @@ module.exports = {
 
         try {
             evaled = eval(args.join(' '));
-            message.channel.send({ content: `${inspect(evaled)}` });
+            message.channel.send({ content: `${inspect(evaled)}`, split: true });
             console.log(inspect(evaled));
         } catch (err) {
         message.channel.send({ content: `${err}`, split: true });
