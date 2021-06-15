@@ -16,13 +16,14 @@ module.exports = {
                 .setColor("RED")
             return message.channel.send(pauseError)
         }
-        if (!client.distube.isPlaying(message)) {
+        let queue = client.distube.getQueue(message);
+        if (!client.distube.queue.playing(message)) {
             const pauseError2 = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")
             return message.channel.send(pauseError2)
         }
-        if (client.distube.isPaused(message)) {
+        if (client.distube.queue.paused(message)) {
             const pauseError3 = new MessageEmbed()
                 .setDescription('The Music is Already Paused!')
                 .setColor("RED")

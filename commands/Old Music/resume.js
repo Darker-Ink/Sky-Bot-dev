@@ -15,13 +15,13 @@ module.exports = {
                 .setColor("RED")
             return message.channel.send(resumeError)
         }
+        let queue = client.distube.getQueue(message);
          if(!client.distube.queue.playing(message)) {
              const resumeError2 = new MessageEmbed()
              .setDescription("There is Nothing Playing")
              .setColor("RED")
              return message.channel.send(resumeError2)
          }
-        let queue = client.distube.getQueue(message);
         if (!queue) {
             const queueError = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
