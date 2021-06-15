@@ -50,7 +50,7 @@ module.exports = {
                 .setTimestamp()
                 .setThumbnail(cursong.thumbnail)
 			console.log(queue.currentTime)
-            message.channel.send(np);
+            message.channel.send({ embeds: [np] })
         } catch (error) {
             message.reply(errorMessage)
             errorhook.send('```\n' + error.stack + '\n```')

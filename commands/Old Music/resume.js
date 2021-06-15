@@ -13,26 +13,27 @@ module.exports = {
             const resumeError = new MessageEmbed()
                 .setDescription("You Need to be in a Voice Channel to resume Music!")
                 .setColor("RED")
-            return message.channel.send(resumeError)
+            return message.channel.send({ embeds: [resumeError] })
         }
         let queue = client.distube.getQueue(message);
-         if(!client.distube.queue.playing(message)) {
-             const resumeError2 = new MessageEmbed()
-             .setDescription("There is Nothing Playing")
-             .setColor("RED")
-             return message.channel.send(resumeError2)
-         }
         if (!queue) {
             const queueError = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")
-            return message.channel.send(queueError)
+            return message.channel.send({ embeds: [queueError] })
         }
-        if (!client.distube.queue.paused(message)) {
+        let cursong = queue.songs[0];
+        if(!cursong.playing) {
+            const resumeError2 = new MessageEmbed()
+             .setDescription("There is Nothing Playing")
+             .setColor("RED")
+             return message.channel.send({ embeds: [resumeError2] })
+        }
+        if (!cursong.paused) {
             const resumeError3 = new MessageEmbed()
                 .setDescription('The Music is not Paused')
                 .setColor("RED")
-            return message.channel.send(resumeError3)
+            return message.channel.send({ embeds: [embed] })
         }
 
         client.distube.resume(message)
