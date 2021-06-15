@@ -39,7 +39,7 @@ module.exports = {
         const embed = new MessageEmbed()
             .setDescription(`Volume has been set to \`${volume}%\``)
             .setColor("BLUE")
-        message.channel.send({ embeds: [embed] })ds: [embed] })
+        message.channel.send({ embeds: [embed] })
 
     }
 }
