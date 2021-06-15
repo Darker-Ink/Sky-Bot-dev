@@ -4,16 +4,13 @@ module.exports = {
     aliases: ['dc', 'disconnect'],
     category: "Music",
     run: async (client, message, args) => {
-        const channel = message.member?.voice.channel;
-		if (channel) {
-			try {
-				const { getVoiceConnection } = require('@discordjs/voice')
-            var connection = getVoiceConnection(message.guild.id)
-            connection.destroy()
-			} catch (error) {
-				console.error(error);
-			}
-		} else {
-			await message.reply('Join a voice channel then try again!');
-		}
+        let queue = client.distube.getQueue(message);
+        let cursong = queue.songs[0];
+        if(!queue) {
+            const pauseError2 = new MessageEmbed()
+                .setDescription("There is Nothing Playing")
+                .setColor("RED")
+            return message.channel.send({ embeds: [pauseError2] })
+        }
+        client.distube.stop(message)
     }}
