@@ -23,7 +23,7 @@ const fs = require("fs");
 
 //Client stuff
 
-client.distube = new Distube(client, {
+client.distube = new DisTube.default(client, {
     searchSongs: 1,
     emitNewSongOnly: true,
     plugins: [new SpotifyPlugin()],
