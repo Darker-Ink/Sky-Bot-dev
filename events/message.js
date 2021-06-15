@@ -141,7 +141,6 @@ module.exports = {
                     data.guild = guildDB;
                     data.Msg = msgDB;
                     data.cmd = cmd;
-                    command.run(client, message, args, data);
                     async function connectToChannel(channel) {
                         const connection = joinVoiceChannel({
                             channelId: channel.id,
@@ -155,7 +154,8 @@ module.exports = {
                             connection.destroy();
                             throw error;
                         }
-                    }            
+                    }
+                    command.run(client, message, args, data);
                 } catch (err) {
                     console.log(err)
                 }
