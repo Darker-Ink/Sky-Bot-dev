@@ -24,9 +24,16 @@ module.exports = {
         const channel = message.member?.voice.channel;
 		if (channel) {
 			try {
-				const connection = await connectToChannel(channel);
-                message.guild.me.voice.setSuppressed(false);
-				await message.reply('Joined The VC');
+                if (channel.type == 'stage') {
+                    const connection = await connectToChannel(channel);
+                                    connection.voice.setSelfDeaf(true)
+                                    connection.voice.setSuppressed(false);
+                                    await message.reply('Joined The VC');
+                    } else {
+                        const connection = await connectToChannel(channel);
+                                    connection.voice.setSelfDeaf(true)
+                                    await message.reply('Joined The VC');
+                    }
 			} catch (error) {
 				console.error(error);
 			}
