@@ -4,15 +4,16 @@ module.exports = {
     aliases: ['dc', 'disconnect'],
     category: "Music",
     run: async (client, message, args) => {
-        const voiceChannel = message.member.voice.channel
-
-        if (!voiceChannel) return message.channel.send("I\'m Not In A Voice Channel")
-
-        try {
-            voiceChannel.leave()
-        } catch (err) {
-            message.reply(errorMessage)
-            errorhook.send('```\n' + err.stack + '\n```')
-        }
-    }
-}
+        const channel = message.member?.voice.channel;
+		if (channel) {
+			try {
+				const { getVoiceConnection } = require('@discordjs/voice')
+            var connection = getVoiceConnection(message.guild.id)
+            connection.destroy()
+			} catch (error) {
+				console.error(error);
+			}
+		} else {
+			await message.reply('Join a voice channel then try again!');
+		}
+    }}
