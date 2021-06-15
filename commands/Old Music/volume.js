@@ -17,7 +17,7 @@ module.exports = {
             return message.channel.send({ embeds: [queueError] })
         }
         let cursong = queue.songs[0];
-        if(!cursong.playing) {
+        if(cursong.playing) {
             const resumeError2 = new MessageEmbed()
              .setDescription("There is Nothing Playing")
              .setColor("RED")
