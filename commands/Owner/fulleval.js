@@ -24,10 +24,10 @@ module.exports = {
 
         try {
             evaled = await eval(args.join(' '));
-            message.channel.send(inspect(evaled));
+            message.channel.send({ content: inspect(evaled) });
             console.log(inspect(evaled));
         } catch (err) {
-        message.channel.send(err)    
+        message.channel.send({ content: err });
         }
     }
 };
