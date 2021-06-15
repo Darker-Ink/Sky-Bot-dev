@@ -28,9 +28,6 @@ module.exports = {
             if (channel) {
             let songName = args.slice(0).join(" ")
             if(message.content.includes('falixnodes sucks')){
-                channel.join().then(connection => {
-                    message.guild.me.voice.setDeaf(true);
-                })
                 return client.distube.play(message, "https://youtu.be/k3NX7u8tTjI")
             }
             
@@ -40,16 +37,6 @@ module.exports = {
                     .setColor("RED")
                 return message.channel.send({ embeds: [playError2] })
             }
-            if (channel.type == 'stage') {
-                connectToChannel(channel).then(connection => {
-                    message.guild.me.voice.setDeaf(true);
-                                message.guild.me.voice.setSuppressed(false);
-                            })
-                } else {
-                    connectToChannel(channel).then(connection => {
-                        connection.me.voice.setSelfDeaf(true)
-                    })
-                }
             client.distube.play(message, songName)
             } else {
                 message.reply('Imagine Join a VC')
