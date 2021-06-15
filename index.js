@@ -647,7 +647,7 @@ var DanBotHosting = require("danbot-hosting");
  
 client.on("ready", async () => {
   console.log("bot is now ready");
-  const API = new DanBotHosting.Client("danbot-vm3g5q", client);
+  const API = new DanBotHosting.Client("danbot-52z619", client);
  
   // Start posting
   let initalPost = await API.autopost();

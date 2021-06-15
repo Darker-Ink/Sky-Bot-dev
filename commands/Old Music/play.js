@@ -6,7 +6,9 @@ var {
   getData,
   getPreview
 } = require("spotify-url-info");
-
+const {
+joinVoiceChannel,
+} = require('@discordjs/voice');
 module.exports = {
     name: "play",
     description: "Plays Songs <3",
