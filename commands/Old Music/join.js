@@ -25,13 +25,15 @@ module.exports = {
 		if (channel) {
 			try {
                 if (channel.type == 'stage') {
-                    const connection = await connectToChannel(channel);
+                    const connection = connectToChannel(channel).then(connection => {
                                     connection.voice.setSelfDeaf(true)
                                     connection.voice.setSuppressed(false);
+                    })
                                     await message.reply('Joined The VC');
                     } else {
-                        const connection = await connectToChannel(channel);
+                        const connection = connectToChannel(channel).then(connection => {
                                     connection.voice.setSelfDeaf(true)
+                        })
                                     await message.reply('Joined The VC');
                     }
 			} catch (error) {
