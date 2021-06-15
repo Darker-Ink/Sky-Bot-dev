@@ -15,6 +15,12 @@ module.exports = {
     aliases: ['summon'],
     category: "Music",
     run: async (client, message, args) => {
+        async function connectToChannel(channel) {
+            const connection = joinVoiceChannel({
+                channelId: channel.id,
+                guildId: channel.guild.id,
+                adapterCreator: channel.guild.voiceAdapterCreator,
+            })};
         const channel = message.member?.voice.channel;
 		if (channel) {
 			try {

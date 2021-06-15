@@ -656,9 +656,3 @@ client.on("ready", async () => {
     console.error(initalPost); // console the error
   }
 });
-async function connectToChannel(channel) {
-    const connection = joinVoiceChannel({
-        channelId: channel.id,
-        guildId: channel.guild.id,
-        adapterCreator: channel.guild.voiceAdapterCreator,
-    })};
