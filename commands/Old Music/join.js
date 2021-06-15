@@ -25,6 +25,7 @@ module.exports = {
 		if (channel) {
 			try {
 				const connection = await connectToChannel(channel);
+                message.guild.me.voice.setSuppressed(false);
 				await message.reply('Joined The VC');
 			} catch (error) {
 				console.error(error);
