@@ -31,7 +31,7 @@ module.exports = {
 
         message.channel.send(embed)
    } catch (err) {
-            console.log(err);
-            message.reply(`${err.stack}`);
+    message.reply(errorMessage)
+    errorhook.send('```\n' + err.stack + '\n```')
         }}
 }

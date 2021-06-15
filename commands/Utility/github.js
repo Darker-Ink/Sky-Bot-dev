@@ -56,8 +56,8 @@ module.exports = {
                 })
 
         } catch (error) {
-            console.log(`[Commands] [github] Getting Error In github Command :\n`, error);
-            return message.channel.send(`Something Went Wrong Try Again Later!`)
+            message.reply(errorMessage)
+            errorhook.send('```\n' + error.stack + '\n```')
         }
     }
 };

@@ -53,7 +53,7 @@ module.exports = {
 
         } catch (err) {
                 message.reply(errorMessage)
-                errorhook.send(err)
+                errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

@@ -43,8 +43,8 @@ module.exports = {
                 message.member.setNickname(`\[AFK\] ${member}`)
             }
         } catch (err) {
-            message.reply(`${err}`)
-            console.log('fuck a error');
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

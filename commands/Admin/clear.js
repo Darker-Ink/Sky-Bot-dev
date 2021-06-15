@@ -11,6 +11,7 @@ module.exports = {
     perms: ["MANAGE_MESSAGES"],
     botperms: ["MANAGE_MESSAGES"],
     run: async (client, message, args) => {
+      try {
         const user = message.mentions.users.first()
       const amount = !!parseInt(message.content.split(' ')[2]) ? parseInt(message.content.split(' ')[2]) : parseInt(message.content.split(' ')[1])
       if (!amount) return message.channel.send("You need to give an amount");
@@ -30,4 +31,9 @@ module.exports = {
       await message.channel.bulkDelete(amount, true).then(() => {
         message.channel.send(`Cleared \`${amount}\` Messages from \`${message.channel.name}\``).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
          });
-    }}
+    } catch(err) {
+      message.reply(errorMessage)
+      errorhook.send('```\n' + err.stack + '\n```')
+    }
+  }
+}

@@ -84,9 +84,8 @@ module.exports = {
                 }
             }
         } catch (err) {
-            console.log('fuck a error');
-			message.reply(`Hey It seems like you got a error, This is not good Please Join https://discord.gg/jKeEgwrrbu and report it, Or if you don't want to join the server just do \n\`<prefix>report-command <command name> <bug>\``)
-            client.channels.cache.get("827716948087013406").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
-        }
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
+            }
     }
 }

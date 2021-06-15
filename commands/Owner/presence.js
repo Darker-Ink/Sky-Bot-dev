@@ -22,9 +22,8 @@ module.exports = {
                 return message.channel.send(`"${statusType}" is not a valid status type.`);
             }
         } catch (err) {
-            console.log('fuck a error');
-            message.reply(`There was an error during evaluation, \n\n**${err}**`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

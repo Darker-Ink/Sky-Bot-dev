@@ -10,9 +10,9 @@ module.exports = {
 
         try {
             voiceChannel.leave()
-        } catch (error) {
-            console.log(`There Was An Error Disconnecting To The Voice Channel: ${error}`)
-            return message.channel.send(`There Was An Error Disconnecting To The Voice Channel: ${error}`)
+        } catch (err) {
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

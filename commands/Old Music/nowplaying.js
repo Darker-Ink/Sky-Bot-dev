@@ -52,7 +52,8 @@ module.exports = {
 			console.log(queue.currentTime)
             message.channel.send(np);
         } catch (error) {
-            message.reply(`MotherDucker I got a error, \n\n**${error.stack}**`);
+            message.reply(errorMessage)
+            errorhook.send('```\n' + error.stack + '\n```')
         }
     }
 }

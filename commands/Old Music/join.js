@@ -13,9 +13,9 @@ module.exports = {
             await voiceChannel.join().then(connection => {
                 connection.voice.setSelfDeaf(true)
             })
-        } catch (error) {
-            console.log(`There Was An Error Connecting To The Voice Channel: ${error}`)
-            return message.channel.send(`There Was An Error Connecting To The Voice Channel: ${error}`)
+        } catch (err) {
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

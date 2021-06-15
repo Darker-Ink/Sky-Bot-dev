@@ -60,8 +60,8 @@ module.exports = {
         return message.channel.send(helpem);
       }
     } catch (err) {
-      console.log(err);
-      message.reply(`There was a error when running the command`);
+      message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
     }
   },
 };

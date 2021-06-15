@@ -10,6 +10,7 @@ module.exports = {
     perms: ["MANAGE_MESSAGES"],
     snupe: true,
     run: async (client, message, args) => {
+        try {
         var obj = JSON.parse(String(fs.readFileSync('./snipe.json')))
 
         if (obj[message.guild.id]) {
@@ -30,5 +31,8 @@ module.exports = {
         } else {
             message.channel.send('No message found in this guild!')
         }
+    } catch(err) {
+        message.reply(errorMessage)
+        errorhook.send('```\n' + err.stack + '\n```')
     }
-}
+}}

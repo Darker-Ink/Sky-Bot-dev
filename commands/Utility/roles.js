@@ -34,7 +34,8 @@ module.exports = {
                 message.channel.send(embed)
             }
         } catch (error) {
-            message.reply(`There was an using this command, \n\n**${error.stack}**`);
+            message.reply(errorMessage)
+            errorhook.send('```\n' + error.stack + '\n```')
         }
     }
 }

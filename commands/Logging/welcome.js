@@ -100,9 +100,8 @@ module.exports = {
             return message.channel.send(embed); // Error message
 
         } catch (err) {
-            //Log error into the database
-            message.reply(`Ran into an error while executing **Welcome-channel**`)
-            console.log(err)
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
         }
 
     },
