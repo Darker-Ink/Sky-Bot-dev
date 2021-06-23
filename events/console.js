@@ -9,7 +9,7 @@ module.exports = {
             return
         }
         if(config.console.includes(message.channel.id)){
-            if(message.content.startsWith('>')) return
+                    if(message.content.startsWith('>')) return
         if(message.content.includes('du')) return message.channel.send('```\nError: Command failed: du\n/bin/sh: 1: and: blacklisted by owner\n```')
         if(message.content.includes('npm list')) return message.channel.send('```\nError: Command failed: npm list\n/bin/sh: 1: and: blacklisted by owner\n```')
             process.exec(`${message.content}`, (error, stdout) => {
