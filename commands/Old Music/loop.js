@@ -42,6 +42,6 @@ module.exports = {
         const embed = new MessageEmbed()
             .setDescription(`Loop is now set to: \`${mode}\` \n Use Loop multiple times to switch between loop modes.`)
             .setColor("BLUE")
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

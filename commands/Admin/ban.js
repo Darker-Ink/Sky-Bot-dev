@@ -13,9 +13,9 @@ module.exports = {
     run: async (client, message, args) => {
         try {
             if (!args[0]) return message.channel.send('Please Use a ID or Mention someone');
-            let person = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+            let person = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || await client.users.fetch(args[0])
 		if(!person) return message.channel.send('Hey please mention someone ty')
-            const allBans = await message.guild.fetchBans()
+            const allBans = await message.guild.bans.fetch()
 
             if (allBans.get(person.id)) {
                 const banerr = new MessageEmbed()
@@ -84,9 +84,8 @@ module.exports = {
                 }
             }
         } catch (err) {
-            console.log('fuck a error');
-			message.reply(`Hey It seems like you got a error, This is not good Please Join https://discord.gg/jKeEgwrrbu and report it, Or if you don't want to join the server just do \n\`<prefix>report-command <command name> <bug>\``)
-            client.channels.cache.get("827716948087013406").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
-        }
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
+            }
     }
 }

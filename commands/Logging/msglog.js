@@ -23,13 +23,13 @@ module.exports = {
                 if (!args[0]) {
                     embed.setTitle("Error")
                         .setDescription("Missing argument!```msglog set #channel\nmsglog disable```")
-                    return message.channel.send(embed); // Error message
+                    return message.channel.send({ embeds: [embed] }); // Error message
                 }
     
                 if (args[0].toLowerCase() === "set" && !args[1]) {
                     embed.setTitle("Error")
                         .setDescription("Unable to find a valid channel.\n\nMissing argument!```msglog set #channel\nmsglog disable```")
-                    return message.channel.send(embed); // Error message
+                    return message.channel.send({ embeds: [embed] }); // Error message
                 }
     
                 // Enable welcome messages and set channel to mentioned channel
@@ -46,14 +46,14 @@ module.exports = {
                     embed.setTitle("Successfully updated")
                         .setDescription(`Message Logs will be sent to ${welcomeChannel}`)
     
-                    return message.channel.send(embed)
+                    return message.channel.send({ embeds: [embed] })
                 }
     
                 if (args[0].toLowerCase() === "disable") {
                     if (!data.Msg.addons.log.enabled) {
                         embed.setTitle("Successfully updated")
                             .setDescription("Message Logs were already disabled.")
-                        return message.channel.send(embed); // Error message
+                        return message.channel.send({ embeds: [embed] }); // Error message
                     }
     
                     data.Msg.addons.log.enabled = false;
@@ -63,17 +63,16 @@ module.exports = {
     
                     embed.setTitle("Successfully updated")
                         .setDescription("Message Logs have now been disabled.")
-                    return message.channel.send(embed); // Error message
+                    return message.channel.send({ embeds: [embed] }); // Error message
                 }
     
                 embed.setTitle("Error")
                     .setDescription("Missing argument!```msglog set #channel\nmsglog disable```")
-                return message.channel.send(embed); // Error message
+                return message.channel.send({ embeds: [embed] }); // Error message
     
             } catch (err) {
-                //Log error into the database
-                message.reply(`Ran into an error while executing **msglog**`)
-                console.log(err)
+                message.reply(errorMessage)
+                errorhook.send('```\n' + err.stack + '\n```')
             }
     
         },

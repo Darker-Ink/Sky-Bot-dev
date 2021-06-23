@@ -68,14 +68,13 @@ module.exports = {
                     .addField(`Reason`, reason)
                     .setColor('BLUE')
 
-                return message.channel.send(embed)
+                return message.channel.send({ embeds: [embed] })
             } else if (afterSlowmode === 0) {
                 return message.channel.send(slowmodeError3)
             }
         } catch (err) {
-            console.log('fuck a error');
-            message.reply(`There was a error Owner Has been alerted, you can try the command again.. Maybe it was a mistake Try again, If you get this message again **__DO NOT__** Use the command again, Thank you!`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

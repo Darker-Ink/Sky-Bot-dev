@@ -31,10 +31,11 @@ module.exports = {
                     .setColor("RANDOM")
                     .setTitle(`Roles`)
                     .setDescription(`${toSend}, @everyone`)
-                message.channel.send(embed)
+                message.channel.send({ embeds: [embed] })
             }
         } catch (error) {
-            message.reply(`There was an using this command, \n\n**${error.stack}**`);
+            message.reply(errorMessage)
+            errorhook.send('```\n' + error.stack + '\n```')
         }
     }
 }

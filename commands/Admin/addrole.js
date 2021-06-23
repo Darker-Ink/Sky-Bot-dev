@@ -48,12 +48,12 @@ module.exports = {
                 .setDescription(`Role ${roleToGive} has been added to ${member}`)
                 .setColor("BLUE")
 
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
 
 
         } catch (err) {
                 message.reply(errorMessage)
-                errorhook.send(err)
+                errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

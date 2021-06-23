@@ -29,9 +29,9 @@ module.exports = {
             .setDescription(`**Server Queue: ** \n\n  ${q}`)
             .setColor("BLUE")
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
    } catch (err) {
-            console.log(err);
-            message.reply(`${err.stack}`);
+    message.reply(errorMessage)
+    errorhook.send('```\n' + err.stack + '\n```')
         }}
 }

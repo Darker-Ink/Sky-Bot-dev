@@ -26,6 +26,6 @@ module.exports = {
             .addField(`Good Night From ${client.user.tag}`, `${dresponses}`, false)
             .setColor("RANDOM") //Nice
             .setTimestamp()
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

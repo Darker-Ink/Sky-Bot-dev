@@ -37,9 +37,8 @@ module.exports = {
             client.users.cache.get(`${args[0]}`).send(`${darkmsg}`);
             return message.channel.send(`Message sent to ${id.tag}`)
         } catch (err) {
-            console.log('fuck a error');
-            message.reply(`ok there are most likely a few things that went wrong... A\) Its a real error B\) You didn\'t give a Id or C\) Something I didn\'t list`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')    
         }
     }
 }

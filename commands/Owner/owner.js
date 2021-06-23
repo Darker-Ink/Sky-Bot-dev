@@ -83,7 +83,7 @@ module.exports = {
             )
             .setTimestamp()
             .setColor(roleColor);
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     } else {
         const command =
             client.commands.get(args[0].toLowerCase()) ||
@@ -95,7 +95,7 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setTitle(`Invalid command! Use \`${settings.prefix}help\` for all of my commands!`)
                 .setColor("FF0000");
-            return message.channel.send(embed);
+            return message.channel.send({ embeds: [embed] });
         }
 
         const embed = new MessageEmbed()
@@ -136,7 +136,7 @@ module.exports = {
             )
             .setTimestamp()
             .setColor(roleColor);
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 },
 };

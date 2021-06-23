@@ -23,7 +23,7 @@ const fs = require("fs");
 
 //Client stuff
 
-client.distube = new Distube(client, {
+client.distube = new Distube.default(client, {
     searchSongs: 1,
     emitNewSongOnly: true,
     plugins: [new SpotifyPlugin()],
@@ -117,7 +117,7 @@ client.distube
             .setThumbnail(song.thumbnail)
         	//.setDescription(` [${queue.name}](${queue.url})`)
             .setColor("BLUE")
-        queue.textChannel.send(playSongEmbed)
+        queue.textChannel.send({ embeds: [playSongEmbed] })
     })
             //▶️⏸️⏹️🔁🔉🔊
     .on("addSong", (queue, song) =>
@@ -140,7 +140,7 @@ client.distube
                 .addField("Amount Of Songs:", `${playlist.songs.length} Songs.`)
                 .addField("Status", `${status(queue)}`)
                 .setTimestamp()
-            queue.textChannel.send(embed)
+                queue.textChannel.send({ embeds: [embed] })
 })
     .on("error", (message, err) =>
         console.log(`${client.emotes.error} | An error encountered: ${err.stack}`)
@@ -156,7 +156,7 @@ client.distube
             .setDescription(`${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}`)
     		.setColor("YELLOW")
     		.setFooter('*Enter anything else or wait 60 seconds to cancel*')
-    message.channel.send(searchembed).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
+    message.channel.send({ embeds: [searchembed] }).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
     client.on("guildCreate", async (guild) => {
@@ -647,7 +647,7 @@ var DanBotHosting = require("danbot-hosting");
  
 client.on("ready", async () => {
   console.log("bot is now ready");
-  const API = new DanBotHosting.Client("danbot-vm3g5q", client);
+  const API = new DanBotHosting.Client("danbot-52z619", client);
  
   // Start posting
   let initalPost = await API.autopost();
@@ -655,6 +655,4 @@ client.on("ready", async () => {
   if (initalPost) {
     console.error(initalPost); // console the error
   }
-  let res = await API.botInfo()
-  console.log(res) 
 });

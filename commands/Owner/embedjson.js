@@ -27,6 +27,7 @@ const embed = {
 };
       targetChannel.send({ embed });
     } catch (error) {
-      message.reply(`Invalid JSON ${error.message}`)
+      message.reply(errorMessage)
+    errorhook.send('```\n' + error.stack + '\n```')
     }
     }}

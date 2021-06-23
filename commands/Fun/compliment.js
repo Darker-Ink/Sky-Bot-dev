@@ -18,6 +18,6 @@ module.exports = {
             .setDescription(compliment)
             .setColor("BLUE")
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }

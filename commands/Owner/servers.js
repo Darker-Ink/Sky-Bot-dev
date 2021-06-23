@@ -26,7 +26,7 @@ module.exports = {
         ])
                 .setTimestamp();
 
-            return message.channel.send(embed)
+            return message.channel.send({ embeds: [embed] })
         } catch (err) {
             console.log('fuck a error');
             message.reply(`There was an error during evaluation, \n\n**${err}**`);

@@ -21,11 +21,10 @@ module.exports = {
                 .setTitle(`${member.tag}\'s Avatar`)
                 .setImage(avatar)
             	.setTimestamp();
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
         } catch (err) {
-            console.log('fuck a error');
-            message.reply(`There was a error Darkerink Already Got the error and Got ping He will check it out soon but anyways here is the error, \n\n**${err}**`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')    
         }
     }
 }

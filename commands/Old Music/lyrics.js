@@ -16,7 +16,7 @@ module.exports = {
             let embed = new MessageEmbed()
                 .setColor('RED')
                 .setTitle(':x: Song title not provided!')
-            return message.channel.send(embed)
+            return message.channel.send({ embeds: [embed] })
         }
         let lyrics = await lyricsFinder(args.join(' ')) || "Not Found!";
         for (let i = 0; i < lyrics.length; i += 2000) {
@@ -25,7 +25,7 @@ module.exports = {
                 .setColor("RANDOM")
                 .setTitle(`Lyrics`)
                 .setDescription(toSend)
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
             console.log(lyrics)
         }
     }

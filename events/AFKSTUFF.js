@@ -28,7 +28,7 @@ module.exports = {
                         .setColor("GREEN")
                         .setDescription(`${mentioned.user.tag} is AFK \n ${status}`)
 
-                    message.channel.then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 900000))
+                        message.channel.send({ embeds: [embed1] }).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 900000))
 
                 }
 

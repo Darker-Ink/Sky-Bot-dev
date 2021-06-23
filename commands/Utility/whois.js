@@ -114,7 +114,7 @@ module.exports = {
               .addField('Badges:', `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`, true)
               .addField('Highest role:', `<@&${weed}>`, true)
               .addField('Roles:', `${roles}`, false)
-              message.channel.send(embed);
+              message.channel.send({ embeds: [embed] });
             }
           }
                 

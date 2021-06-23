@@ -1,3 +1,13 @@
+const {
+	NoSubscriberBehavior,
+	StreamType,
+	createAudioPlayer,
+	createAudioResource,
+	entersState,
+	AudioPlayerStatus,
+	VoiceConnectionStatus,
+	joinVoiceChannel,
+} = require('@discordjs/voice');
 module.exports = {
     name: 'join',
     description: "Joins The Voice Channel",
@@ -5,17 +15,30 @@ module.exports = {
     aliases: ['summon'],
     category: "Music",
     run: async (client, message, args) => {
-        const voiceChannel = message.member.voice.channel
-
-        if (!voiceChannel) return message.channel.send("You must be in a VC to use this command!")
-
-        try {
-            await voiceChannel.join().then(connection => {
-                connection.voice.setSelfDeaf(true)
-            })
-        } catch (error) {
-            console.log(`There Was An Error Connecting To The Voice Channel: ${error}`)
-            return message.channel.send(`There Was An Error Connecting To The Voice Channel: ${error}`)
-        }
-    }
+async function connectToChannel(channel) {
+            const connection = joinVoiceChannel({
+                channelId: channel.id,
+                guildId: channel.guild.id,
+                adapterCreator: channel.guild.voiceAdapterCreator,
+                selfDeaf : false,
+                selfMute : false
+            })};
+const channel = message.member?.voice.channel;
+		if (channel) {
+			try {
+                if (channel.type == 'stage') {
+                    const connection = await connectToChannel(channel) 
+                                    await message.reply('Joined The VC');
+                    } else {
+                        const connection = await connectToChannel(channel)
+                        connection.guild.me.voice.setDeaf(true);
+                                    await message.reply('Joined The VC');
+                    }
+			} catch (error) {
+				console.error(error);
+			}
+		} else {
+			await message.reply('Join a voice channel then try again!');
+		}
+	}
 }

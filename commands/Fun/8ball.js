@@ -27,7 +27,7 @@ module.exports = {
             .addField(`Answer:`, answer);
 
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
 
     }
 }

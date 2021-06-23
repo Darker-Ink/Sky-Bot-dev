@@ -30,11 +30,10 @@ module.exports = {
                 .setDescription(`${channel} is now unlocked. Everyone can speak now.`)
                 .setColor("BLUE")
 
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] })
         } catch (err) {
-            console.log('fuck a error');
-            message.reply(`There was a error Owner Has been alerted, you can try the command again.. Maybe it was a mistake Try again, If you get this message again **__DO NOT__** Use the command again, Thank you!`);
-            client.channels.cache.get("820052885081423872").send(`<@791741154999140374> Someone got a error\`\`\`${err.stack}\`\`\` `)
+            message.reply(errorMessage)
+            errorhook.send('```\n' + err.stack + '\n```')
         }
     }
 }

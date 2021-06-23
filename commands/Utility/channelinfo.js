@@ -34,6 +34,6 @@ module.exports = {
             .addField("Created On:", createdAt, true)
             .setColor("BLUE")
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 }
