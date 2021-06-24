@@ -662,7 +662,4 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
 	let DBHGuild = client.guilds.cache.get("639477525927690240");
 	if(!oldMember.premiumSince && oldMember.premiumSince) {
 		return client.channels.cache.get('739175011721413009').send(`[Don't mind me] Pog ${newMember.user.tag} Just boosted the server we now have ${DBHGuild.premiumSubscriptionCount} boosts :D <@!379781622704111626>`)
-	})
-		
-		
-		
+	}})
