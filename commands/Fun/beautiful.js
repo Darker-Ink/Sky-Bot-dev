@@ -18,6 +18,6 @@ module.exports = {
 
         const image = await canvacord.beautiful(memberAvatar)
         const beautiful = new MessageAttachment(image, 'beautiful.png')
-        return message.channel.send(beautiful)
+        return message.channel.send({ files: [beautiful]})
     }
 }

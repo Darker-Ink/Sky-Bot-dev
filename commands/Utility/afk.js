@@ -13,10 +13,10 @@ module.exports = {
 
             const member = message.author.username
             const no1 = new Discord.MessageEmbed()
-                .setDescription("Sorry AFK Command Can\'t use links due to a bug SORRY")
+                .setDescription("Sorry You can't have links in your AFK message")
                 .setColor("RED")
             let text = args.join(" ")
-            if (text.includes("www") || text.includes("discord.gg") || text.includes("discordapp") || text.startsWith("https://")) return message.channel.send(no1)
+            if (text.includes("www") || text.includes("discord.gg") || text.includes("discordapp") || text.startsWith("https://")) return message.channel.send({ embeds: [no1]})
 
 
 
@@ -40,7 +40,7 @@ module.exports = {
                 status.set(`${message.author.id}_${message.guild.id}`, text)
                 message.channel.send({ embeds: [embed] })
 
-                message.member.setNickname(`\[AFK\] ${member}`)
+                message.member.setNickname(`[AFK] ${member}`)
             }
         } catch (err) {
             message.reply(errorMessage)

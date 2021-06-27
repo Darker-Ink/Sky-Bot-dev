@@ -1,5 +1,3 @@
-require("../../ExtendedMessage");
-const Discord = require('discord.js')
 const ms = require('ms')
 const os = require('os')
 module.exports = {
@@ -8,16 +6,12 @@ module.exports = {
     cooldown: 0,
     category: "Utility",
     run: async (client, message, args) => {
-        const dt = new Date(message.createdTimestamp);
-        const responses = [
-    'I-It\'s not like I wanted to say pong or anything...',
-    'Pong...',
-    'Woo! A secret command!',
-    'Ping! ...I mean **pong!**',
-    'Does anyone even use this?',
-    'At your service!',
-    'Testing, testing, 1, 2, 3!'
-  ];
-        const dresponses = responses[Math.floor(Math.random() * responses.length)];
-			message.channel.send(`**API:**\`${new Date() - dt}ms\`\n\n**WS:**\`${client.ws.ping}ms\`\n\n**Linux Uptime:**\`${ms(os.uptime() * 1000, { long: true })}\``)
+        let darkos = os.type()
+        if(darkos === 'Linux') {
+        darkos = 'Linux'
+    } else if(darkos === 'Windows_NT'){ 
+        darkos = 'Windows'
+    } else darkos = 'Unknown OS'
+        const m = await message.channel.send("Pinging...");
+        return m.edit(`**API latency is:** \`${m.createdTimestamp - message.createdTimestamp}ms\` \n\n**WS latency is:** \`${Math.round(message.client.ws.ping)}ms\`\n\n**${darkos} Uptime is:** \`${ms(os.uptime() * 1000, { long: true })}\`.`);
     }}

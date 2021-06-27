@@ -9,17 +9,15 @@ module.exports = {
     aliases: ['loops'],
     category: "Music",
     run: async (client, message, args) => {
-        if (!message.member.voice.channel) {
-            const loopError = new MessageEmbed()
-                .setDescription("You Need to be in a Voice Channel to loop Music!")
-                .setColor("RED")
-            return message.channel.send(loopError)
-        }
-        if (!client.distube.isPlaying(message)) {
-            const loopError2 = new MessageEmbed()
+        const channel = message.member?.voice.channel;
+        if(!channel) return message.reply('Please Join a VC to use this command')
+
+       let queue = client.distube.getQueue(message);
+        if (!queue) {
+            const queueError = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")
-            return message.channel.send(loopError2)
+                return message.channel.send({ embeds: [queueError] })
         }
 
         let mode = null

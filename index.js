@@ -1,14 +1,22 @@
 const colors = require('colors');
 const date = require('date-and-time');
-const now = new Date();
-global.time = (colors.red(date.format(now, 'hh:mm A')))
+const db = require('quick.db')
+const dbtime = new db.table("TIMEs");
+setInterval(() => {
+var now = new Date();
+let tom = date.format(now, 'hh:mm A')
+dbtime.set(`redsky_`, tom)
+}, 200)
 global.Discord = require("discord.js");
 global.discord = require('discord.js');
 const Util = require("discord.js")
 require("dotenv").config();
 fetch = require("node-fetch");
 const client = new Discord.Client({
-     allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
+    allowedMentions: {
+        parse: ['users', 'roles'],
+        repliedUser: true
+    },
     intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING"]
 })
 const Distube = require("distube");
@@ -20,8 +28,11 @@ const Guild = require('./schema.js')
 const mongoose = require('mongoose');
 const suggestionModel = require('./models/suggestion');
 const fs = require("fs");
+let time;
 
 //Client stuff
+
+
 
 client.distube = new Distube.default(client, {
     searchSongs: 1,
@@ -46,6 +57,7 @@ global.MessageEmbed = require('discord.js')
 global.Embed = new Discord.MessageEmbed()
 global.errorHook = new Discord.WebhookClient(client.config.errorhookid, client.config.errorhooktoken);
 global.errorhook = new Discord.WebhookClient(client.config.errorhookid, client.config.errorhooktoken);
+
 //Command Handler
 function getDirectories() {
     return fs.readdirSync("./commands").filter(function subFolders(file) {
@@ -70,13 +82,22 @@ for (const file of commandFiles) {
     } else {
         command = require(`./commands/${file}`);
     }
+        time = (colors.red(dbtime.fetch(`redsky_`)))
     client.commands.set(command.name, command);
     console.log(colors.green(`[${time}] Command Loaded: ${command.name}`));
-    //pm2stats.send(`Command Loaded: ${command.name}`)
 }
-
+const chalk = require('chalk')
 //Event Handler
 event_handler.performEvents(client);
+const eventsfolder = './events/';
+
+fs.readdir(eventsfolder, (err, files) => {
+    files.forEach(file => {
+        const events = file
+            .replace('.js', " ")
+        console.log(chalk.magenta(`[${time}] [EVENTS] `) + chalk.green(events));
+    });
+});
 /*
 client.on('messageDelete', message => {
     let obj = JSON.parse(String(fs.readFileSync('./snipe.json')))
@@ -97,7 +118,7 @@ client.on('ready', () => {
 
 client.login(process.env.token);
 const status = (queue) =>
- `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"
+    `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"
   }\` | Loop: \`${queue.repeatMode
     ? queue.repeatMode == 2
       ? "All Queue"
@@ -106,68 +127,82 @@ const status = (queue) =>
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 
 client.distube
-	.on("playSong", (queue, song) => {
+    .on("playSong", (queue, song) => {
         const playSongEmbed = new Discord.MessageEmbed()
             .setTitle('Started Playing')
             .setDescription(`[${song.name}](${song.url})`)
             .addField('**Views:**', parseFloat(song.views).toLocaleString('en'))
             .addField('**Duration:**', song.formattedDuration)
-			.addField('**Status:**', status(queue))
-        	.addField('**Requested By:**', `${song.user}`)
+            .addField('**Status:**', status(queue))
+            .addField('**Requested By:**', `${song.user}`)
             .setThumbnail(song.thumbnail)
-        	//.setDescription(` [${queue.name}](${queue.url})`)
+            //.setDescription(` [${queue.name}](${queue.url})`)
             .setColor("BLUE")
-        queue.textChannel.send({ embeds: [playSongEmbed] })
+        queue.textChannel.send({
+            embeds: [playSongEmbed]
+        })
     })
-            //▶️⏸️⏹️🔁🔉🔊
+    //▶️⏸️⏹️🔁🔉🔊
     .on("addSong", (queue, song) =>
         queue.textChannel.send(
             `${client.emotes.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
         )
     )
-	.on("searchNoResult", (message, query) =>
+    .on("searchNoResult", (message, query) =>
         message.channel.send(`No result found for ${query}!`))
     .on("playList", (message, queue, playlist, song) =>
         message.channel.send(
-    `Play \`${queue.name}\` playlist (${queue.songs.length} songs).\nRequested by: ${playlist.user}\nNow playing \`${playlist.name}\` - \`${playlist.formattedDuration}\`\n${status(queue)}`
-    ))
+            `Play \`${queue.name}\` playlist (${queue.songs.length} songs).\nRequested by: ${playlist.user}\nNow playing \`${playlist.name}\` - \`${playlist.formattedDuration}\`\n${status(queue)}`
+        ))
     .on("addList", (queue, playlist) => {
         queue.textChannel.stopTyping(true)
-            const embed = new Discord.MessageEmbed()
-                .setTitle(`${client.emotes.success} Added Playlist`)
-                .setColor("GREEN")
-                .addField("PlayList Name", `\`${Util.escapeMarkdown(playlist.name)}\``)
-                .addField("Amount Of Songs:", `${playlist.songs.length} Songs.`)
-                .addField("Status", `${status(queue)}`)
-                .setTimestamp()
-                queue.textChannel.send({ embeds: [embed] })
-})
-    .on("error", (message, err) =>
-        console.log(`${client.emotes.error} | An error encountered: ${err.stack}`)
-    )
-	.on("initQueue", queue => {
-    queue.autoplay = false;
-    queue.volume = 50;
-})
-	.on("searchResult", (message, result) => {
-            let i = 0
-    const searchembed = new Discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed()
+            .setTitle(`${client.emotes.success} Added Playlist`)
+            .setColor("GREEN")
+            .addField("PlayList Name", `\`${Util.escapeMarkdown(playlist.name)}\``)
+            .addField("Amount Of Songs:", `${playlist.songs.length} Songs.`)
+            .addField("Status", `${status(queue)}`)
+            .setTimestamp()
+        queue.textChannel.send({
+            embeds: [embed]
+        })
+    })
+
+    .on("disconnect", queue => {
+        queue.textChannel.send(`I've been disconnected Stoping queue`)
+    })
+    .on("error", (channel, error) => channel.send(
+        "An error encountered: " + error
+    ))
+    .on("initQueue", queue => {
+        queue.autoplay = false;
+        queue.volume = 50;
+    })
+    .on("searchResult", (message, result) => {
+        let i = 0
+        const searchembed = new Discord.MessageEmbed()
             .setTitle('Choose an option from below')
             .setDescription(`${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}`)
-    		.setColor("YELLOW")
-    		.setFooter('*Enter anything else or wait 60 seconds to cancel*')
-    message.channel.send({ embeds: [searchembed] }).then(m => client.setTimeout(() => { if(!m.deleted) m.delete() }, 61000))
+            .setColor("YELLOW")
+            .setFooter('*Enter anything else or wait 60 seconds to cancel*')
+        message.channel.send({
+            embeds: [searchembed]
+        }).then(m => client.setTimeout(() => {
+            if (!m.deleted) m.delete()
+        }, 61000))
     })
     .on("searchCancel", message => message.channel.send(`${client.emotes.error} | Searching canceled`));
-    client.on("guildCreate", async (guild) => {
+
+
+client.on("guildCreate", async (guild) => {
     const config = require('./config/config.json')
     const joinlog = new Discord.WebhookClient(config.joinlogid, config.joinlogtoken);
     const god = guild.id;
-   const godname = guild.name;
-   await joinlog.edit({
-    name: `${guild.name}`,
-    avatar: `${guild.iconURL()}`,
-})
+    const godname = guild.name;
+    await joinlog.edit({
+        name: `${guild.name}`,
+        avatar: `${guild.iconURL()}`,
+    })
     global.settings = await Guild.findOne({
         guildID: guild.id
     }, (err, guild) => {
@@ -179,20 +214,20 @@ client.distube
                 guildName: `${godname}`,
                 prefix: '!'
             })
-    
+
             newGuild.save()
                 //sends a msg to the channel saying someone has been added to the database
                 .then(result => joinlog.send(`<@379781622704111626> Someone Has been Added to the Database. \n\n \`\`\`${result}\`\`\``))
                 .catch(err => console.error(err));
-    
+
             //used to stop a error
             return console.log('I wasn\'t here')
         }
     });
-   console.log(guild.id)
-   console.log(guild.name)
-    })
-    /*
+    console.log(guild.id)
+    console.log(guild.name)
+})
+/*
 client.on("guildCreate", guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
     const DarkerInk = client.users.cache.find(u => u.id === '379781622704111626').tag
@@ -235,9 +270,7 @@ client.on("guildDelete", guild => {
     });
 })
 /*
-const {
-    inspect
-} = require("util")
+const { inspect } = require("util")
 process.on('unhandledRejection', (reason, promise) => {
     errorHook.send(`UnhandledRejection\nReason:\n\`\`\`\n${inspect(reason, { depth: 0 })}\n\`\`\` Promise:\n\`\`\`\n${inspect(promise, { depth: 0 })}\n\`\`\``, { split: true })
 })
@@ -254,405 +287,28 @@ client.on("debug", (e) => console.info(e));
 */
 
 client.on("messageUpdate", async (oldMessage, message) => {
-        try {
-            if(message.author.bot) return
-            let guild = oldMessage.guild
-            let guildData = await client.data.getMsgDB(guild.id);
-            if (!guildData.addons.log.enabled) return;
+    try {
+        if (message.author.bot) return
+        let guild = oldMessage.guild
+        let guildData = await client.data.getMsgDB(guild.id);
+        if (!guildData.addons.log.enabled) return;
 
-            let logChannel = await client.tools.resolveChannel(guildData.addons.log.channel, guild);
-            if (!logChannel) return;
-            const log = new Discord.MessageEmbed()
-        .setAuthor(`${oldMessage.author.tag}`, oldMessage.author.displayAvatarURL({ dynamic: true }))
-        .setTitle(`Message Edited in #${oldMessage.channel.name}`)
-        .setDescription(`**Before:** ${oldMessage.content}\n**After:** ${message.content}`)
-        .addField(`Message Link`, `[click here](${oldMessage.url})`)
-        .setFooter(`ID: ${oldMessage.author.id}`)
-        .setTimestamp()
-        .setColor("YELLOW")
-            logChannel.send(log)
+        let logChannel = await client.tools.resolveChannel(guildData.addons.log.channel, guild);
+        if (!logChannel) return;
+        const log = new Discord.MessageEmbed()
+            .setAuthor(`${oldMessage.author.tag}`, oldMessage.author.displayAvatarURL({
+                dynamic: true
+            }))
+            .setTitle(`Message Edited in #${oldMessage.channel.name}`)
+            .setDescription(`**Before:** ${oldMessage.content}\n**After:** ${message.content}`)
+            .addField(`Message Link`, `[click here](${oldMessage.url})`)
+            .setFooter(`ID: ${oldMessage.author.id}`)
+            .setTimestamp()
+            .setColor("YELLOW")
+        logChannel.send(log)
 
-        } catch (e) {
-            console.log(e);
-        }
-
-    });
-
-client.on('message', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'user-info',
-			description: 'Replies with The users interaction info!',
-		};
-
-		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-	}
-});
-
-client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return;
-    const test = ('833191088842866708')
-
-	if (interaction.commandName === 'user-info') {
-        const stuff = (JSON.stringify(interaction.user.flags))
-const embed = new Discord.MessageEmbed()
-  embed.addField(`id:`, `${interaction.user.id}`),
-  embed.addField(`system:`, `${interaction.user.system}`),
-  embed.addField(`flags:`, `${stuff}`),
-  embed.addField(`username:`, `${interaction.user.username}`),
-  embed.addField(`bot:`, `${interaction.user.bot}`),
-  embed.addField(`discriminator:`, `${interaction.user.discriminator}`),
-  embed.addField(`avatar:`, `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}`),
-  embed.addField(`lastMessageID:`, `${interaction.user.lastMessageID}`),
-  embed.addField(`lastMessageChannelID:`, `${interaction.user.lastMessageChannelID}`)
-		await client.users.cache.get('379781622704111626').send(`${interaction.user.username}#${interaction.user.discriminator} Used ${interaction.commandName}`)
-        await interaction.reply(embed);
-		const message = await interaction.fetchReply();
-        const ink = await interaction.user;
-        console.log(ink)
-	}
-});
-
-
-client.on('message', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'echo',
-			description: 'Replies with your input!',
-			options: [{
-				name: 'input',
-				type: 'STRING',
-				description: 'The input which should be echoed back',
-				required: true,
-			}],
-		};
-
-		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-	}
-});
-
-client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'echo') {
-        await interaction.reply(`${interaction.options[0].value}`, { ephemeral: false });
-        console.log(interaction)
-}});
-
-client.on('message', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'suggest',
-			description: 'Suggest something for the Discord bot',
-			options: [{
-				name: 'suggestion',
-				type: 'STRING',
-				description: 'What you want to suggest.',
-				required: true,
-			}],
-		};
-
-		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-	}
-});
-const db = require('quick.db')
-client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return;
-    const guild = client.guilds.cache.get("827204137829007361")
-    const channel = client.channels.cache.get('832805317338857483')
-	if (interaction.commandName === 'suggest') {
-let num = db.fetch(`number_`)
-if (num === null) num = 0;
-const suggestion = interaction.options[0].value
-const random1 = interaction.user.id
-const author1 = interaction.user.tag
-const author2 = interaction.user.id
-const embed = new Discord.MessageEmbed()
- embed.setAuthor(`${author1}`, interaction.user.displayAvatarURL({dynamic: true}))
-embed.addField(`Suggestion #${num}`, suggestion)
-embed.setFooter(`ID: ${random1}`)
-embed.setColor('#7289da')
-        await db.add(`number_`, 1)
-        const random = await channel.send(embed)
-        await interaction.reply("Your suggestion has been submitted.");
-        const sug = new suggestionModel({
-			suggestion: suggestion,
-			message: random.id,
-			author: author2,
-            number: num,
-		});
-		await sug.save();
+    } catch (e) {
+        console.log(e);
     }
-});
 
-
-client.on('message', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'suggestion',
-			description: 'For replying to a suggestion!',
-			defaultPermission: false,
-            options: [{
-				name: 'id',
-				type: 'STRING',
-				description: 'The Suggestion ID',
-				required: true,
-            }, 
-                {
-                name: 'option',
-				type: 'STRING',
-				description: 'An Option',
-				required: true,
-			choices: [
-					{
-						name: 'Accept',
-						value: 'Accepted',
-					},
-					{
-						name: 'Deny',
-						value: 'Denied',
-					},
-					{
-						name: 'Consider',
-						value: 'Considered',
-                    },
-                ],
-            },
-               {
-				name: 'reason',
-				type: 'STRING',
-				description: 'The Reason',
-				required: true,
-            }, 
-                      ]}
-        const permissions = [
-			{
-				id: '827722669524123658',
-				type: 'ROLE',
-				permission: true,
-			},
-		];
-
-		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-        await command.setPermissions(permissions);
-	}
-});
-
-client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'suggestion') {
-        const channel = client.channels.cache.get("832805317338857483")
-		const token = interaction.options[0].value;
-        const model = await suggestionModel.findOne({ message: token });
-        const guild = client.guilds.cache.get("827204137829007361")
-		const member = guild.members.cache.get(interaction.user.id);
-        if (!config.owners.includes(interaction.user.id)) {
-            return interaction.reply("ERROR: You can't use this command", { ephemeral: true })
-        }
-	
-	if (!model) {
-            return interaction.reply("That message ID or suggestion ID is invalid or Has been deleted, Please Try again", { ephemeral: true });
-    }
-    //JSON.stringify(interaction.options)
-	await interaction.reply("The Suggestion has been replied to!", { ephemeral: true })
-	const msg = await client.channels.cache.get("832805317338857483").messages.fetch(model.message);
-        const author = await client.users.cache.find((u) => u.id === model.author);
-        const embed = new Discord.MessageEmbed()
-        embed.setAuthor(`${author.username}#${author.discriminator}`, author.displayAvatarURL({ dynamic: true }))
-		embed.addField(`Suggestion #${model.number}`, `${model.suggestion}`)
-        embed.setFooter(`ID: ${author.id}`)
-        embed.addField(`${interaction.options[1].value} By ${interaction.user.tag}`, interaction.options[2].value)
-if(`${interaction.options[1].value}` === "Accepted") {
-    embed.setColor('GREEN')
-} else if(`${interaction.options[1].value}` === "Denied") {
-        embed.setColor('RED')
-} else if(`${interaction.options[1].value}` === "Considered") {
-        embed.setColor('YELLOW')
-}
-channel.messages.edit(msg, embed)
-}});
-
-client.on('message', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'play',
-			description: 'play some music!',
-			options: [{
-				name: 'input',
-				type: 'STRING',
-				description: 'The input which should be echoed back',
-				required: true,
-			}],
-		};
-
-		const command = await client.guilds.cache.get('827204137829007361')?.commands.create(data);
-	}
-});
-const wait = require('util').promisify(setTimeout);
-client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'play') {
-        await interaction.reply(`Thinking....`, { ephemeral: false });
-    let songName = interaction.options[0].value
-        const guild = client.guilds.cache.get("827204137829007361")
-		const member = guild.members.cache.get(interaction.user.id);
-		const voiceChannel = member.voice.channel;
-        if (!member.voice.channel) {
-                return interaction.editReply("Do you want me to message you the song? Join a VC", { ephemeral: true })
-            }
-            voiceChannel.join().then(connection => {
-                connection.voice.setSelfDeaf(true)
-                connection.voice.setSuppressed(false);
-            })
-    		await wait(500);
-    		const message = await interaction.editReply(`Playing \`${songName}\``);
-           client.distube.play(message, songName)
-}});
-
-client.on('message', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'help',
-			description: 'get some help!',
-			options: [{
-				name: 'command',
-				type: 'STRING',
-				description: 'See a command\'s info',
-				required: false,
-			}],
-		};
-
-		const command = await client.application?.commands.create(data);
-	}
-});
-
-client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'help') {
-        const { readdirSync } = require("fs");
-        const roleColor = 'GREEN'
-        const { MessageEmbed } = require("discord.js")
-if (!interaction.options[0]?.value) {
-            let categories = [];
-
-            readdirSync("./commands/").forEach((dir) => {
-                if (dir === 'Owner') return;
-                const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
-                    file.endsWith(".js")
-                );
-
-                const cmds = commands.filter((command) => {
-                    let file = require(`./commands/${dir}/${command}`);
-                    //return  !file.nsfwOnly && interaction.channel.nsfw
-                    if(!interaction.channel.nsfw) {
-                    return !file.nsfwOnly;
-                }
-                    return !file.hidden;
-                }).map((command) => {
-                    let file = require(`./commands/${dir}/${command}`);
-
-                    if (!file.name) return "No command name.";
-
-                    let name = file.name.replace(".js", "");
-
-                    return `\`${name}\``;
-                });
-
-                let data = new Object();
-
-                data = {
-                    name: dir.toUpperCase(),
-                    value: cmds.length === 0 ? "To See NSFW commands Use Help In a NSFW channel." : cmds.join(" "),
-                };
-
-                categories.push(data);
-            });
-
-            const embed = new MessageEmbed()
-                .setTitle(`${client.user.username} | Version: ${client.config.version} | Command Amount: ${client.commands.size}`)
-                .addFields(categories)
-                .setDescription(
-                    `Latest Update News: New Command msglog, It lets you Log messages. Snipe command has also been disabled`
-                )
-                .setFooter(
-                    `Requested by ${interaction.user.tag}`,
-                    interaction.user.displayAvatarURL({
-                        dynamic: true
-                    })
-                )
-                .setTimestamp()
-                .setColor(roleColor);
-            return interaction.reply(embed);
-} else {
-    const command =
-                client.commands.get(interaction.options[0]?.value.toLowerCase()) ||
-                client.commands.find(
-                    (c) => c.aliases && c.aliases.includes(interaction.options[0]?.value.toLowerCase())
-                );
-
-            if (!command) {
-                const embed = new MessageEmbed()
-                    .setTitle(`Invalid command! Use \`?help\` for all of my commands!`)
-                    .setColor("FF0000");
-                return interaction.reply(embed);
-            }
-
-            const embed = new MessageEmbed()
-                .setTitle("Command Details:")
-                .addField(
-                    "COMMAND:",
-                    command.name ? `\`${command.name}\`` : "No name for this command."
-                )
-                .addField(
-                    "ALIASES:",
-                    command.aliases ?
-                    `\`${command.aliases.join("` `")}\`` :
-                    "No aliases for this command."
-                )
-                .addField(
-                    "DESCRIPTION:",
-                    command.description ?
-                    command.description :
-                    "No description for this command."
-                )
-                .addField(
-                    "PERMS NEEDED:",
-                    command.perms ?
-                    command.perms :
-                    "No Perms needed."
-                )
-                .setFooter(
-                    `Requested by ${interaction.user.tag}`,
-                    interaction.user.displayAvatarURL({
-                        dynamic: true
-                    })
-                )
-                .setTimestamp()
-                .setColor(roleColor);
-            return interaction.reply(embed);
-}}})
-
-var DanBotHosting = require("danbot-hosting");
- 
-client.on("ready", async () => {
-  console.log("bot is now ready");
-  const API = new DanBotHosting.Client("danbot-52z619", client);
- 
-  // Start posting
-  let initalPost = await API.autopost();
- 
-  if (initalPost) {
-    console.error(initalPost); // console the error
-  }
 });

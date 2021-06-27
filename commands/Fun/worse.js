@@ -18,8 +18,8 @@ module.exports = {
 
         let image = await Canvacord.hitler(avatar)
 
-        let triggered = new MessageAttachment(image, "fun.png")
+        let worse = new MessageAttachment(image, "fun.png")
 
-        message.channel.send(triggered)
+        message.channel.send({files: [worse]})
     }
 }

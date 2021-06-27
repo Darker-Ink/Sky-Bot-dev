@@ -11,7 +11,6 @@ module.exports = {
     category: "Music",
     run: async (client, message, args) => {
         let queue = client.distube.getQueue(message);
-        let cursong = queue.songs[0];
         if(!queue) {
             const pauseError2 = new MessageEmbed()
                 .setDescription("There is Nothing Playing")

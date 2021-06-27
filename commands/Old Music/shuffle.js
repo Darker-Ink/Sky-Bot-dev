@@ -11,17 +11,13 @@ module.exports = {
     category: "Music",
     run: async (client, message, args) => {
         let queue = client.distube.getQueue(message);
-        if (!message.member.voice.channel) {
-            const pauseError = new MessageEmbed()
-                .setDescription("You Need to be in a Voice Channel to pause Music!")
-                .setColor("RED")
-            return message.channel.send(pauseError)
-        }
-        if (!client.distube.isPlaying(message)) {
+        const channel = message.member?.voice.channel;
+        if(!channel) return message.reply('Please Join a VC to use this command')
+        if (!queue) {
             const pauseError2 = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")
-            return message.channel.send(pauseError2)
+                return message.channel.send({ embeds: [queueError] })
         }
 
         client.distube.shuffle(message)

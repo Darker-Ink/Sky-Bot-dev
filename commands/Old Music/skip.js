@@ -9,20 +9,16 @@ module.exports = {
     aliases: [],
     category: "Music",
     run: async (client, message, args) => {
-        if (!message.member.voice.channel) {
-            const skipError = new MessageEmbed()
-                .setDescription("You Need to be in a Voice Channel to skip music!")
-                .setColor("RED")
-            return message.channel.send(skipError)
-        }
-        if (!client.distube.isPlaying(message)) {
-            const skipError2 = new MessageEmbed()
+        const channel = message.member?.voice.channel;
+        if(!channel) return message.reply('Please Join a VC to use this command')
+        let queue = client.distube.getQueue(message);
+        if (!queue) {
+            const queueError = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")
-            return message.channel.send(skipError2)
+                return message.channel.send({ embeds: [queueError] })
         }
-
-        let queue = client.distube.skip(message)
+        client.distube.skip(message)
 
         const embed = new MessageEmbed()
             .setDescription(`Skipped!`)

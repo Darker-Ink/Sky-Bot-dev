@@ -26,7 +26,6 @@ module.exports = {
                 .setTitle(`Lyrics`)
                 .setDescription(toSend)
             message.channel.send({ embeds: [embed] })
-            console.log(lyrics)
         }
     }
 }

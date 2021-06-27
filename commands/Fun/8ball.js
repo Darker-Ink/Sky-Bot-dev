@@ -16,7 +16,7 @@ module.exports = {
             const eightBallError = new MessageEmbed()
                 .setDescription('Please Provide a Question')
                 .setColor('RED')
-            return message.channel.send(eightBallError)
+                return message.channel.send({ embeds: [eightBallError] });
         }
         const answer = answers[Math.floor(Math.random() * answers.length)];
 

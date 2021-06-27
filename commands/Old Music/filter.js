@@ -12,17 +12,12 @@ module.exports = {
     aliases: ['setfilter'],
     category: "Music",
     run: async (client, message, args) => {
-        if (!message.member.voice.channel) {
-            const filterError = new MessageEmbed()
-                .setDescription("You Need to be in a Voice Channel to filter Music!")
-                .setColor("RED")
-            return message.channel.send(filterError)
-        }
-        if (!client.distube.isPlaying(message)) {
-            const filterError2 = new MessageEmbed()
+        let queue = client.distube.getQueue(message);
+        if(!queue) {
+            const pauseError2 = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")
-            return message.channel.send(filterError2)
+            return message.channel.send({ embeds: [pauseError2] })
         }
 
         let filterOption = args[0];

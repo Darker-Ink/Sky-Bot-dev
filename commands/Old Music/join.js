@@ -1,12 +1,9 @@
 const {
-	NoSubscriberBehavior,
-	StreamType,
-	createAudioPlayer,
-	createAudioResource,
-	entersState,
 	AudioPlayerStatus,
-	VoiceConnectionStatus,
+	AudioResource,
+	entersState,
 	joinVoiceChannel,
+	VoiceConnectionStatus,
 } = require('@discordjs/voice');
 module.exports = {
     name: 'join',
@@ -15,30 +12,28 @@ module.exports = {
     aliases: ['summon'],
     category: "Music",
     run: async (client, message, args) => {
-async function connectToChannel(channel) {
+        const channel = message.member?.voice.channel;
+        async function connectToChannel(channel) {
             const connection = joinVoiceChannel({
                 channelId: channel.id,
                 guildId: channel.guild.id,
+                selfDeaf: true, // <- here
+                selfMute: false,
                 adapterCreator: channel.guild.voiceAdapterCreator,
-                selfDeaf : false,
-                selfMute : false
-            })};
-const channel = message.member?.voice.channel;
-		if (channel) {
-			try {
-                if (channel.type == 'stage') {
-                    const connection = await connectToChannel(channel) 
-                                    await message.reply('Joined The VC');
-                    } else {
-                        const connection = await connectToChannel(channel)
-                        connection.guild.me.voice.setDeaf(true);
-                                    await message.reply('Joined The VC');
-                    }
-			} catch (error) {
-				console.error(error);
-			}
-		} else {
-			await message.reply('Join a voice channel then try again!');
-		}
-	}
-}
+            });
+            try {
+                await entersState(connection, VoiceConnectionStatus.Ready, 30_000);
+                return connection;
+            } catch (error) {
+                connection.destroy();
+                throw error;
+            }
+        }
+        if(channel.type === 'stage') {
+            const connection = await connectToChannel(channel);
+            return message.guild.me.voice.setSuppressed(false);
+        } else if(channel.type === 'voice') {
+            const connection = await connectToChannel(channel);
+            
+        }
+    }}

@@ -4,11 +4,18 @@ const exec = require('child_process').exec;
 const date = require('date-and-time');
 const now = new Date();
 const time = (date.format(now, 'YYYY/MM/DD hh:mm'))
+const DanBotHosting = require("danbot-hosting");
 module.exports = {
     type: 'ready',
     async run(client) {
-        console.log(`ready.js has been loaded`);
+        const API = new DanBotHosting.Client("danbot-52z619", client);
 
+        // Start posting
+        let initalPost = await API.autopost();
+    
+        if (initalPost) {
+            console.error(initalPost); // console the error
+        }
         let statuses = [
             `How are you today?`,
             `Serving ${client.guilds.cache.size} Servers`,

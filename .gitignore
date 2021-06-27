@@ -33,3 +33,6 @@ install.bat
 .cache
 config.json
 .gitconfig
+newindex.js
+oldindex.js
+test.js

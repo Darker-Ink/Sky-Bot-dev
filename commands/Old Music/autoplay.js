@@ -9,17 +9,12 @@ module.exports = {
     aliases: ['autop', 'a'],
     category: "Music",
     run: async (client, message, args) => {
-        if (!message.member.voice.channel) {
-            const autoplayError = new MessageEmbed()
-                .setDescription("You Need to be in a Voice Channel to toggle autoplay")
-                .setColor("RED")
-            return message.channel.send(autoplayError)
-        }
-        if (!client.distube.isPlaying(message)) {
-            const autoplayError2 = new MessageEmbed()
+        let queue = client.distube.getQueue(message);
+        if(!queue) {
+            const pauseError2 = new MessageEmbed()
                 .setDescription("There is Nothing Playing")
                 .setColor("RED")
-            return message.channel.send(autoplayError2)
+            return message.channel.send({ embeds: [pauseError2] })
         }
 
         let mode = client.distube.toggleAutoplay(message)

@@ -3,8 +3,8 @@ const canvacord = require("canvacord");
 
 module.exports = {
     name: 'clyde',
-    description: "bonk",
-    usage: '?bonk <mention>',
+    description: "",
+    usage: '',
     category: "Fun",
     cooldown: 0,
     run: async (client, message, args) => {
@@ -23,5 +23,5 @@ module.exports = {
 
 	let triggered = new Discord.MessageAttachment(image, "clyde.png");
 
-	message.channel.send(triggered);
+	message.channel.send({ files: [triggered]})
     }}

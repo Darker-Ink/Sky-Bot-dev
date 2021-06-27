@@ -19,9 +19,9 @@ module.exports = {
 
             let image = await Canvacord.wanted(avatar)
 
-            let triggered = new MessageAttachment(image, "fun.png")
+            let wanted = new MessageAttachment(image, "fun.png")
 
-            message.channel.send(triggered)
+            message.channel.send({files: [wanted]})
         } catch (err) {
             console.log('fuck a error');
             message.reply(`${err.stack}`);

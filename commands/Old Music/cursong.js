@@ -34,7 +34,6 @@ let queue = client.distube.getQueue(message);
                 .setTitle(`Lyrics`)
                 .setDescription(toSend)
             message.channel.send({ embeds: [embed] })
-            console.log(lyrics)
         }
     }
 }

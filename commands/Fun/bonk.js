@@ -11,14 +11,14 @@ module.exports = {
     description: "bonk",
     usage: '?bonk <mention>',
     category: "Fun",
-    cooldown: 400,
+    cooldown: 40,
     run: async (client, message, args) => {
         if (!message.mentions.users.first()) {
             const noMentionedUserEmbed = new MessageEmbed()
                 .setColor("RED")
                 .setTitle("Uh Oh!")
                 .setDescription("Please mention someone to bonk them.");
-            return message.channel.send(message.author, noMentionedUserEmbed);
+            return message.reply({embeds: [noMentionedUserEmbed]});
         }
 
         const bonk = await jimp.read(`${__dirname}/../../Assets/bonk.jpeg`);
@@ -44,9 +44,8 @@ module.exports = {
             const bonkEmbed = new MessageEmbed()
                 .setColor("BLUE")
                 .setTitle(`${message.mentions.users.first().username} Just Got Bonked!`)
-                .attachFiles(bonkedAttachment)
                 .setImage("attachment://bonk.jpeg");
-            return message.channel.send(message.author, bonkEmbed);
+            return message.reply({ embeds: [bonkEmbed], files: [bonkedAttachment]});
         });
     },
 };
