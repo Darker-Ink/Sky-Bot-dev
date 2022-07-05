@@ -4,7 +4,7 @@
   "description": "This is Sky-Bot, It is a great bot made by Darkerink#1750",
   "main": "index.js",
   "dependencies": {
-    "@discordjs/opus": "^0.3.3",
+    "@discordjs/opus": "^0.8.0",
     "@distube/spotify": "^0.2.0",
     "@k3rn31p4nic/google-translate-api": "^1.1.1",
     "@ksoft/api": "^3.1.9",
